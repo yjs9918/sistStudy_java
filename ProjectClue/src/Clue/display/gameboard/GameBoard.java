@@ -8,14 +8,14 @@ public class GameBoard extends JPanel{
 	JPanel gridBoard;
 	
 	public GameBoard(){
-		backImg=Toolkit.getDefaultToolkit().getImage("/ÇÁ·ÎÁ§Æ®Æû/res/boardBack.png");
-		
-		gridBoard=new JPanel();
-		gridBoard.setBackground(Color.blue);
+		backImg=Toolkit.getDefaultToolkit().getImage("C:\\image\\boardBack.png");
+		gridBoard=new GameView();
+		gridBoard.setBackground(Color.white);
 		
 		setLayout(null);
-		/*gridBoard.setBounds(280,130,390,390);
-		roomImg[0].setBounds(10,15,300,115);
+		
+		gridBoard.setBounds(280,130,390,390);
+		/*roomImg[0].setBounds(10,15,300,115);
 		roomImg[1].setBounds(315,15,300,115);
 		roomImg[2].setBounds(620,15,280,115);
 		roomImg[3].setBounds(670,130,280,240);

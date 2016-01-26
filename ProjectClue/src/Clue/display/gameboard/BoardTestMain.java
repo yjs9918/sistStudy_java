@@ -10,7 +10,7 @@ public class BoardTestMain extends JFrame {
 	
 	public BoardTestMain(){
 		add(gb);
-		setSize(950,650);
+		setSize(955,680);
 		setVisible(true);
 		setResizable(false);
 	}
