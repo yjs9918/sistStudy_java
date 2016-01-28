@@ -13,6 +13,7 @@ public class BoardTestMain extends JFrame {
 		setSize(955,680);
 		setVisible(true);
 		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 	public static void main(String[] args) {
