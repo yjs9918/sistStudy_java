@@ -3,6 +3,8 @@ package Clue.display.gameboard;
 import java.awt.*;
 import javax.swing.*;
 
+import Clue.display.gamemainboard.GameBoard;
+
 public class BoardTestMain extends JFrame {
 
 	GameBoard gb = new GameBoard();

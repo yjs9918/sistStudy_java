@@ -1,4 +1,4 @@
-package Clue.display.gameboard;
+package Clue.display.gamemainboard;
 
 import java.awt.*;
 import javax.swing.*;
@@ -14,7 +14,7 @@ public class GameBoard extends JPanel{
 		
 		setLayout(null);
 		
-		gridBoard.setBounds(280,130,390,390);
+		gridBoard.setBounds(250,108,350,350);
 
 		add(gridBoard);
 	}
