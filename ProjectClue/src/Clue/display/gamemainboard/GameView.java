@@ -1,4 +1,4 @@
-package Clue.display.gameboard;
+package Clue.display.gamemainboard;
 
 
 import javax.swing.*;
@@ -6,7 +6,7 @@ import java.awt.*;
 
 
 public class GameView extends JPanel{
-	static final int SIZE=30;
+	static final int SIZE=27;
 	static final int ARR_SIZE=13; //배열크기
 	static int[][] arrBoard;
 	
