@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 public class GameWaitingRoom extends JPanel {
-	Image back1;
+	Image back3;
 	JPanel title,user1,user2,user3,user4,chr1,chr2;
 	JTextArea chat;
 	JTextField tf;
@@ -11,7 +11,7 @@ public class GameWaitingRoom extends JPanel {
 	JButton b1,b2;
 	
 	public GameWaitingRoom(){
-		back1=Toolkit.getDefaultToolkit().getImage("c:\\image\\back1.jpg");
+		back3=Toolkit.getDefaultToolkit().getImage("c:\\image\\back3.jpg");
 		//game user
 		title=new JPanel();
 		title.setBackground(Color.darkGray);
@@ -80,6 +80,6 @@ public class GameWaitingRoom extends JPanel {
 	@Override
 	//paint, paintComponent => 자동호출
 	protected void paintComponent(Graphics g) {
-		g.drawImage(back1, 0, 0, getWidth(),getHeight(),this);
+		g.drawImage(back3, 0, 0, getWidth(),getHeight(),this);
 }
 }
