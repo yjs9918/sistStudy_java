@@ -3,13 +3,13 @@ package Clue.display.gamemainboard;
 import java.awt.*;
 import javax.swing.*;
 
-public class GameBoard extends JPanel{
+public class GameArea extends JPanel{
 	Image backImg;
 	JPanel gridBoard;
 	
-	public GameBoard(){
+	public GameArea(){
 		backImg=Toolkit.getDefaultToolkit().getImage("C:\\image\\boardBack.png");
-		gridBoard=new GameView();
+		gridBoard=new GameArea_InnerBoard();
 		gridBoard.setBackground(Color.white);
 		
 		setLayout(null);

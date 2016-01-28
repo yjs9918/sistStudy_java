@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class GameView extends JPanel{
+public class GameArea_InnerBoard extends JPanel{
 	static final int SIZE=27;
 	static final int ARR_SIZE=13; //배열크기
 	static int[][] arrBoard;
@@ -13,7 +13,7 @@ public class GameView extends JPanel{
 	
 
 	
-	public GameView(){
+	public GameArea_InnerBoard(){
 		
 		
 		//보드 초기화

@@ -3,7 +3,7 @@ package Clue.display.gamemainboard;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
-public class Board extends JPanel {
+public class GameMainScreen extends JPanel {
 	Image back;
 	JPanel jpLogo,jpTurn,jpGameBoard,jpDice;
 	JTable table;
@@ -11,11 +11,11 @@ public class Board extends JPanel {
 	JTextField ChatInput;
 	JButton b;
 	
-	public Board() {
+	public GameMainScreen() {
 		back=Toolkit.getDefaultToolkit().getImage("c:\\image\\back.jpg");
 		jpLogo=new JPanel();// 배너
 		jpTurn=new JPanel();//턴화면
-		jpGameBoard=new GameBoard();//게임화면
+		jpGameBoard=new GameArea();//게임화면
 		JScrollPane jsMemo=new JScrollPane(table);//메모카드
 		jpDice=new JPanel();//주사위
 		

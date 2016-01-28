@@ -3,13 +3,13 @@ package Clue.display.gamemainboard;
 import java.awt.*; //Layout
 import java.awt.event.*;
 import javax.swing.*; //window
-public class GameMainForm extends JFrame{
+public class ClueMain extends JFrame{
 	CardLayout card=new CardLayout();
 	//Login login=new Login();
-	Board GameMainWindow=new Board();
-	public GameMainForm(){
+	GameMainScreen mainScreen=new GameMainScreen();
+	public ClueMain(){
 		setLayout(card); //BorderLayout
-		add("GameMainWindow",GameMainWindow);
+		add("MS",mainScreen);
 		//add("LOG",login);
 		//Å©±â
 		setSize(1200, 900);
@@ -26,7 +26,7 @@ public class GameMainForm extends JFrame{
             UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
 		}catch(Exception ex){}
 		
-		GameMainForm gm=new GameMainForm();
+		ClueMain gm=new ClueMain();
 	}
 	/*public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
