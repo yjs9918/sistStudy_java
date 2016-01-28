@@ -22,7 +22,7 @@ public class GWRMain extends JFrame implements ActionListener{
 		{
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		}catch(Exception ex){}
-		Main mn=new Main();
+		GWRMain mn=new GWRMain();
 		
 		
 	}
