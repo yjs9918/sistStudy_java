@@ -42,15 +42,16 @@ public class GameView extends JPanel{
 		//기본 보드판
 		for(int i=0;i<ARR_SIZE;i++){
 			for(int j=0;j<ARR_SIZE;j++){
-				g2.setColor(Color.BLACK);
-				if(arrBoard[i][j]==0){
-					g2.drawRect(i*SIZE, j*SIZE, SIZE, SIZE);
+				
+				if(arrBoard[i][j]==-1){
+					g2.setColor(Color.pink);
+					g2.fillRect(i*SIZE, j*SIZE, SIZE, SIZE);
+					g2.setColor(Color.BLACK);
 				}else{
 								
-				if(arrBoard[i][j]==-1)
-					g2.setColor(Color.pink);
 				
-					//g2.fillRect(i*SIZE, j*SIZE, SIZE, SIZE);
+					g2.drawRect(i*SIZE, j*SIZE, SIZE, SIZE);
+					//
 					
 							
 				}
@@ -59,17 +60,16 @@ public class GameView extends JPanel{
 		}
 		//여기까지
 				
-		g.fillRect(6*(SIZE), 6*(SIZE), SIZE, SIZE);
 		
+		g2.fillRect(6*(SIZE), 6*(SIZE), SIZE, SIZE);
 		
 	}
 	
 	
 	
-	public boolean isReached(int i, int j){
+	public boolean isReached(int x, int y){
 		boolean room=false;
-		int x=i-1;
-		int y=j-1;
+		
 		//방1~3
 		if(y==0){
 			if(x==1){
@@ -86,7 +86,7 @@ public class GameView extends JPanel{
 		}else if(y==12){
 			if(x==9)
 				room=true;
-			else if(x==3)
+			else if(x==1)
 				room=true;
 			
 		}else if(x==0){
