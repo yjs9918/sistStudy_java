@@ -8,13 +8,14 @@ public class GameArea extends JPanel{
 	JPanel gridBoard;
 	
 	public GameArea(){
-		backImg=Toolkit.getDefaultToolkit().getImage("C:\\image\\boardBack.png");
+		
+		backImg=Toolkit.getDefaultToolkit().getImage("boardBack.png");
 		gridBoard=new GameArea_InnerBoard();
 		gridBoard.setBackground(Color.white);
 		
 		setLayout(null);
 		
-		gridBoard.setBounds(250,108,350,350);
+		gridBoard.setBounds(249,109,352,352);
 
 		add(gridBoard);
 	}

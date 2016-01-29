@@ -9,13 +9,13 @@ public class GameArea_InnerBoard extends JPanel{
 	static final int SIZE=27;
 	static final int ARR_SIZE=13; //배열크기
 	static int[][] arrBoard;
-	
+	Image board;
 	
 
 	
 	public GameArea_InnerBoard(){
 		
-		
+		board = Toolkit.getDefaultToolkit().getImage("C:\\image\\woodboard.jpg");
 		//보드 초기화
 				//보드판 테두리=>1
 				//입구 =>-1
@@ -62,6 +62,7 @@ public class GameArea_InnerBoard extends JPanel{
 				
 		
 		g2.fillRect(6*(SIZE), 6*(SIZE), SIZE, SIZE);
+		g2.drawImage(board, 0, 0, getWidth(), getHeight(), this);
 		
 	}
 	

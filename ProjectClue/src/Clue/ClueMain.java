@@ -1,42 +1,68 @@
 package Clue;
+import java.awt.*;
+import javax.swing.*;
 
-import java.awt.*; //Layout
 import java.awt.event.*;
-import javax.swing.*; //window
-public class ClueMain extends JFrame{
-	CardLayout card=new CardLayout();
-	//Login login=new Login();
+
+import java.util.TimerTask;
+public class ClueMain extends JFrame implements ActionListener{
+	CardLayout card;
+	GameWaitingRoom gwr=new GameWaitingRoom();
+	Login login=new Login();
 	GameMainScreen mainScreen=new GameMainScreen();
-	public ClueMain(){
-		setLayout(card); //BorderLayout
+	
+	
+	
+	public ClueMain()
+	{	
+		card=new CardLayout();
+		setLayout(card);
+		add("LOG",login);
+		add("GWR",gwr);
 		add("MS",mainScreen);
-		//add("LOG",login);
-		//크기
-		setSize(1200, 900);
-		//윈도우를 보여라
+		setSize(1200,900);
 		setVisible(true);
-		setResizable(false);   //창 크기조절 불가하도록 설정
+		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+		login.b1.addActionListener(this);
+		gwr.chatInput.addActionListener(this);
+		gwr.btnReady.addActionListener(this);
+		gwr.btnExit.addActionListener(this);
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// 생성자
-		try{
-            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+		try
+		{
+			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		}catch(Exception ex){}
-		
-		ClueMain gm=new ClueMain();
+		ClueMain mn=new ClueMain();
+		String path = ClueMain.class.getResource("").getPath();
+		System.out.println(path);
 	}
-	/*public void actionPerformed(ActionEvent e) {
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==login.b1){
-			card.show(getContentPane(), "N");
+		if(e.getSource()==login.b1)
+		{
+			card.show(getContentPane(),"GWR");
 		}
-		else if(e.getSource()==n.tf){
-			String data=n.tf.getText();
-			n.ta.append(data+"\n");   //한 줄씩 넘어가며 문자 붙임
-			n.tf.setText("");
+		else if(e.getSource()==gwr.chatInput)
+		{
+			String data= gwr.chatInput.getText();
+			gwr.chat.append(data+"\n");
+			gwr.chatInput.setText("");
 		}
-	}*/
+		else if(e.getSource()==gwr.btnReady)
+		{	
+			
+			
+			card.show(getContentPane(), "MS");
+		}else if(e.getSource()==gwr.btnExit){
+			repaint();
+			card.previous(getContentPane());
+		}
+	}
+	
+
 }
+
