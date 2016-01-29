@@ -1,4 +1,4 @@
-package Clue.display.gamemainboard;
+package Clue;
 
 import java.awt.*; //Layout
 import java.awt.event.*;
@@ -16,7 +16,7 @@ public class ClueMain extends JFrame{
 		//윈도우를 보여라
 		setVisible(true);
 		setResizable(false);   //창 크기조절 불가하도록 설정
-		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 	}
 	public static void main(String[] args) {

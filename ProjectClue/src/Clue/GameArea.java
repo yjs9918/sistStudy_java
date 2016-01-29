@@ -1,4 +1,4 @@
-package Clue.display.gamemainboard;
+package Clue;
 
 import java.awt.*;
 import javax.swing.*;
@@ -23,5 +23,4 @@ public class GameArea extends JPanel{
 	protected void paintComponent(Graphics g) {
 		g.drawImage(backImg, 0, 0, getWidth(), getHeight(),this);
 		}
-	
 }

@@ -1,4 +1,4 @@
-package Clue.display.gamemainboard;
+package Clue;
 
 
 import javax.swing.*;
