@@ -1,7 +1,9 @@
 package Clue;
 import java.awt.*;
+import java.awt.color.*;
 import javax.swing.*;
 import javax.swing.table.*;
+import javax.swing.JFrame;
 public class GameWaitingRoom extends JPanel {
 	Image back3;
 	JPanel title,user1,user2,user3,user4,chr1,chr2;
@@ -75,6 +77,8 @@ public class GameWaitingRoom extends JPanel {
 		add(chr1);
 		add(chr2);
 		add(p);
+		
+		
 		
 	}
 	@Override

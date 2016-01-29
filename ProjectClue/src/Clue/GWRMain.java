@@ -34,7 +34,7 @@ public class GWRMain extends JFrame implements ActionListener{
 		if(e.getSource()==login.b1)
 		{
 			card.show(getContentPane(),"GWR");
-		}
+		} //Plz change "GWR" to watingroom className 
 		else if(e.getSource()==gwr.tf)
 		{
 			String data= gwr.tf.getText();
