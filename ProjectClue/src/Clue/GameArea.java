@@ -9,7 +9,7 @@ public class GameArea extends JPanel{
 	
 	public GameArea(){
 		
-		backImg=Toolkit.getDefaultToolkit().getImage("boardBack.png");
+		backImg=Toolkit.getDefaultToolkit().getImage("/image/boardBack.png");
 		gridBoard=new GameArea_InnerBoard();
 		gridBoard.setBackground(Color.white);
 		

@@ -12,7 +12,7 @@ public class GameMainScreen extends JPanel {
 	JButton b;
 	
 	public GameMainScreen() {
-		back=Toolkit.getDefaultToolkit().getImage("c:\\image\\back.jpg");
+		back=Toolkit.getDefaultToolkit().getImage("c:\\image\\background.jpg");
 		jpLogo=new JPanel();// 배너
 		jpTurn=new JPanel();//턴화면
 		jpGameBoard=new GameArea();//게임화면

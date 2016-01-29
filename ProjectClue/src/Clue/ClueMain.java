@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import java.awt.event.*;
 
-import java.util.TimerTask;
+
 public class ClueMain extends JFrame implements ActionListener{
 	CardLayout card;
 	GameWaitingRoom gwr=new GameWaitingRoom();
@@ -54,7 +54,7 @@ public class ClueMain extends JFrame implements ActionListener{
 		}
 		else if(e.getSource()==gwr.btnReady)
 		{	
-			
+			repaint();
 			
 			card.show(getContentPane(), "MS");
 		}else if(e.getSource()==gwr.btnExit){
