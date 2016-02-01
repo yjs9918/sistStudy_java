@@ -10,19 +10,19 @@ public class GameWaitingRoom extends JPanel {
 	JComboBox box;
 	JButton btnReady,btnExit;
 	
+	
 	public GameWaitingRoom(){
 		back3=Toolkit.getDefaultToolkit().getImage("c:\\image\\back3.jpg");
 		//game user
 		title=new JPanel();
 		title.setBackground(Color.darkGray);
 		user1=new GWR_userPanel();
-		user1.setSize(450,300);
-		user2=new JPanel();
-		user2.setBackground(Color.gray);
-		user3=new JPanel();
-		user3.setBackground(Color.gray);
-		user4=new JPanel();
-		user4.setBackground(Color.gray);
+		user2=new GWR_userPanel();
+		//user2.setBackground(Color.gray);
+		user3=new GWR_userPanel();
+		//user3.setBackground(Color.gray);
+		user4=new GWR_userPanel();
+		//user4.setBackground(Color.gray);
 		
 		//choose character
 		chr1=new JPanel();

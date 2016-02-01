@@ -3,17 +3,18 @@ import java.awt.*;
 import javax.swing.*;
 public class GWR_userPanel extends JPanel{
 
-	Image panelImg;
+	Image panelImage;
 	
 	public GWR_userPanel() {
-		panelImg=Toolkit.getDefaultToolkit().getImage("image/cardback1.jpg");
+		
+		panelImage=Toolkit.getDefaultToolkit().getImage("/image/cardback.jpg");
 		
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
-		g.drawImage(panelImg, 0,0, getWidth(), getHeight(), this);
+		g.drawImage(panelImage, 0,0, getWidth(), getHeight(), this);
 	}
 
 	
