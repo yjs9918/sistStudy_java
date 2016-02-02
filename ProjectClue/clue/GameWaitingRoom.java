@@ -1,4 +1,4 @@
-package Clue;
+package clue;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -80,7 +80,6 @@ public class GameWaitingRoom extends JPanel {
 		add(qcard);
 		
 	}
-
 	@Override
 	//paint, paintComponent => 자동호출
 	protected void paintComponent(Graphics g) {

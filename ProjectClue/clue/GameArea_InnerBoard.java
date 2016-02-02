@@ -1,4 +1,4 @@
-package Clue;
+package clue;
 
 
 import javax.swing.*;

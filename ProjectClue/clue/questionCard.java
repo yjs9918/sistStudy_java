@@ -1,4 +1,4 @@
-package Clue;
+package clue;
 import java.awt.*;
 import javax.swing.*;
 public class questionCard extends JPanel{
