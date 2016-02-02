@@ -18,7 +18,7 @@ public class Login extends JPanel{
 	 */
 	public Login() 
 	{
-		back=Toolkit.getDefaultToolkit().getImage("image/back8.gif");
+		back=Toolkit.getDefaultToolkit().getImage("image/background.gif");
 		la1=new JLabel("ID");
 		la1.setForeground(Color.WHITE);
 		la1.setFont(new Font("Arial", Font.BOLD, 14));
