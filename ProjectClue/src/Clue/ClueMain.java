@@ -28,6 +28,9 @@ public class ClueMain extends JFrame implements ActionListener{
 		gwr.chatInput.addActionListener(this);
 		gwr.btnReady.addActionListener(this);
 		gwr.btnExit.addActionListener(this);
+		
+		mainScreen.addKeyListener(mainScreen);
+		mainScreen.setFocusable(true);
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -36,8 +39,8 @@ public class ClueMain extends JFrame implements ActionListener{
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		}catch(Exception ex){}
 		ClueMain mn=new ClueMain();
-		String path = ClueMain.class.getResource("").getPath();
-		System.out.println(path);
+		
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -62,6 +65,7 @@ public class ClueMain extends JFrame implements ActionListener{
 			card.previous(getContentPane());
 		}
 	}
+	
 	
 
 }
