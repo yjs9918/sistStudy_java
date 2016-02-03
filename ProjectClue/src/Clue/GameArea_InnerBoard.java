@@ -3,23 +3,19 @@ package Clue;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 
-public class GameArea_InnerBoard extends JPanel implements KeyListener{
+public class GameArea_InnerBoard extends JPanel{
 	static final int SIZE=27;
 	static final int ARR_SIZE=13; //배열크기
 	static int[][] arrBoard;
 	Image board;
 	
-	Game game;
-	GamePlayer gp;
-	public GameArea_InnerBoard(Game game, GamePlayer gp){
-		this.game = game;
-		this.gp=gp;
-		setFocusable(true);
-		board = Toolkit.getDefaultToolkit().getImage("/image/woodboard.jpg");
+
+	
+	public GameArea_InnerBoard(){
+		
+		board = Toolkit.getDefaultToolkit().getImage("image/woodboard.jpg");
 		//보드 초기화
 				//보드판 테두리=>1
 				//입구 =>-1
@@ -43,8 +39,6 @@ public class GameArea_InnerBoard extends JPanel implements KeyListener{
 	public void paint(Graphics g){
 		super.paint(g);
 		Graphics g2 = g;
-		g2.drawImage(board, 0, 0, getWidth(), getHeight(), this);
-		
 		//기본 보드판
 		for(int i=0;i<ARR_SIZE;i++){
 			for(int j=0;j<ARR_SIZE;j++){
@@ -53,6 +47,13 @@ public class GameArea_InnerBoard extends JPanel implements KeyListener{
 					g2.setColor(Color.pink);
 					g2.fillRect(i*SIZE, j*SIZE, SIZE, SIZE);
 					g2.setColor(Color.BLACK);
+				}else{
+								
+				
+					g2.drawRect(i*SIZE, j*SIZE, SIZE, SIZE);
+					//
+					
+							
 				}
 				
 			}
@@ -60,8 +61,8 @@ public class GameArea_InnerBoard extends JPanel implements KeyListener{
 		//여기까지
 				
 		
-		g.fillRect(gp.getCrrX()*(GameView.SIZE), gp.getCrrY()*(GameView.SIZE), GameView.SIZE, GameView.SIZE);
-		
+		g2.fillRect(6*(SIZE), 6*(SIZE), SIZE, SIZE);
+		g2.drawImage(board, 0, 0, getWidth(), getHeight(), this);
 		
 	}
 	
@@ -98,23 +99,4 @@ public class GameArea_InnerBoard extends JPanel implements KeyListener{
 		
 		return room;
 	}
-	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		gp.keyPressed(e);
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

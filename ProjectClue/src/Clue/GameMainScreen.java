@@ -1,15 +1,11 @@
 package Clue;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.*;
 import javax.swing.table.*;
-public class GameMainScreen extends JPanel implements KeyListener{
+public class GameMainScreen extends JPanel {
 	Image back;
-	JPanel jpLogo,jpTurn,jpDice;
-	GameArea jpGameBoard;
+	JPanel jpLogo,jpTurn,jpGameBoard,jpDice;
 	JTable table;
 	JTextArea ta;
 	JTextField ChatInput;
@@ -52,20 +48,5 @@ public class GameMainScreen extends JPanel implements KeyListener{
 	protected void paintComponent(Graphics g) {  
 		g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
 
-	}
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		jpGameBoard.keyPressed(e);
-	}
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }

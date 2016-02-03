@@ -4,12 +4,13 @@ import javax.swing.*;
 
 import java.awt.event.*;
 
-public class ClueMain extends JFrame implements ActionListener,KeyListener{
+
+public class ClueMain extends JFrame implements ActionListener{
 	CardLayout card;
 	GameWaitingRoom gwr=new GameWaitingRoom();
 	Login login=new Login();
 	GameMainScreen mainScreen=new GameMainScreen();
-
+	
 	
 	
 	public ClueMain()
@@ -19,7 +20,6 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 		add("LOG",login);
 		add("GWR",gwr);
 		add("MS",mainScreen);
-		
 		setSize(1200,900);
 		setVisible(true);
 		setResizable(false);
@@ -28,9 +28,6 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 		gwr.chatInput.addActionListener(this);
 		gwr.btnReady.addActionListener(this);
 		gwr.btnExit.addActionListener(this);
-
-		addKeyListener(this);
-
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -39,7 +36,8 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		}catch(Exception ex){}
 		ClueMain mn=new ClueMain();
-
+		String path = ClueMain.class.getResource("").getPath();
+		System.out.println(path);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -56,35 +54,14 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 		}
 		else if(e.getSource()==gwr.btnReady)
 		{	
-
 			repaint();
-			//서버에 준비완료 알려주기
+			
 			card.show(getContentPane(), "MS");
-			//게임시작
-			
-			
 		}else if(e.getSource()==gwr.btnExit){
 			repaint();
 			card.previous(getContentPane());
 		}
 	}
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 	
 
 }
