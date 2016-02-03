@@ -23,7 +23,7 @@ public class GameWaitingRoom extends JPanel {
 		//user3.setBackground(Color.gray);
 		user4=new GWR_userPanel();
 		//user4.setBackground(Color.gray);
-		qcard=new questionCard();
+		qcard=new QuestionCard();
 		
 		//choose character
 		chr1=new JPanel();
