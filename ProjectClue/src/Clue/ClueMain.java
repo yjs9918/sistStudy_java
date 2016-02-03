@@ -10,21 +10,16 @@ public class ClueMain extends JFrame implements ActionListener{
 	GameWaitingRoom gwr=new GameWaitingRoom();
 	Login login=new Login();
 	GameMainScreen mainScreen=new GameMainScreen();
-	LoadingTest loading;
 	
 	
 	
 	public ClueMain()
 	{	
-		loading=new LoadingTest(this);
 		card=new CardLayout();
 		setLayout(card);
-		
-		add("LS",loading);
 		add("LOG",login);
 		add("GWR",gwr);
 		add("MS",mainScreen);
-		
 		setSize(1200,900);
 		setVisible(true);
 		setResizable(false);
@@ -43,7 +38,6 @@ public class ClueMain extends JFrame implements ActionListener{
 		ClueMain mn=new ClueMain();
 		String path = ClueMain.class.getResource("").getPath();
 		System.out.println(path);
-		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -62,7 +56,7 @@ public class ClueMain extends JFrame implements ActionListener{
 		{	
 			repaint();
 			
-			card.show(getContentPane(), "LS");
+			card.show(getContentPane(), "MS");
 		}else if(e.getSource()==gwr.btnExit){
 			repaint();
 			card.previous(getContentPane());

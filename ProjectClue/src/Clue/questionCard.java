@@ -1,10 +1,10 @@
 package Clue;
 import java.awt.*;
 import javax.swing.*;
-public class QuestionCard extends JPanel{
+public class questionCard extends JPanel{
 	Image qcard;
 	
-	public QuestionCard() {
+	public questionCard() {
 		qcard=Toolkit.getDefaultToolkit().getImage("image/qcard1.png");
 		
 	}
