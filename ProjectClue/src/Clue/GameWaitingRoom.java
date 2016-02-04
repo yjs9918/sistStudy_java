@@ -33,6 +33,7 @@ public class GameWaitingRoom extends JPanel {
 		
 		//chat
 		chat=new JTextArea();
+		chat.setEditable(false);
 		JScrollPane js1=new JScrollPane(chat);
 		chatInput=new JTextField();
 		box=new JComboBox();

@@ -19,8 +19,7 @@ public class LoadingTest extends JPanel implements Runnable{
 		setLayout(null);
 		prg.setBounds(100,800,1000,40);
 		add(prg);  
-	
-		
+
 	}
 	
 	
