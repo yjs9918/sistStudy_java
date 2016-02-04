@@ -23,7 +23,7 @@ public class GameWaitingRoom extends JPanel {
 		//user3.setBackground(Color.gray);
 		user4=new GWR_userPanel();
 		//user4.setBackground(Color.gray);
-		qcard=new questionCard();
+		
 		
 		//choose character
 		chr1=new JPanel();
@@ -64,7 +64,7 @@ public class GameWaitingRoom extends JPanel {
 		chr1.setBounds(912, 75, 278, 572);
 		chr2.setBounds(912, 45, 278, 30);
 		p.setBounds(912, 652, 278, 215);
-		qcard.setBounds(30, 70, 171, 250);
+		
 		
 		add(title);
 		add(user1);
@@ -77,7 +77,7 @@ public class GameWaitingRoom extends JPanel {
 		add(chr1);
 		add(chr2);
 		add(p);
-		add(qcard);
+		
 		
 	}
 	@Override

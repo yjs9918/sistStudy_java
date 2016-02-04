@@ -10,6 +10,7 @@ public class ClueMain extends JFrame implements ActionListener{
 	GameWaitingRoom gwr=new GameWaitingRoom();
 	Login login=new Login();
 	GameMainScreen mainScreen=new GameMainScreen();
+	LoadingTest loading= new LoadingTest(this); //160204 정선 추가
 	
 	
 	
@@ -19,6 +20,7 @@ public class ClueMain extends JFrame implements ActionListener{
 		setLayout(card);
 		add("LOG",login);
 		add("GWR",gwr);
+		add("LD",loading); //160204정선추가
 		add("MS",mainScreen);
 		setSize(1200,900);
 		setVisible(true);
@@ -28,6 +30,7 @@ public class ClueMain extends JFrame implements ActionListener{
 		gwr.chatInput.addActionListener(this);
 		gwr.btnReady.addActionListener(this);
 		gwr.btnExit.addActionListener(this);
+		
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -56,7 +59,9 @@ public class ClueMain extends JFrame implements ActionListener{
 		{	
 			repaint();
 			
-			card.show(getContentPane(), "MS");
+			card.show(getContentPane(), "LD"); //160204 정선추가
+			new Thread(loading).start(); //160204 정선추가
+			
 		}else if(e.getSource()==gwr.btnExit){
 			repaint();
 			card.previous(getContentPane());
