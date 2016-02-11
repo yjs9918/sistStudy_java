@@ -1,6 +1,12 @@
 package Clue;
 import java.awt.*;
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+
+import Clue.GameMainScreen;
+import Clue.Dice;
 
 import java.awt.event.*;
 
@@ -11,6 +17,8 @@ public class ClueMain extends JFrame implements ActionListener{
 	Login login=new Login();
 	GameMainScreen mainScreen=new GameMainScreen();
 	LoadingTest loading= new LoadingTest(this); //160204 정선 추가
+	private Dice dice; //160206 정선 추가
+	
 	
 	
 	
@@ -31,7 +39,15 @@ public class ClueMain extends JFrame implements ActionListener{
 		gwr.btnReady.addActionListener(this);
 		gwr.btnExit.addActionListener(this);
 		
+		dice=new Dice();//정선 추가 150207
 	}
+	
+	
+	public Dice dice() //정선 추가 160206
+	{
+		return dice;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try
