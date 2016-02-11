@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class GameArea extends JPanel{
+
 	Image backImg;
 	Image[] horse= new Image[4];
 
@@ -56,4 +57,5 @@ public class GameArea extends JPanel{
 	
 	
 	}
+
 }
