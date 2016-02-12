@@ -23,18 +23,18 @@ public class GameMainScreen extends JPanel{
 	Game game;
 	JLabel jlshowCnt;
 	JFrame jfTurn;
-	Dice dice;//정선추가 160207
 	
 	
 
 	public GameMainScreen() {
-		dice=new Dice();//정선 추가 160207
+
+		dice1=Toolkit.getDefaultToolkit().getImage(getDiceImage1());
+		dice2=Toolkit.getDefaultToolkit().getImage(getDiceImage2());
 		
-		dice1=Toolkit.getDefaultToolkit().getImage(dice.getDiceImage1());//정선추가 160207
-		dice2=Toolkit.getDefaultToolkit().getImage(dice.getDiceImage2());//정선추가 160207
+		
 		jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
-		//jpLogo=new JPanel();// 배너
+		
 		jpTurn=new JPanel();//턴이미지화면
 		
 		jlshowCnt = new JLabel("0");
@@ -59,7 +59,7 @@ public class GameMainScreen extends JPanel{
 		
 		
 
-		//jpLogo.setBounds(5, 10, 850, 90);
+		
 		jpTurn.setBounds(865, 10, 90, 90);
 		jpCount.setBounds(955, 10, 180, 90);
 		jpGameBoard.setBounds(5, 105, 850, 570);//게임화면
@@ -69,7 +69,7 @@ public class GameMainScreen extends JPanel{
 		ChatInput.setBounds(5, 840, 540, 25);
 		b.setBounds(545, 840, 60, 25);
 		
-		//add(jpLogo);
+		
 		add(jpTurn);
 		add(jpCount);
 		add(jpGameBoard);
@@ -79,7 +79,7 @@ public class GameMainScreen extends JPanel{
 		add(jsChatArea);
 		add(ChatInput);
 		add(b);
-		add(dice);
+
 		
 		
 	}
@@ -104,10 +104,27 @@ public class GameMainScreen extends JPanel{
 			e.printStackTrace();
 		}
 		jpMyCard.setCardImg(game.pCard[0]);//0번플레이어로
+		showCount();
+		setImage();
+		
+
+	}
+	public void setImage(){
+		dice1=Toolkit.getDefaultToolkit().getImage("image/dice/d" + Game.dice1+ ".png");
+		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d" + Game.dice2+ ".png");
 	}
 	
 	public void showCount(){
 		jlshowCnt.setText(String.valueOf(game.gp.getCount()));
 	}
 	
+	public String getDiceImage1()
+	{
+		return "image/dice/d" + Game.dice1+ ".png";
+	}
+	
+	public String getDiceImage2()
+	{
+		return "image/dice/d" + Game.dice2+ ".png";
+	}
 }

@@ -150,13 +150,15 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 			card.previous(getContentPane());
 			card.show(getContentPane(), "MS");
 			
-			//수정필요
+			
 			mainScreen.game.savePlayerStatus();
 			mainScreen.game.setGamePlayer(Game.crrPlayer,mainScreen.game.runDice());
 			
 			mainScreen.showCount();
+			mainScreen.setImage();
 			mainScreen.jpGameBoard.repaint();
-			//여기까지
+			
+			
 			//mainScreen.mc.show(getParent(), "GB");
 		}else if(e.getSource()==reachRoom.b1){
 			repaint();
@@ -185,6 +187,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 			reachRoom.setVisible(true);
 		}
 		mainScreen.showCount();
+		mainScreen.setImage();
 		mainScreen.jpGameBoard.repaint();
 	}
 	@Override

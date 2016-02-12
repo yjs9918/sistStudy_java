@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,10 +16,11 @@ public class Game{
 	GameArea gv;
 	int[] answerCard =new int[3];
 	int[][] pCard= new int[4][5];
-	
+	static int dice1=1,dice2=1;
 	static PlayerDTO[] p;
 	static int crrPlayer; 
 	JFrame frTurn;
+	private Random random;
 /*	public Game(){
 		answerCard=selectAnswerCard();	//정답카드
 		distributeCard(answerCard, pCard); //플레이어카드
@@ -49,14 +51,19 @@ public class Game{
 		
 		setGamePlayer(crrPlayer,runDice());
 		
+		
+		
 	}
 
 	
 	
 	public int runDice() {
 		// TODO Auto-generated method stub
-		int dice1= (int)(Math.random()*6)+1;
-		int dice2= (int)(Math.random()*6)+1;
+		
+		random= new Random(System.currentTimeMillis());
+		
+		dice1=random.nextInt(5)+1;
+		dice2=random.nextInt(5)+1;
 		/*frTurn = new JFrame("주사위");
 		frTurn.setSize(300, 300);
 		Container contentPane = frTurn.getContentPane();
@@ -69,8 +76,22 @@ public class Game{
 		*/
 		frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
 		frTurn.setVisible(true);
-
+		
 		return dice1+dice2;
+	}
+
+
+	
+	
+
+	public int getDice1() {
+		return dice1;
+	}
+
+
+
+	public int getDice2() {
+		return dice2;
 	}
 
 
