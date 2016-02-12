@@ -28,8 +28,8 @@ public class GameMainScreen extends JPanel{
 
 	public GameMainScreen() {
 
-		dice1=Toolkit.getDefaultToolkit().getImage(getDiceImage1());
-		dice2=Toolkit.getDefaultToolkit().getImage(getDiceImage2());
+		dice1=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
+		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
 		
 		
 		jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
@@ -118,13 +118,4 @@ public class GameMainScreen extends JPanel{
 		jlshowCnt.setText(String.valueOf(game.gp.getCount()));
 	}
 	
-	public String getDiceImage1()
-	{
-		return "image/dice/d" + Game.dice1+ ".png";
-	}
-	
-	public String getDiceImage2()
-	{
-		return "image/dice/d" + Game.dice2+ ".png";
-	}
 }

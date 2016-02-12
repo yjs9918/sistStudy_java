@@ -21,7 +21,7 @@ public CardSelect()
    
    for(int i=0;i<6;i++)
    {
-      p[i]=new JButton(new ImageIcon("image/player/p"+(i+1)+".jpg"));
+      p[i]=new JButton(new ImageIcon("image/player/char"+i+".jpg"));
       
    }
    for(int i=6;i<9;i++)
@@ -32,7 +32,7 @@ public CardSelect()
    
    for(int i=0;i<8;i++)
    {
-      q[i]=new JButton(new ImageIcon("image/weapon/w"+(i+1)+".jpg"));
+      q[i]=new JButton(new ImageIcon("image/weapon/wp"+i+".jpg"));
       
    }
    for(int i=8;i<9;i++)
