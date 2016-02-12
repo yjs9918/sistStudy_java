@@ -123,9 +123,9 @@ public class Game{
 	public int[] selectAnswerCard(){
 		//정답카드고르기
 		int[] answer = new int[3];
-		answer[0]=(int)(Math.random()*6);
-		answer[1]=(int)(Math.random()*8)+5;
-		answer[2]=(int)(Math.random()*9)+13;
+		answer[0]=(int)(Math.random()*6);//플레이어
+		answer[1]=(int)(Math.random()*8)+6;//무기
+		answer[2]=(int)(Math.random()*9)+14;//장소
 		//System.out.println(answer[0]+" "+answer[1]+" "+answer[2]+"\n");
 		return answer;
 	}
@@ -168,6 +168,20 @@ public class Game{
 			pCard[i/5][i%5] = com[i+3];
 			
 		}
+		
+		//정렬
+		for(int k=0;k<pCard.length;k++){
+				for(int i=0; i<pCard[0].length-1; i++){
+					for(int j=0; j<pCard[0].length-1-i;j++){
+						if(pCard[k][j]>pCard[k][j+1]){
+							int temp=pCard[k][j];
+							pCard[k][j]=pCard[k][j+1];
+							pCard[k][j+1]=temp;
+						}
+					}
+				}
+		}
+		
 	}
 	public void savePlayerStatus(){
 		p[crrPlayer].setCrrX(gp.getCrrX());
