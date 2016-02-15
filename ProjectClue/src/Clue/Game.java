@@ -17,10 +17,12 @@ public class Game{
 	int[] answerCard =new int[3];
 	int[][] pCard= new int[4][5];
 	static int dice1=1,dice2=1;
+	PlayerDTO pMain;
 	static PlayerDTO[] p;
 	static int crrPlayer; 
 	JFrame frTurn;
 	private Random random;
+	
 /*	public Game(){
 		answerCard=selectAnswerCard();	//정답카드
 		distributeCard(answerCard, pCard); //플레이어카드
@@ -35,6 +37,7 @@ public class Game{
 	
 	public Game(GameArea gv, JFrame fr){
 		p=new PlayerDTO[4];
+		
 		this.gv=gv;
 		frTurn=fr;
 		answerCard=selectAnswerCard();	//정답카드
@@ -46,6 +49,8 @@ public class Game{
 		p[1]= new PlayerDTO("오달수",pCard[1]);
 		p[2]= new PlayerDTO("길태미",pCard[2]);
 		p[3]= new PlayerDTO("고현정",pCard[3]);
+		
+		pMain=new PlayerDTO(p[0].getId(),pCard[0]);
 		
 		crrPlayer=0;
 		
@@ -74,7 +79,8 @@ public class Game{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frTurn.setBounds((screenSize.width - frTurn.getWidth())/2,(screenSize.height - frTurn.getHeight())/2,frTurn.getWidth(),frTurn.getHeight());
 		*/
-		frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
+		//frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
+		frTurn=new ShowTurn(pMain.getId(), (dice1+dice2),gv);
 		frTurn.setVisible(true);
 		
 		return dice1+dice2;
@@ -224,10 +230,18 @@ public class Game{
 	}*/
 	
 	//현재플레이의 좌표값과 count값을 배열에서 불러와 설정
-	public void setGamePlayer(int pNum, int dice){
+	/*public void setGamePlayer(int pNum, int dice){
 		p[pNum].setNumCanGo(dice);
 		gp.setCrrX(p[pNum].crrX);
 		gp.setCrrY(p[pNum].crrY);
+		gp.setCount(dice);
+		
+	}*/
+	public void setGamePlayer(int pNum, int dice){
+		pMain=p[pNum];
+		pMain.setNumCanGo(dice);
+		gp.setCrrX(pMain.crrX);
+		gp.setCrrY(pMain.crrY);
 		gp.setCount(dice);
 		
 	}

@@ -22,11 +22,6 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
 	
 
-
-	
-	
-
-	
 	public ClueMain()
 	{	
 		
