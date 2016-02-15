@@ -45,12 +45,12 @@ public class Game{
 		
 		
 		//플레이어 초기화 수정필요=> 대기실에서 데이터 가져와야함.
-		p[0]= new PlayerDTO("신민아",pCard[0]);
-		p[1]= new PlayerDTO("오달수",pCard[1]);
-		p[2]= new PlayerDTO("길태미",pCard[2]);
-		p[3]= new PlayerDTO("고현정",pCard[3]);
+		p[0]= new PlayerDTO(0,pCard[0]);
+		p[1]= new PlayerDTO(1,pCard[1]);
+		p[2]= new PlayerDTO(2,pCard[2]);
+		p[3]= new PlayerDTO(3,pCard[3]);
 		
-		pMain=new PlayerDTO(p[0].getId(),pCard[0]);
+		pMain=new PlayerDTO(p[0].getCharIndex(),pCard[0]);
 		
 		crrPlayer=0;
 		
@@ -89,6 +89,12 @@ public class Game{
 
 	
 	
+
+	public PlayerDTO getpMain() {
+		return pMain;
+	}
+
+
 
 	public int getDice1() {
 		return dice1;
@@ -245,4 +251,5 @@ public class Game{
 		gp.setCount(dice);
 		
 	}
+	
 }
