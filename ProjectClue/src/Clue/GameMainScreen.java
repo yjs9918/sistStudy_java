@@ -35,7 +35,7 @@ public class GameMainScreen extends JPanel{
 		jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 		
-		jpTurn=Toolkit.getDefaultToolkit().getImage("image/player/qcard1.png");//턴이미지화면
+		jpTurn=Toolkit.getDefaultToolkit().getImage("image/player/schar.jpg");//턴이미지화면
 		
 		jlshowCnt = new JLabel("0");
 		jlshowCnt.setFont(new Font("맑은고딕",Font.BOLD,50));
