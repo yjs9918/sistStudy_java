@@ -17,7 +17,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	LoadingTest loading= new LoadingTest(this); //160204 정선 추가
 	ReachRoom reachRoom =new ReachRoom();
 	WaitRoom wait=new WaitRoom(); //160211 정선추가
-	private Dice dice;//160206 정선 추가
+	
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
 	
@@ -29,7 +29,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	
 	public ClueMain()
 	{	
-		dice=new Dice();//정선 추가 150207
+		
 		card=new CardLayout();
 		setLayout(card);
 		add("LOG",login);
@@ -66,10 +66,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 
 	}
 	
-	public Dice dice() //정선 추가 160206
-	{
-		return dice;
-	}
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -163,6 +160,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 		}else if(e.getSource()==reachRoom.b1){
 			repaint();
 			card.show(getContentPane(), "CS");
+			cs.setCardImg();
 			reachRoom.setVisible(false);
 		}
 	}
