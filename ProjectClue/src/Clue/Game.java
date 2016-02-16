@@ -3,6 +3,7 @@ package Clue;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.Random;
 
@@ -18,7 +19,7 @@ public class Game{
 	int[][] pCard= new int[4][5];
 	static int dice1=1,dice2=1;
 	PlayerDTO pMain;
-	static PlayerDTO[] p;
+	PlayerDTO[] p;
 	static int crrPlayer; 
 	JFrame frTurn;
 	private Random random;
@@ -80,6 +81,12 @@ public class Game{
 		frTurn.setBounds((screenSize.width - frTurn.getWidth())/2,(screenSize.height - frTurn.getHeight())/2,frTurn.getWidth(),frTurn.getHeight());
 		*/
 		//frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		frTurn=new ShowTurn(pMain.getId(), (dice1+dice2),gv);
 		frTurn.setVisible(true);
 		
@@ -109,22 +116,9 @@ public class Game{
 
 
 	public void move(){
-		gp.move();		
+		gp.move(gv);		
 		
 	}
-
-
-	/*테스트용
-	 * public static void main(String args[]){
-		Game g  = new Game();
-		for(int i=0;i<4; i++){
-			for(int j=0;j<5;j++){
-				System.out.print(g.pCard[i][j]+" ");
-			}
-			System.out.println();
-		}
-		
-	}*/
 
 	
 	public int process()  {
@@ -134,7 +128,15 @@ public class Game{
 			if(roomNum!=0){
 				return roomNum;
 			}
-			isTurn();
+			if(gp.getCount()==0){
+				
+				
+				savePlayerStatus();
+				setGamePlayer(crrPlayer,runDice());
+				
+				
+			}
+			//isTurn();
 			return 0;
 		
 	}
@@ -142,12 +144,11 @@ public class Game{
 	public void isTurn() {
 		// TODO Auto-generated method stub
 		if(gp.getCount()==0){
-			//JOptionPane.showMessageDialog(this, "더이상 이동할 수 없습니다.","더이상 이동할 수 없습니다.",JOptionPane.YES_NO_OPTION);
-			System.out.println("더이상 이동할 수 없습니다.");
+			
 			
 			savePlayerStatus();
 			setGamePlayer(crrPlayer,runDice());
-			//System.exit(0);
+			
 			
 		}
 	}

@@ -227,10 +227,15 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener,Runna
 		// TODO Auto-generated method stub
 		
 		mainScreen.game.gp.keyPressed(e);
+		
 		int n=mainScreen.game.process();
 		if(n!=0){
 			reachRoom.setBounds(500,250,230,240);
-			reachRoom.la1.setText(n+"번방에 도달했습니다.");
+			try{
+			reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");}
+			catch(Exception ex){
+				
+			}
 			reachRoom.setVisible(true);
 		}
 		mainScreen.showCount();
