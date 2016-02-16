@@ -1,14 +1,17 @@
 package Clue;
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.text.Document;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
+import javax.swing.text.*;
+
+
+import com.sist.common.Function;
 
 import java.awt.event.*;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
-public class ClueMain extends JFrame implements ActionListener,KeyListener{
+public class ClueMain extends JFrame implements ActionListener,KeyListener,Runnable{
 	CardLayout card;
 	GameWaitingRoom gwr=new GameWaitingRoom();
 	Login login=new Login();
@@ -21,7 +24,19 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
 	
+	
+	 // 소켓 연결시도
+	 
+	Socket s;
+	BufferedReader in;	//서버에서 값을 읽는다
+	OutputStream out;	//서버로 요청값을 보낸다.
+	
+	 
+	
 
+	
+
+	
 	public ClueMain()
 	{	
 		
@@ -61,7 +76,26 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 
 	}
 	
-	
+	//소켓
+	public void connection(String id, String name, String sex){
+		try {
+			s= new Socket("localhost", 3355);
+			//s=server
+			in = new BufferedReader(new InputStreamReader(s.getInputStream()));//바이트를 캐릭터러
+			
+			//s는 클라이언트
+			out=s.getOutputStream(); //서버로 보내겠다.
+			out.write((Function.LOGIN+"|"+id+"|"+name+"|"+sex+"\n").getBytes());	//값보내기
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		//서버로부터 응답값을 받아서 처리
+		
+		new Thread(this).start();//run 돈다.
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -80,8 +114,28 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 		
 		if(e.getSource()==login.b1)
 		{
-			repaint();
-			card.show(getContentPane(),"WR");
+			String id= login.tf.getText().trim();
+			if(id.length()<1){
+				JOptionPane.showMessageDialog(this, "ID를 입력하세요");
+				login.tf.requestFocus();
+				return;
+			}
+			
+			String name= login.tf2.getText().trim();
+			if(id.length()<1){
+				JOptionPane.showMessageDialog(this, "대화명을 입력하세요");
+				login.tf2.requestFocus();
+				return;
+			}
+			String sex="남";
+			
+			/*if(login.man.isSelected()){
+				sex="남자";
+			}else
+				sex="여자";*/
+			connection(id,name,sex);
+			//repaint();
+			//card.show(getContentPane(),"WR");
 		}
 		else if(e.getSource()==login.b2)
 		{
@@ -214,6 +268,54 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 			Document doc=wait.ta.getDocument();
 			doc.insertString(doc.getLength(), msg+"\n", wait.ta.getStyle(color));
 		}catch(Exception e){}
+	}
+
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(true){
+			try {
+				String msg= in.readLine();
+				System.out.println("Server=>"+ msg);
+				StringTokenizer st= new StringTokenizer(msg, "|");
+				int protocol =Integer.parseInt(st.nextToken());
+				switch(protocol){
+				
+				case Function.LOGIN:
+				{
+					String[] data={
+							st.nextToken(),
+							st.nextToken(),
+							st.nextToken(),
+							st.nextToken()
+					};
+					wait.model2.addRow(data);
+				}
+				break;
+				
+				case Function.MYLOG:
+				{
+					String id =st.nextToken();
+					setTitle(id);
+					repaint();
+					card.show(getContentPane(), "WR");
+				}
+				break;
+				
+				case Function.WAITCHAT:
+				{
+					//wait.ta.append(st.nextToken()+"\n");
+					append(st.nextToken()+"\n","Color.BLUE");
+					wait.bar.setValue(wait.bar.getMaximum());
+				}
+				break;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 	}
 
 }
