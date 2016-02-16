@@ -42,7 +42,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener,Runna
 		
 		card=new CardLayout();
 		setLayout(card);
-		add("LOG",login);
+		//add("LOG",login);
 		add("WR",wait);
 		add("GWR",gwr);
 		add("MS",mainScreen);
