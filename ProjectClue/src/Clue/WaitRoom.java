@@ -79,6 +79,11 @@ public class WaitRoom extends JPanel {
 		add(movie);
 		add(p);
 		
+		tf.setEnabled(false);
+		js1.setEnabled(false);
+		js2.setEnabled(false);
+		js3.setEnabled(false);
+		
 	}
 	@Override
 	//paint, paintComponent => 자동호출
