@@ -6,8 +6,21 @@ public class Function {
 	public static final int MYLOG=110;	//창을 대기실로 바꿔라. 프로토콜
 	
 	//방관련
+
+    public static final int MAKEROOM=200;
+    public static final int ROOMIN=210;
+    public static final int ROOMOUT=220;//남아 있는 사람 
+    
+    public static final int ROOMADD=230;//먼저 방에 들어가 있는 사람
+    public static final int MYROOMOUT=240;
+    
+    public static final int WAITROOMUPDATE=250;
+    
+    public static final int REFLUSH=260;
+    
 	//채팅관련
 	public static final int WAITCHAT=500;
+	
 	
 	//게임관련
 	//나가기 관련

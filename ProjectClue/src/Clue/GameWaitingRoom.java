@@ -8,15 +8,30 @@ public class GameWaitingRoom extends JPanel {
 	
 	JPanel title;
 	JPanel uPan1,uPan2,uPan3,uPan4,aa1,aa2,aa3,aa4,bb1,bb2,bb3,bb4;
+	JPanel[] imgP={aa1,aa2,aa3,aa4};
+	
 	
 	JTextArea chat;
 	JTextField chatInput;
-
+	
 	JButton btnReady,btnExit,insert;//160211 정선 수정 (JComboBox삭제->JButton insert추가/하위box관련항목 수정)
+
+	
+    JTextField t1=new JTextField();
+    JTextField t2=new JTextField();
+    JTextField t3=new JTextField();
+    JTextField t4=new JTextField();
+
+	
+	JTextField[] idtf={t1,t2,t3,t4};
+	boolean[] sw=new boolean[4];
+
 	JButton chr1, chr2, chr3, chr4, chr5, chr6, chrN;
+
 	
 	public GameWaitingRoom(){
 		back3=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
+
 		p1 = Toolkit.getDefaultToolkit().getImage("image/player/char0.jpg");
 		p2 = Toolkit.getDefaultToolkit().getImage("image/player/char1.jpg");
 		p3 = Toolkit.getDefaultToolkit().getImage("image/player/char2.jpg");
@@ -25,9 +40,10 @@ public class GameWaitingRoom extends JPanel {
 		p6 = Toolkit.getDefaultToolkit().getImage("image/player/char5.jpg");
 		
 		
-		
+
 		//게임 유저
 		title=new JPanel();
+
 		//title.setBackground(Color.darkGray);
 		title.add(new JLabel(new ImageIcon(setImage("image/back/jplogo2.png", 1185, 35))));
 		
@@ -40,17 +56,20 @@ public class GameWaitingRoom extends JPanel {
 		uPan1.add("Center",new JLabel(new ImageIcon(setImage("image/back/cardback.jpg", uPan1.getWidth(), uPan1.getHeight()))));
 		
 		
+		
+
 		aa1=new JPanel();
 		aa1.setOpaque(false);
 		aa1.setBounds(5, 60, 220, 295);
 		aa1.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
 		add(aa1);
+
 		
 		bb1=new JPanel();
 		bb1.setOpaque(false);
 		bb1.setBounds(230, 60, 220, 295);
 		bb1.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		add(bb1);
+		//add(bb1);
 		
 		
 		uPan2 = new JPanel();
@@ -69,7 +88,7 @@ public class GameWaitingRoom extends JPanel {
 		bb2.setOpaque(false);
 		bb2.setBounds(682, 60, 220, 295);
 		bb2.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		add(bb2);
+		//add(bb2);
 	
 		uPan3 = new JPanel();
 		uPan3.setBackground(Color.BLACK);
@@ -88,7 +107,7 @@ public class GameWaitingRoom extends JPanel {
 		bb3.setOpaque(false);
 		bb3.setBounds(230, 362, 220, 295);
 		bb3.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		add(bb3);
+		//add(bb3);
 		
 		uPan4 = new JPanel();
 		uPan4.setBackground(Color.BLACK);
@@ -107,7 +126,7 @@ public class GameWaitingRoom extends JPanel {
 		bb4.setOpaque(false);
 		bb4.setBounds(682, 362, 220, 295);
 		bb4.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		add(bb4);
+		//add(bb4);
 		
 		
 	
@@ -132,7 +151,7 @@ public class GameWaitingRoom extends JPanel {
 		//케릭터 선택창
 		chrN = new JButton("캐릭터 선택창");
 		chrN.setBounds(912, 45, 278, 30);
-		chrN.setFont(new Font("맑은고딕", Font.BOLD, 14));
+		chrN.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		
 		ImageIcon img1 = new ImageIcon("image/player/wp0.jpg");
 		ImageIcon img2 = new ImageIcon("image/player/wp1.jpg");
@@ -150,6 +169,23 @@ public class GameWaitingRoom extends JPanel {
 		
 		setLayout(null);
 		title.setBounds(5, 5, 1185, 35);
+
+	
+		
+  		  
+  		idtf[0].setBounds(235,45,225, 50);
+  		idtf[1].setBounds(690,45,225, 50);
+  		idtf[2].setBounds(235,347,225, 50);
+  		idtf[3].setBounds(690,347,225, 50);
+  		  
+  		add(idtf[0]);
+  		add(idtf[1]);
+  		add(idtf[2]);
+  		add(idtf[3]);
+  		
+  		
+		
+
 		
 		js1.setBounds(5, 652, 902, 180);
 		chatInput.setBounds(5, 837, 795, 30);
@@ -182,7 +218,14 @@ public class GameWaitingRoom extends JPanel {
 		add(chr2);
 		add(p);
 		
-
+		
+	/*	캐릭터 이미지 바꿀때
+	 * gwr.pan[i].removeAll();
+		  gwr.pan[i].setLayout(new BorderLayout());
+		  gwr.pan[i].add("Center",
+				  new JLabel(new ImageIcon("c:\\image\\"+s+avata+".gif")));
+		  gwr.pan[i].validate();//panel재배치
+*/
 		
 	}
 	private Image setImage(String filename, int width, int height) {
