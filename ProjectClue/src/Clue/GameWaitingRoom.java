@@ -9,7 +9,7 @@ public class GameWaitingRoom extends JPanel {
 	JPanel title;
 	JPanel uPan1,uPan2,uPan3,uPan4,aa1,aa2,aa3,aa4,bb1,bb2,bb3,bb4;
 	JPanel[] imgP={aa1,aa2,aa3,aa4};
-	
+	int pnum; //플레이어 넘버
 	
 	JTextArea chat;
 	JTextField chatInput;

@@ -49,7 +49,7 @@ public class Server implements Runnable{
 	class ClientThread extends Thread{
 		//데이터를 공유할 것이 있기때문에 내부클래스로. -> 통신은 얘가한다
 		String id,name,sex,pos;
-		int avata;
+		int avata,pnum;
 		Socket s;
 		
 		BufferedReader in;	//reader면 2byte단위, 한글이니까 당연히 reader로 clinrt 요청값 읽어옴
@@ -104,6 +104,7 @@ public class Server implements Runnable{
 						String data=st.nextToken();
 						messageAll(Function.WAITCHAT+"|["+name+"]"+data);
 						}break;
+					
 					case Function.MAKEROOM:
  				   {
  					    Room room=new Room(
@@ -117,8 +118,9 @@ public class Server implements Runnable{
  					    roomVc.addElement(room);
  					    room.userVc.addElement(this);//방장
  					    pos=room.roomName;
+ 					    pnum=room.current;
  					    // 대기실 ==> 방이름 전환
- 					    messageTo(Function.ROOMIN+"|"+id+"|"+sex+"|"+avata+"|"+room.roomName);
+ 					    messageTo(Function.ROOMIN+"|"+id+"|"+sex+"|"+avata+"|"+room.roomName+"|"+room.current);
  					    messageAll(Function.REFLUSH+"|"+id+"|"+pos);
  					    //대기실에서 위치를 변경
  				   }
@@ -165,6 +167,7 @@ public class Server implements Runnable{
  					    			    messageTo(Function.ROOMADD+"|"+c.id+"|"+c.sex+"|"+c.avata);
  					    			 }
  					    		 }
+ 					    		// 본인(방에 들어가는 사람)
  					    		 messageTo(Function.ROOMIN+"|"+id+"|"+sex+"|"+avata+"|"+room.roomName);
  					    		 room.userVc.addElement(this);
  					    		 //대기실 처리 

@@ -225,7 +225,7 @@ KeyListener,Runnable,MouseListener{
 				  //mr.pf.getText();
 			  }
 			  
-			  int inwon=mkr.box.getSelectedIndex()+2;
+			  int inwon=4;
 			  
 			  //서버로 전송 
 			  try
@@ -421,7 +421,7 @@ KeyListener,Runnable,MouseListener{
 					 String id=st.nextToken();
 					 String sex=st.nextToken();
 					 String avata=st.nextToken();
-					 
+					 gwr.pnum=Integer.parseInt(st.nextToken());
 					 String s="";
 					 if(sex.equals("남자")) 
 						 s="m";
@@ -438,7 +438,8 @@ KeyListener,Runnable,MouseListener{
 							  break;
 						  }
 					 }
-					String[] temp={id,sex,avata};
+					 
+					//String[] temp={id,sex,avata};
 					
 				}
 				break;
@@ -448,6 +449,7 @@ KeyListener,Runnable,MouseListener{
 					 String sex=st.nextToken();
 					 String avata=st.nextToken();
 					 myRoom=st.nextToken();
+					 int pnum=Integer.parseInt(st.nextToken());
 					 String s="";
 					 if(sex.equals("남자")) 
 						 s="m";
@@ -460,6 +462,7 @@ KeyListener,Runnable,MouseListener{
 						  {
 							  gwr.sw[i]=true;
 							  gwr.idtf[i].setText(id);
+							  
 							  
 							  break;
 						  }
