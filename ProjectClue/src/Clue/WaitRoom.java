@@ -78,6 +78,7 @@ public class WaitRoom extends JPanel {
 		add(box);
 		add(movie);
 		add(p);
+		
 	}
 	@Override
 	//paint, paintComponent => 자동호출
