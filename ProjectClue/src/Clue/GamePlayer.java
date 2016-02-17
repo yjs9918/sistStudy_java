@@ -25,7 +25,6 @@ public class GamePlayer {
 	public void keyPressed(KeyEvent e){
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_UP:
-			System.out.println(e);
 			inputY=-1;
 			break;
 		case KeyEvent.VK_DOWN:

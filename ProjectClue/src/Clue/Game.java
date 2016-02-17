@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 
 public class Game{
 	
-	
 	GamePlayer gp=new GamePlayer(this);
 	GameArea gv;
 	int[] answerCard =new int[3];
@@ -34,7 +33,8 @@ public class Game{
 		p[3]= new PlayerDTO("고현정",pCard[3]);
 		
 		crrPlayer=0;
-	}*/
+	}
+	*/
 	
 	public Game(GameArea gv, JFrame fr){
 		p=new PlayerDTO[4];
@@ -57,19 +57,16 @@ public class Game{
 		
 		setGamePlayer(crrPlayer,runDice());
 		
-		
-		
 	}
 
-	
 	
 	public int runDice() {
 		// TODO Auto-generated method stub
 		
 		random= new Random(System.currentTimeMillis());
 		
-		dice1=random.nextInt(5)+1;
-		dice2=random.nextInt(5)+1;
+		dice1=random.nextInt(6)+1;
+		dice2=random.nextInt(6)+1;
 		/*frTurn = new JFrame("주사위");
 		frTurn.setSize(300, 300);
 		Container contentPane = frTurn.getContentPane();
@@ -87,7 +84,7 @@ public class Game{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		frTurn=new ShowTurn(pMain.getId(), (dice1+dice2),gv);
+		frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
 		frTurn.setVisible(true);
 		
 		return dice1+dice2;
