@@ -8,6 +8,8 @@ public class GameWaitingRoom extends JPanel {
 	
 	JPanel title;
 	JPanel uPan1,uPan2,uPan3,uPan4,aa1,aa2,aa3,aa4,bb1,bb2,bb3,bb4;
+	JPanel[] imgP={aa1,aa2,aa3,aa4};
+	
 	
 	JTextArea chat;
 	JTextField chatInput;
@@ -67,7 +69,7 @@ public class GameWaitingRoom extends JPanel {
 		bb1.setOpaque(false);
 		bb1.setBounds(230, 60, 220, 295);
 		bb1.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		add(bb1);
+		//add(bb1);
 		
 		
 		uPan2 = new JPanel();
@@ -86,7 +88,7 @@ public class GameWaitingRoom extends JPanel {
 		bb2.setOpaque(false);
 		bb2.setBounds(682, 60, 220, 295);
 		bb2.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		add(bb2);
+		//add(bb2);
 	
 		uPan3 = new JPanel();
 		uPan3.setBackground(Color.BLACK);
@@ -105,7 +107,7 @@ public class GameWaitingRoom extends JPanel {
 		bb3.setOpaque(false);
 		bb3.setBounds(230, 362, 220, 295);
 		bb3.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		add(bb3);
+		//add(bb3);
 		
 		uPan4 = new JPanel();
 		uPan4.setBackground(Color.BLACK);
@@ -124,7 +126,7 @@ public class GameWaitingRoom extends JPanel {
 		bb4.setOpaque(false);
 		bb4.setBounds(682, 362, 220, 295);
 		bb4.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		add(bb4);
+		//add(bb4);
 		
 		
 	
@@ -149,7 +151,7 @@ public class GameWaitingRoom extends JPanel {
 		//ƒ…∏Ø≈Õ º±≈√√¢
 		chrN = new JButton("ƒ≥∏Ø≈Õ º±≈√√¢");
 		chrN.setBounds(912, 45, 278, 30);
-		chrN.setFont(new Font("∏º¿∫∞ÌµÒ", Font.BOLD, 14));
+		chrN.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 14));
 		
 		ImageIcon img1 = new ImageIcon("image/player/wp0.jpg");
 		ImageIcon img2 = new ImageIcon("image/player/wp1.jpg");
@@ -168,12 +170,7 @@ public class GameWaitingRoom extends JPanel {
 		setLayout(null);
 		title.setBounds(5, 5, 1185, 35);
 
-		/*user1.setBounds(5, 45, 450, 300);
-		user2.setBounds(457, 45, 449, 300);
-		user3.setBounds(5, 347, 450, 300);
-		user4.setBounds(457, 347, 449, 300);*/
-
-		
+	
 		
   		  
   		idtf[0].setBounds(235,45,225, 50);

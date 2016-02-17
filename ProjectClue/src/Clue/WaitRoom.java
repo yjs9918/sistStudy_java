@@ -15,6 +15,7 @@ public class WaitRoom extends JPanel {
 	JScrollBar bar;
 	TableColumn column;
 	
+	
 	public WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 		String[] col1={"방이름","공개/비공개","인원"};

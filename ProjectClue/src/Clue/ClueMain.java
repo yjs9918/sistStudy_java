@@ -273,22 +273,23 @@ KeyListener,Runnable,MouseListener{
 			gwr.chat.append(data + "\n");
 			gwr.chatInput.setText("");
 		} else if (e.getSource() == gwr.chr1) {
-			// gwr.aa1.getBackground();
-			gwr.aa1.getGraphics().drawImage(gwr.p1, 24, 5, 171, 250, this);
+			chAvata(0,0);
+			
+			//gwr.aa1.getGraphics().drawImage(gwr.p1, 24, 5, 171, 250, this);
 		} else if (e.getSource() == gwr.chr2) {
-			gwr.aa1.getGraphics().drawImage(gwr.p2, 24, 5, 171, 250, this);
+			//gwr.aa1.getGraphics().drawImage(gwr.p2, 24, 5, 171, 250, this);
 		} else if (e.getSource() == gwr.chr3) {
 			// gwr.aa1.repaint();
-			gwr.aa1.getGraphics().drawImage(gwr.p3, 24, 5, 171, 250, this);
+			//gwr.aa1.getGraphics().drawImage(gwr.p3, 24, 5, 171, 250, this);
 		} else if (e.getSource() == gwr.chr4) {
 			// gwr.aa1.repaint();
-			gwr.aa1.getGraphics().drawImage(gwr.p4, 24, 5, 171, 250, this);
+			//gwr.aa1.getGraphics().drawImage(gwr.p4, 24, 5, 171, 250, this);
 		} else if (e.getSource() == gwr.chr5) {
 			// gwr.aa1.repaint();
-			gwr.aa1.getGraphics().drawImage(gwr.p5, 24, 5, 171, 250, this);
+			//gwr.aa1.getGraphics().drawImage(gwr.p5, 24, 5, 171, 250, this);
 		} else if (e.getSource() == gwr.chr6) {
 			// gwr.aa1.repaint();
-			gwr.aa1.getGraphics().drawImage(gwr.p6, 24, 5, 171, 250, this);
+			//gwr.aa1.getGraphics().drawImage(gwr.p6, 24, 5, 171, 250, this);
 
 			// ################## CardSelect
 
@@ -549,6 +550,13 @@ KeyListener,Runnable,MouseListener{
 		
 	}
 
+	public void chAvata(int pNum,int i){
+		gwr.imgP[pNum].removeAll();
+		  gwr.imgP[pNum].setLayout(new BorderLayout());
+		  gwr.imgP[i].add("Center",
+				  new JLabel(new ImageIcon("image/player/char"+0+".jpg")));
+		  gwr.imgP[i].validate();//panelÀç¹èÄ¡
+	}
 
 
 }
