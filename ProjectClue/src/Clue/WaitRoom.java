@@ -90,6 +90,7 @@ public class WaitRoom extends JPanel {
 		add(movie);
 		add(p);
 		
+
 		for(int i=0;i<col1.length;i++)
 		{
 			 column=table1.getColumnModel().getColumn(i);
@@ -112,6 +113,7 @@ public class WaitRoom extends JPanel {
 			 }
 			 column.setCellRenderer(rend);
 		}
+
 	}
 	@Override
 	//paint, paintComponent => 자동호출
