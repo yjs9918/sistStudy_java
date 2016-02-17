@@ -11,7 +11,8 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class ClueMain extends JFrame implements ActionListener,KeyListener,Runnable{
+public class ClueMain extends JFrame implements ActionListener,
+KeyListener,Runnable,MouseListener{
 	CardLayout card;
 	GameWaitingRoom gwr=new GameWaitingRoom();
 	Login login=new Login();
@@ -25,6 +26,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener,Runna
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
 	
 	
+	
 	 // 소켓 연결시도
 	 
 	Socket s;
@@ -32,7 +34,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener,Runna
 	OutputStream out;	//서버로 요청값을 보낸다.
 	
 	 
-	
+    String myRoom,myId;
 
 	
 
@@ -53,17 +55,29 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener,Runna
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		login.b1.addActionListener(this);
 		login.b2.addActionListener(this);//160211 정선추가
+		
 		wait.b1.addActionListener(this);//160211 정선추가
 		wait.b2.addActionListener(this);//160211 정선추가
 		wait.tf.addActionListener(this);//160211 정선추가
+		
+		//방만들기
 		mkr.b1.addActionListener(this);// 160211 정선추가
-		gwr.chatInput.addActionListener(this);
-		gwr.btnReady.addActionListener(this);
-		gwr.btnExit.addActionListener(this);
-		mainScreen.b.addActionListener(this);
-		cs.st.addActionListener(this);
+    	mkr.b2.addActionListener(this);
+    	wait.table1.addMouseListener(this);
+    	wait.table2.addMouseListener(this);
+    	//방에서
+		gwr.chatInput.addActionListener(this);	//채팅입력
+		gwr.btnReady.addActionListener(this);	//준비
+		gwr.btnExit.addActionListener(this);	//나가기
+		
+		
+		mainScreen.b.addActionListener(this);	//채팅입력
+		cs.st.addActionListener(this);	//추리-카드선택
+		
+		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((screenSize.width - getWidth())/2,(screenSize.height - getHeight())/2,getWidth(),getHeight());
 		
@@ -140,11 +154,17 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener,Runna
 		else if(e.getSource()==login.b2)
 		{
 			join.setVisible(true);
-		} // 160211 정선 추가
+		} 
+		// 방만들기 버튼
 		else if(e.getSource()==wait.b1)
-		{
+		{	mkr.tf.setText("");
+			mkr.rb1.setSelected(true);
+			mkr.la3.setVisible(false);
+			mkr.pf.setText("");
+			mkr.pf.setVisible(false);
+			mkr.box.setSelectedIndex(0);
 			mkr.setVisible(true);
-		}//160211 정선추가
+		}//160211 정선추가 
 		else if(e.getSource()==wait.b2)
 		{
 			repaint();
@@ -159,13 +179,62 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener,Runna
 			append(msg,color);
 			wait.tf.setText("");
 		}//160211 정선추가
-		
+		//방만들기 창
 		else if(e.getSource()==mkr.b1)
 		{
-			repaint();
+			/*repaint();
 			card.show(getContentPane(),"GWR");
-			mkr.setVisible(false);
+			mkr.setVisible(false);*/
+			String rname=mkr.tf.getText().trim();
+			  if(rname.length()<1)
+			  {
+				  JOptionPane.showMessageDialog(this,"방이름을 입력하세요");
+				  mkr.tf.requestFocus();
+				  return;
+			  }
+			  //중복체크 
+			  String str="";
+			  for(int i=0;i<wait.model1.getRowCount();i++)
+			  {
+				   str=wait.model1.getValueAt(i, 0).toString();
+				   if(rname.equals(str))
+				   {
+					   JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다");
+					   mkr.tf.setText("");
+					   mkr.tf.requestFocus();
+					   return;
+				   }
+			  }
+			  String state="",pwd="";
+			  if(mkr.rb1.isSelected())
+			  {
+				  state="공개";
+				  pwd=" ";
+			  }
+			  else
+			  {
+				  state="비공개";
+				  pwd=String.valueOf(mkr.pf.getPassword());//char[] ==> 문자열로 변환
+				  //mr.pf.getText();
+			  }
+			  
+			  int inwon=mkr.box.getSelectedIndex()+2;
+			  
+			  //서버로 전송 
+			  try
+			  {
+				  out.write((Function.MAKEROOM+"|"+rname+"|"
+			                    +state+"|"+pwd+"|"+inwon+"\n").getBytes());
+			  }catch(Exception ex){}
+			  
+			  mkr.setVisible(false);
+			
 		}//160211 정선추가
+		else if(e.getSource()==mkr.b2)
+		{
+			mkr.setVisible(false);
+		}
+		
 		else if(e.getSource()==gwr.chatInput)
 		{
 			String data= gwr.chatInput.getText();
@@ -316,11 +385,144 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener,Runna
 					wait.bar.setValue(wait.bar.getMaximum());
 				}
 				break;
+				case Function.MAKEROOM:
+				{
+					 String[] temp={st.nextToken(),st.nextToken(),st.nextToken()};
+					 wait.model1.addRow(temp);
+				}
+				
+				
+				break;
+				case Function.ROOMADD:
+				{
+					 String id=st.nextToken();
+					 String sex=st.nextToken();
+					 String avata=st.nextToken();
+					 
+					 String s="";
+					 if(sex.equals("남자")) 
+						 s="m";
+					 else 
+						 s="w";
+					 
+					 for(int i=0;i<4;i++)
+					 {
+						  if(!gwr.sw[i])
+						  {
+							  gwr.sw[i]=true;
+							  gwr.idtf[i].setText(id);
+							  
+							  break;
+						  }
+					 }
+					String[] temp={id,sex,avata};
+					
+				}
+				break;
+				case Function.ROOMIN:
+				{
+					 String id=st.nextToken();
+					 String sex=st.nextToken();
+					 String avata=st.nextToken();
+					 myRoom=st.nextToken();
+					 String s="";
+					 if(sex.equals("남자")) 
+						 s="m";
+					 else 
+						 s="w";
+					 
+					 for(int i=0;i<4;i++)
+					 {
+						  if(!gwr.sw[i])
+						  {
+							  gwr.sw[i]=true;
+							  gwr.idtf[i].setText(id);
+							  
+							  break;
+						  }
+					 }
+					 String[] temp={id,sex};
+					
+					 card.show(getContentPane(), "GWR");
+				}
+				break;
+				case Function.REFLUSH:
+				{
+					 String id=st.nextToken();
+					 String pos=st.nextToken();
+					 String str="";
+					 for(int i=0;i<wait.model2.getRowCount();i++)
+					 {
+						 str=wait.model2.getValueAt(i, 0).toString();
+						 if(str.equals(id))
+						 {
+							 wait.model2.setValueAt(pos, i, 3);
+							 break;
+						 }
+					 }
+				}
+				break;
+			
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==wait.table1)
+		{
+			if(e.getClickCount()==2)
+			{
+				 int row=wait.table1.getSelectedRow();
+				 String rn=wait.model1.getValueAt(row, 0).toString();
+				 String inwon=wait.model1.getValueAt(row, 2).toString();
+				 StringTokenizer st=new StringTokenizer(inwon,"/");
+				 // 6/6
+				 String s1=st.nextToken();
+				 String s2=st.nextToken();
+				 
+				 if(s1.equals(s2))
+				 {
+					 JOptionPane.showMessageDialog(this,"이미 방이 찼습니다");
+					 return;
+				 }
+				 
+				 try
+				 {
+					 out.write((Function.ROOMIN+"|"+rn+"\n").getBytes());
+				 }catch(Exception ex){}
+			}
+		
+		
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

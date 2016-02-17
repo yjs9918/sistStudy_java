@@ -13,13 +13,24 @@ public class WaitRoom extends JPanel {
 	JPanel movie;
 	JButton b1,b2,b3,b4,b5,b6;
 	JScrollBar bar;
+	TableColumn column;
 	
 	public WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 		String[] col1={"방이름","공개/비공개","인원"};
 		String[][] row1=new String[0][3];
-		model1=new DefaultTableModel(row1, col1);
+		model1=new DefaultTableModel(row1, col1){
+		     public boolean isCellEditable(int r,int c)
+		     {
+		    	 return false;
+		     }
+		     };
 		table1=new JTable(model1);
+		table1.getTableHeader().setReorderingAllowed(false);
+		table1.setRowHeight(30);
+		table1.setShowVerticalLines(false);
+		table1.setIntercellSpacing(new Dimension(0,0));
+		
 		JScrollPane js1=new JScrollPane(table1);
 		
 		
@@ -78,6 +89,29 @@ public class WaitRoom extends JPanel {
 		add(box);
 		add(movie);
 		add(p);
+		
+		for(int i=0;i<col1.length;i++)
+		{
+			 column=table1.getColumnModel().getColumn(i);
+			 DefaultTableCellRenderer rend=
+					 new DefaultTableCellRenderer();
+			 if(i==0)
+			 {
+				 column.setPreferredWidth(250);
+				 rend.setHorizontalAlignment(JLabel.LEFT);
+			 }
+			 if(i==1)
+			 {
+				 column.setPreferredWidth(100);
+				 rend.setHorizontalAlignment(JLabel.CENTER);
+			 }
+			 if(i==2)
+			 {
+				 column.setPreferredWidth(100);
+				 rend.setHorizontalAlignment(JLabel.CENTER);
+			 }
+			 column.setCellRenderer(rend);
+		}
 	}
 	@Override
 	//paint, paintComponent => 자동호출
