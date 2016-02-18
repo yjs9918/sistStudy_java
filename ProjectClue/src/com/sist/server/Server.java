@@ -147,16 +147,18 @@ public class Server implements Runnable{
  					    	if(rname.equals(room.roomName))//방을 찾는다
  					    	{
  					    		 room.current++;
+ 					    		 pnum=room.current;
  					    		 pos=room.roomName;
  					    		 // 이미 방에 들어가 있는 사람들 처리
  					    		 for(int j=0;j<room.userVc.size();j++)
  					    		 {
  					    			 ClientThread c=room.userVc.elementAt(j);
- 					    			 c.messageTo(Function.ROOMADD+"|"+id+"|"+sex+"|"+avata);
+ 					    			c.messageTo(Function.ROOMADD+"|"+id+"|"+sex);
+ 					    			// c.messageTo(Function.ROOMADD+"|"+id+"|"+sex+"|"+pnum+"|"+avata);
  					    			 //c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님이 입장하셨습니다");
  					    		 }
  					    		 // 본인(방에 들어가는 사람)
- 					    		 /*messageTo(Function.ROOMIN+"|"+id+"|"+sex+"|"+avata+"|"+room.roomName);
+ 					    		/* messageTo(Function.ROOMIN+"|"+id+"|"+sex+"|"+room.roomName);
  					    		 room.userVc.addElement(this);*/
  					    		 for(int j=0;j<room.userVc.size();j++)
  					    		 {
@@ -164,11 +166,12 @@ public class Server implements Runnable{
  					    			 ClientThread c=room.userVc.elementAt(j);
  					    			 if(!id.equals(c.id))
  					    			 {
- 					    			    messageTo(Function.ROOMADD+"|"+c.id+"|"+c.sex+"|"+c.avata);
+ 					    				messageTo(Function.ROOMADD+"|"+c.id+"|"+c.sex);
+ 					    			    //messageTo(Function.ROOMADD+"|"+c.id+"|"+c.sex+"|"+avata);
  					    			 }
  					    		 }
  					    		// 본인(방에 들어가는 사람)
- 					    		 messageTo(Function.ROOMIN+"|"+id+"|"+sex+"|"+avata+"|"+room.roomName);
+ 					    		 messageTo(Function.ROOMIN+"|"+id+"|"+sex+"|"+room.roomName);
  					    		 room.userVc.addElement(this);
  					    		 //대기실 처리 
  					    		 messageAll(Function.WAITROOMUPDATE+"|"
@@ -179,9 +182,10 @@ public class Server implements Runnable{
  					    }
  				   }
  				   break;
- 				   /*case Function.ROOMOUT:
+ 				   case Function.ROOMOUT:
  				   {
  					   
+ 					   /* *   
  					    *    1) 방이름을 받는다 
  					    *    2) 방을 찾는다
  					    *    3) ==> 현재인원감소 
@@ -189,25 +193,28 @@ public class Server implements Runnable{
  					    *     4) 방에 있는 사람들에게 
  					    *         삭제명령
  					    *         퇴장메세지 전송 
- 					    *     5) userVc 에 삭제
+ 					    *     5) userVc에 삭제
  					    *     6) 대기실로 변환 메세지 전송 
  					    *     
  					    *     7) 대기실 갱신을 한다 
- 					    
+ 					    */
  					    String rname=st.nextToken();
+ 					    
  					    for(int i=0;i<roomVc.size();i++)
  					    {
  					    	Room room=roomVc.elementAt(i);
  					    	if(rname.equals(room.roomName))//방을 찾는다
- 					    	{
+ 					    	{	
  					    		 room.current--;
+ 					    		
  					    		 pos="대기실";
+ 					    		 
  					    		 // 이미 방에 들어가 있는 사람들 처리
  					    		 for(int j=0;j<room.userVc.size();j++)
  					    		 {
  					    			 ClientThread c=room.userVc.elementAt(j);
  					    			 c.messageTo(Function.ROOMOUT+"|"+id);
- 					    			 c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님이 퇴장하셨습니다");
+ 					    			// c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님이 퇴장하셨습니다");
  					    		 }
  					    		 // 본인(방에 들어가는 사람)
  					    		 messageTo(Function.MYROOMOUT+"|");
@@ -233,9 +240,26 @@ public class Server implements Runnable{
  					    	}
  					    }
  				   }
- 				   break;*/
+ 				   break;
 						
-				}
+ 				   case Function.CHOOSECHAR :
+ 					  int charnum=Integer.parseInt(st.nextToken());
+ 					  for(int i=0;i<roomVc.size();i++)
+					    {
+ 						  Room room=roomVc.elementAt(i);  
+ 						 
+ 					   				
+ 					   
+ 					   for(int j=0;j<room.userVc.size();j++)
+			    		 {
+			    			 ClientThread c=room.userVc.elementAt(j);
+			    			 c.messageTo(Function.AVATA+"|"+pnum+"|"+charnum+"|"+avata);
+			    			
+			    			 avata=charnum; 
+			    		}
+ 					   
+					    }
+ 					  }
 				} catch (Exception ex) {
 					
 				}

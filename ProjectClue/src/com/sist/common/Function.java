@@ -20,6 +20,9 @@ public class Function {
     
 	//채팅관련
 	public static final int WAITCHAT=500;
+	public static final int CHOOSECHAR = 600;
+	public static final int MYAVATA = 610;
+	public static final int AVATA = 620;
 	
 	
 	//게임관련
