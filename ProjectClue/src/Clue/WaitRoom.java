@@ -91,6 +91,13 @@ public class WaitRoom extends JPanel {
 		add(movie);
 		add(p);
 		
+/*<<<<<<< HEAD
+		tf.setEnabled(false);
+		js1.setEnabled(false);
+		js2.setEnabled(false);
+		js3.setEnabled(false);
+		
+=======*/
 
 		for(int i=0;i<col1.length;i++)
 		{
@@ -115,6 +122,7 @@ public class WaitRoom extends JPanel {
 			 column.setCellRenderer(rend);
 		}
 
+//>>>>>>> branch 'master' of https://github.com/actifq/ProjectClue.git
 	}
 	@Override
 	//paint, paintComponent => 자동호출
