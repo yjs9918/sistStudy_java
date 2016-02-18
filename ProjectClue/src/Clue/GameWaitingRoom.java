@@ -38,7 +38,7 @@ public class GameWaitingRoom extends JPanel {
 	boolean[] sw=new boolean[4];
 
 	//JButton chr, chr2, chr3, chr4, chr5, chr6, chrN;
-	static JButton[] chr=new JButton[7];
+	JButton[] chr=new JButton[7];
 
 	
 	public GameWaitingRoom(){

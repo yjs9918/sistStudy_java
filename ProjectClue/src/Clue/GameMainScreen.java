@@ -13,7 +13,7 @@ public class GameMainScreen extends JPanel{
 	Image back;
 	Image dice1,dice2,jpTurn; //정선
 	Image jpLogo; //정선
-	JPanel jpCount;
+	JPanel jpCount,jpNote1,jpNote2,jpNote3;
 	ShowMyCard jpMyCard;
 	GameArea jpGameBoard;
 	JTable table;
