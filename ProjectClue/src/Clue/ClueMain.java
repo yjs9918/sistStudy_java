@@ -59,15 +59,14 @@ KeyListener,Runnable,MouseListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		login.b1.addActionListener(this);
-
 		login.b2.addActionListener(this);// 160211 정선추가
 		wait.b1.addActionListener(this);// 160211 정선추가
 		wait.b2.addActionListener(this);// 160211 정선추가
 		wait.b6.addActionListener(this);// 160217 찬재추가
 		wait.tf.addActionListener(this);// 160211 정선추가
-
 		mkr.b1.addActionListener(this);// 160211 정선추가
 
+		
     	mkr.b2.addActionListener(this);
     	wait.table1.addMouseListener(this);
     	wait.table2.addMouseListener(this);
