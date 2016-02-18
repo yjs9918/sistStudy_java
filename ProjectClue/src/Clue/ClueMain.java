@@ -45,7 +45,7 @@ KeyListener,Runnable,MouseListener{
 
 		card = new CardLayout();
 		setLayout(card);
-
+		
 		add("LOG",login);
 		add("WR", wait);
 		add("GWR", gwr);
