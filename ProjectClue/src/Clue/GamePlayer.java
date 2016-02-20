@@ -25,7 +25,6 @@ public class GamePlayer {
 	public void keyPressed(KeyEvent e){
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_UP:
-			System.out.println(e);
 			inputY=-1;
 			break;
 		case KeyEvent.VK_DOWN:
@@ -59,26 +58,27 @@ public class GamePlayer {
 		g.fillRect(crrX*(GameView.SIZE), crrY*(GameView.SIZE), GameView.SIZE, GameView.SIZE);
 	}*/
 	
-	public void move(){
+	public void move(GameArea gv){
 		int isChanged=0;
 		if(crrX+inputX>=0 && crrX+inputX<13){
 			crrX=crrX+inputX;
 			game.pMain.crrX=crrX;
-			GameArea.crrX=crrX;
+			
 			isChanged++;
 		}
 		
 		if(crrY+inputY>=0 && crrY+inputY<13){
 			crrY=crrY+inputY;
 			game.pMain.crrY=crrY;
-			GameArea.crrY=crrY;
+			//GameArea.crrY=crrY;
+			
 			isChanged++;
 		}
 		
 		if(isChanged<2){
 			count++;
 		}
-		
+		gv.setpXY(crrX, crrY);
 		inputX=0;
 		inputY=0;
 	}
@@ -100,7 +100,7 @@ public class GamePlayer {
 		}else if(crrY==12){
 			if(crrX==9)
 				roomNo=6;
-			else if(crrX==3)
+			else if(crrX==2)
 				roomNo=7;
 			
 		}else if(crrX==0){
