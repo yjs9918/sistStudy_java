@@ -167,6 +167,7 @@ public class Server implements Runnable{
  					    			 if(!id.equals(c.id))
  					    			 {
  					    				messageTo(Function.ROOMADD+"|"+c.id+"|"+c.sex);
+ 					    				messageTo(Function.AVATA+"|"+c.pnum+"|"+c.avata+"|"+c.avata);
  					    			    //messageTo(Function.ROOMADD+"|"+c.id+"|"+c.sex+"|"+avata);
  					    			 }
  					    		 }
