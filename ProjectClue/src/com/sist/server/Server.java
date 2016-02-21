@@ -50,10 +50,12 @@ public class Server implements Runnable{
 		//데이터를 공유할 것이 있기때문에 내부클래스로. -> 통신은 얘가한다
 		String id,name,sex,pos;
 		int avata,pnum;
-		Socket s;
+		boolean ready=false;
 		
+		Socket s;
 		BufferedReader in;	//reader면 2byte단위, 한글이니까 당연히 reader로 clinrt 요청값 읽어옴
 		OutputStream out;	//stream이면 1byte단위. client로 결과값을 을답할때
+		
 		public ClientThread(Socket s){
 			try {
 				this.s=s;//접속한 사람의 소켓 가지고있음. 벡터가 공유되거있음.->이너클래스라서
@@ -170,12 +172,12 @@ public class Server implements Runnable{
  					    			 {
  					    				messageTo(Function.ROOMADD+"|"+c.id+"|"+c.sex);
  					    				messageTo(Function.AVATA+"|"+c.pnum+"|"+c.avata+"|"+c.avata);
- 					    				messageTo(Function.GETREADY+"|"+c.pnum);
+ 					    				messageTo(Function.GETREADY+"|"+c.pnum+"|"+c.ready);
  					    			    //messageTo(Function.ROOMADD+"|"+c.id+"|"+c.sex+"|"+avata);
  					    			 }
  					    		 }
  					    		// 본인(방에 들어가는 사람)
- 					    		 messageTo(Function.ROOMIN+"|"+id+"|"+sex+"|"+room.roomName);
+ 					    		 messageTo(Function.ROOMIN+"|"+id+"|"+sex+"|"+room.roomName+"|"+room.current);
  					    		 room.userVc.addElement(this);
  					    		 //대기실 처리 
  					    		 messageAll(Function.WAITROOMUPDATE+"|"
@@ -275,18 +277,38 @@ public class Server implements Runnable{
 					    	/*if(rname.equals(room.roomName))//방을 찾는다
 					    	{	*/
 					    		room.rdyCnt++;
+					    		ready=true;
 					    		 // 이미 방에 들어가 있는 사람들 처리
 					    		 for(int j=0;j<room.userVc.size();j++)
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);
-					    			 c.messageTo(Function.GETREADY+"|"+pnum);
+					    			 c.messageTo(Function.GETREADY+"|"+pnum+"|"+ready);
 					    			// c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님이 준비하였습니다");
+					    			 
 					    		 }
-					    		 // 본인(방에 들어가는 사람)
+					    		 if(room.rdyCnt==3){
+				    				 //모두 레디하면 방장에게 시작버튼 활성화
+					    			 for(int j=0;j<room.userVc.size();j++)
+						    		 {
+						    			 ClientThread c=room.userVc.elementAt(j);
+						    			 if(c.pnum==1){
+						    			 c.messageTo(Function.ALLREADY+"|"+c.pnum);
+						    			// c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님이 준비하였습니다");
+						    			 break;
+						    			 }
+						    		 }
+				    				
+				    				
+				    			 }
+					    		
 					    	}
 					    }
- 				   //}
+ 				  
  				   break;
+ 				   
+ 				   case Function.STARTGAME:
+ 					   
+ 				  
  				  
  					  }
 				} catch (Exception ex) {
