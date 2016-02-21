@@ -257,11 +257,16 @@ KeyListener,Runnable,MouseListener{
 			gwr.chat.append(data + "\n");
 			gwr.chatInput.setText("");
 		} else if (e.getSource() == gwr.btnReady) {
-			repaint();
+			try
+			{
+				 out.write((Function.READY+"|"+myRoom+"\n").getBytes());
+			}catch(Exception ex){}
 
-			card.show(getContentPane(), "LD"); // 160204 정선추가
+			
+			/*repaint();
+			 * card.show(getContentPane(), "LD"); // 160204 정선추가
 			new Thread(loading).start(); // 160204 정선추가
-
+*/
 		} else if (e.getSource() == gwr.btnExit) {
 			/*repaint();
 			card.previous(getContentPane());*/
@@ -592,7 +597,12 @@ KeyListener,Runnable,MouseListener{
 				}
 				break;
 				
-				case Function.MYAVATA:
+				case Function.GETREADY:
+				{
+					int pNum=Integer.parseInt(st.nextToken());//플레이어 넘버
+					
+					gwr.isReady[pNum-1].setText("준비완료");//캐릭터 바꾸기
+				}
 					break;
 				
 				case Function.AVATA:

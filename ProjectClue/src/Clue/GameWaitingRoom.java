@@ -32,7 +32,7 @@ public class GameWaitingRoom extends JPanel {
     JTextField t4=new JTextField();
     
     JTextField[] avaName= new JTextField[4];
-
+    JTextField[] isReady= new JTextField[4];
 	
 	JTextField[] idtf={t1,t2,t3,t4};
 	boolean[] sw=new boolean[4];
@@ -190,6 +190,11 @@ public class GameWaitingRoom extends JPanel {
 		avaName[1]= new JTextField("?");
 		avaName[2]= new JTextField("?");
 		avaName[3]= new JTextField("?");
+		
+		isReady[0]= new JTextField("");
+		isReady[1]= new JTextField("");
+		isReady[2]= new JTextField("");
+		isReady[3]= new JTextField("");
 
 	
 		
@@ -214,7 +219,15 @@ public class GameWaitingRoom extends JPanel {
   		add(avaName[2]);
   		add(avaName[3]);
   		
-		
+  		isReady[0].setBounds(235,185,225, 50);
+  		isReady[1].setBounds(690,185,225, 50);
+  		isReady[2].setBounds(235,487,225, 50);
+  		isReady[3].setBounds(690,487,225, 50);
+  		  
+  		add(isReady[0]);
+  		add(isReady[1]);
+  		add(isReady[2]);
+  		add(isReady[3]);
 
 		
 		js1.setBounds(5, 652, 902, 180);
