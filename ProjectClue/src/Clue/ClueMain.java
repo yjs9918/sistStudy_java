@@ -634,13 +634,31 @@ KeyListener,Runnable,MouseListener{
 					
 					break;
 				case Function.STARTGAME:
-				{
+				{	int[] ans= new int[3];
+					int[][] pCard= new int[4][5];
+					
+					int pnum=Integer.parseInt(st.nextToken());
+					int ava=Integer.parseInt(st.nextToken());
+					for(int i=0;i<ans.length;i++){
+						ans[i]=Integer.parseInt(st.nextToken());
+					}
+					for(int i=0;i<pCard.length;i++){
+						for(int j=0; j<pCard[i].length; j++){
+							pCard[i][j]=Integer.parseInt(st.nextToken());
+						}
+					}
 					
 					repaint();
 					card.show(getContentPane(), "LD"); // 160204 정선추가
 					new Thread(loading).start(); // 160204 정선추가
 					mainScreen.gameStart(); //game생성자 호출
-					
+					mainScreen.game.setMyNum(pnum-1);
+					mainScreen.game.setMyAva(ava);
+					mainScreen.game.setAnswerCard(ans);
+					mainScreen.game.setpCard(pCard);
+					mainScreen.jpMyCard.setCardImg(mainScreen.game.pCard[pnum-1]);//0번플레이어로
+					mainScreen.showCount();
+					mainScreen.setImage();
 					
 				}
 				break;

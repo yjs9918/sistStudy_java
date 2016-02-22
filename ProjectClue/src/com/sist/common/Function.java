@@ -24,8 +24,10 @@ public class Function {
 	public static final int AVATA = 620;
 	public static final int READY = 630;
 	public static final int GETREADY = 640;
-	public static final int STARTGAME = 700;
 	public static final int ALLREADY = 650;
+	
+	public static final int STARTGAME = 700;
+	public static final int SETCARD = 710;
 
 	
 	

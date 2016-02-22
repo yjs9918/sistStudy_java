@@ -23,6 +23,9 @@ public class Game{
 	JFrame frTurn;
 	private Random random;
 	
+	private int myNum, myAva;
+	
+	
 /*	public Game(){
 		answerCard=selectAnswerCard();	//정답카드
 		distributeCard(answerCard, pCard); //플레이어카드
@@ -118,6 +121,22 @@ public class Game{
 	
 	
 
+	public int getMyNum() {
+		return myNum;
+	}
+
+	public void setMyNum(int myNum) {
+		this.myNum = myNum;
+	}
+
+	public int getMyAva() {
+		return myAva;
+	}
+
+	public void setMyAva(int myAva) {
+		this.myAva = myAva;
+	}
+
 	public PlayerDTO getpMain() {
 		return pMain;
 	}
@@ -174,6 +193,16 @@ public class Game{
 		}
 	}
 	
+	
+	
+	public void setAnswerCard(int[] answerCard) {
+		this.answerCard = answerCard;
+	}
+
+	public void setpCard(int[][] pCard) {
+		this.pCard = pCard;
+	}
+
 	//카드 봉인하기
 	public int[] selectAnswerCard(){
 		//정답카드고르기
