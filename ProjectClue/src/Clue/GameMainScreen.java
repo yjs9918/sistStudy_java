@@ -112,7 +112,7 @@ public class GameMainScreen extends JPanel{
 	
 	public void gameStart(){
 		game= new Game(jpGameBoard,jfTurn);
-		try {
+		/*try {
 			Thread.sleep(20);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -120,7 +120,7 @@ public class GameMainScreen extends JPanel{
 		}
 		jpMyCard.setCardImg(game.pCard[0]);//0번플레이어로
 		showCount();
-		setImage();
+		setImage();*/
 		
 
 	}

@@ -298,21 +298,35 @@ public class Server implements Runnable{
 						    			 break;
 						    			 }
 						    		 }
-				    				
-				    				
 				    			 }
-					    		
 					    	}
 					    }
  				  
  				   break;
  				   
  				   case Function.STARTGAME:
- 					   
- 				  
- 				  
 
- 					  }
+ 				   {
+ 					  String rname=st.nextToken();
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	room.initGame();
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.STARTGAME+"|"+c.pnum+"|"+c.avata);//자신의 Player 넘버와 캐릭터
+					    			 
+					    			 
+					    			// c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님이 준비하였습니다");
+					    			 
+					    		 }
+					    }
+ 				   }
+ 				  break;
+ 				    }
+
 				} catch (Exception ex) {
 					
 				}
