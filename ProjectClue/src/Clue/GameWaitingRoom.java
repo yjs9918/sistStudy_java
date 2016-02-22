@@ -17,6 +17,9 @@ public class GameWaitingRoom extends JPanel {
 	
 	JPanel title;
 	JPanel uPan1,uPan2,uPan3,uPan4,bb1,bb2,bb3,bb4;
+
+	JPanel CntDwn;
+
 	JPanel[] aa= new JPanel[4];
 	int pnum; //플레이어 넘버
 	
@@ -32,6 +35,8 @@ public class GameWaitingRoom extends JPanel {
     JTextField t4=new JTextField();
     
     JTextField[] avaName= new JTextField[4];
+
+    JTextField[] isReady= new JTextField[4];
 
 	
 	JTextField[] idtf={t1,t2,t3,t4};
@@ -191,6 +196,12 @@ public class GameWaitingRoom extends JPanel {
 		avaName[2]= new JTextField("?");
 		avaName[3]= new JTextField("?");
 
+		
+		isReady[0]= new JTextField("");
+		isReady[1]= new JTextField("");
+		isReady[2]= new JTextField("");
+		isReady[3]= new JTextField("");
+
 	
 		
   		  
@@ -214,6 +225,22 @@ public class GameWaitingRoom extends JPanel {
   		add(avaName[2]);
   		add(avaName[3]);
   		
+  		isReady[0].setBounds(235,185,225, 50);
+  		isReady[1].setBounds(690,185,225, 50);
+  		isReady[2].setBounds(235,487,225, 50);
+  		isReady[3].setBounds(690,487,225, 50);
+  		  
+  		add(isReady[0]);
+  		add(isReady[1]);
+  		add(isReady[2]);
+  		add(isReady[3]);
+  		
+  		
+  		CntDwn= new JPanel();
+  		CntDwn.setOpaque(false);
+  		CntDwn.setBounds(510, 330, 171, 250);
+  		CntDwn.add(new JLabel(new ImageIcon(setImage("image/dice/d3.png", 171, 250))));
+
 		
 
 		
@@ -247,7 +274,8 @@ public class GameWaitingRoom extends JPanel {
 		
 		add(p);
 		
-		
+
+
 	/*	캐릭터 이미지 바꿀때
 	 * gwr.pan[i].removeAll();
 		  gwr.pan[i].setLayout(new BorderLayout());
@@ -255,8 +283,19 @@ public class GameWaitingRoom extends JPanel {
 				  new JLabel(new ImageIcon("c:\\image\\"+s+avata+".gif")));
 		  gwr.pan[i].validate();//panel재배치
 */
-		
+		//setCntDwn();
 	}
+	public void setCntDwn(){
+		this.add(CntDwn);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+
 	private Image setImage(String filename, int width, int height) {
 		// TODO Auto-generated method stub
 		ImageIcon ii = new ImageIcon(filename);

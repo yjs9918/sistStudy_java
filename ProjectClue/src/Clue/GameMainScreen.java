@@ -4,12 +4,16 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import javax.swing.table.*;
 
-import com.clue.note.GameNote_js;
-import com.clue.note.GameNote_js2;
-import com.clue.note.GameNote_js3;
+import com.sist.note.GameNote_js;
+import com.sist.note.GameNote_js2;
+import com.sist.note.GameNote_js3;
 
-
+import java.awt.event.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class GameMainScreen extends JPanel{
 	
@@ -37,6 +41,7 @@ public class GameMainScreen extends JPanel{
 		
 		jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
+
 		jpTurn=Toolkit.getDefaultToolkit().getImage("image/player/schar.jpg");//턴이미지화면
 		
 		jlshowCnt = new JLabel("0");

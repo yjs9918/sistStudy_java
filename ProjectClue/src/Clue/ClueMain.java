@@ -64,9 +64,10 @@ KeyListener,Runnable,MouseListener{
 		wait.b2.addActionListener(this);// 160211 정선추가
 		wait.b6.addActionListener(this);// 160217 찬재추가
 		wait.tf.addActionListener(this);// 160211 정선추가
+
 		mkr.b1.addActionListener(this);// 160211 정선추가
 
-		
+
     	mkr.b2.addActionListener(this);
     	wait.table1.addMouseListener(this);
     	wait.table2.addMouseListener(this);
@@ -256,10 +257,21 @@ KeyListener,Runnable,MouseListener{
 			gwr.chat.append(data + "\n");
 			gwr.chatInput.setText("");
 		} else if (e.getSource() == gwr.btnReady) {
-			repaint();
 
-			card.show(getContentPane(), "LD"); // 160204 정선추가
+			try
+			{
+				if(gwr.btnReady.getText().equals("START"))
+					out.write((Function.STARTGAME+"|"+myRoom+"\n").getBytes());
+				else 
+				 out.write((Function.READY+"|"+myRoom+"\n").getBytes());
+			}catch(Exception ex){}
+
+			gwr.btnReady.setEnabled(false);
+			
+			/*repaint();
+			 * card.show(getContentPane(), "LD"); // 160204 정선추가
 			new Thread(loading).start(); // 160204 정선추가
+*/
 
 		} else if (e.getSource() == gwr.btnExit) {
 			/*repaint();
@@ -475,6 +487,8 @@ KeyListener,Runnable,MouseListener{
 					 String id=st.nextToken();
 					 String sex=st.nextToken();					 
 					 myRoom=st.nextToken();
+
+					 int pnum = Integer.parseInt(st.nextToken());
 					 
 					 String s="";
 					 if(sex.equals("남자")) 
@@ -494,8 +508,16 @@ KeyListener,Runnable,MouseListener{
 						  }
 					 }
 					 String[] temp={id,sex};
-					
 					 card.show(getContentPane(), "GWR");
+					 
+					 if(pnum==1){
+						 gwr.btnReady.setText("START");
+						 gwr.btnReady.setEnabled(false);
+						 gwr.isReady[pnum-1].setFont(new Font("맑은 고딕", Font.ITALIC, 20));
+						 gwr.isReady[pnum-1].setForeground(Color.PINK);
+						 gwr.isReady[pnum-1].setText("방장");
+					 }
+					
 				}
 				break;
 				case Function.REFLUSH:
@@ -591,7 +613,13 @@ KeyListener,Runnable,MouseListener{
 				}
 				break;
 				
-				case Function.MYAVATA:
+				case Function.GETREADY:
+				{
+					int pNum=Integer.parseInt(st.nextToken());//플레이어 넘버
+					boolean ready=Boolean.parseBoolean(st.nextToken());
+					if(ready)
+					gwr.isReady[pNum-1].setText("준비완료");//캐릭터 바꾸기
+				}
 					break;
 				
 				case Function.AVATA:
@@ -605,7 +633,18 @@ KeyListener,Runnable,MouseListener{
 					gwr.chr[prvChar].setEnabled(true);
 					
 					break;
+				case Function.STARTGAME:
+				{
+					
+				}
+				break;
 				
+				case Function.ALLREADY:
+				{
+					gwr.btnReady.setEnabled(true);
+				}
+				break;
+
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
