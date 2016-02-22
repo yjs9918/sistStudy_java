@@ -36,10 +36,10 @@ KeyListener,Runnable,MouseListener{
 
 	BufferedReader in;	//서버에서 값을 읽는다
 	OutputStream out;	//서버로 요청값을 보낸다.
-	
+	int n=0;
 	 
     String myRoom,myId;
-
+   int myNum;
 
 	public ClueMain() {
 
@@ -92,7 +92,7 @@ KeyListener,Runnable,MouseListener{
 		setFocusable(true);
 		reachRoom.b1.addActionListener(this);
 		reachRoom.b2.addActionListener(this);
-
+		mainScreen.ChatInput.addActionListener(this);
 	}
 
 	// 소켓
@@ -344,10 +344,52 @@ KeyListener,Runnable,MouseListener{
 
 			// mainScreen.mc.show(getParent(), "GB");
 		} else if (e.getSource() == reachRoom.b1) {
-			repaint();
-			card.show(getContentPane(), "CS");
-			cs.setCardImg();
+			try
+			{
+				 out.write((Function.GUESS+"|"+myRoom+"|"+n+"\n").getBytes());
+			}catch(Exception ex){}
+			
+			
 			reachRoom.setVisible(false);
+		}else if(e.getSource()==mainScreen.ChatInput)
+		{
+			 String msg=mainScreen.ChatInput.getText().trim();
+			 if(msg.length()<1)
+				 return;
+			 //서버로 전송 
+			 /*
+			  *   사람 찾는다 ==> id (waitVc)
+			  *   방에 있는 사람 ==> roomName(userVc)
+			  */
+			 try
+			 {
+				 out.write((Function.ROOMCHAT+"|"+myRoom+"|"+msg+"\n").getBytes());
+				 // Server ==> in.readLine() (Thread==> run())
+				 /*
+				  *   1. 이벤트 발생 (Button,Mouse)   
+				  *      ==> 서버로 요청값 전송
+				  *      ******** 브라우저으로 클릭 , 주소 변경 
+				  *                 login.jsp?id=aaa&pwd=1234
+				  *   2. Server (통신을 담당하는 쓰레드에서 처리)
+				  *      class Client
+				  *      {
+				  *          public void run(){}
+				  *      }
+				  *      ==> 요청한 결과값을 클라이언트로 전송 
+				  *      ==> 웹서버 ==> 처리 결과를 클라이언트 브라우저로 전송
+				  *   3. run() : 서버에서 들어오는 응답을 받아서 
+				  *       윈도우에 출력 (브라우저 출력)
+				  *       
+				  *   Client ==> Server ==> Client
+				  *   오라클 
+				  *     요청 ==> 결과값 ==> 브라우저 전송(출력)
+				  *     SQL  
+				  *   웹서버
+				  *     요청 (브라우저) ==> 파일요청 ==> 
+				  *     파일 찾기 ==> 파일내용 브라우저 전송
+				  */
+			 }catch(Exception ex){}
+			 mainScreen.ChatInput.setText("");
 		}
 
 	}
@@ -361,24 +403,52 @@ KeyListener,Runnable,MouseListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-
-		mainScreen.game.gp.keyPressed(e);
-
 		
-		int n=mainScreen.game.process();
+		if(myNum==Game.crrPlayer){//내가 현재 플레이어일때.
+		int key=-1;
+		
+		//mainScreen.game.gp.keyPressed(e);
+		
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_RIGHT:
+			key=3;
+			break;
+		case KeyEvent.VK_LEFT:
+			key=2;
+			break;
+		case KeyEvent.VK_UP:
+			key=0;
+			break;
+		case KeyEvent.VK_DOWN:
+			key=1;
+			break;
+		}
+		
+		try{
+			
+			out.write((Function.MOVE+"|"+myRoom+"|"+(myNum+1)+"|"+key+"\n").getBytes());
+			}catch(Exception ex){
+				
+			}
+		
+		n=mainScreen.game.process();
 		if(n!=0){
 			reachRoom.setBounds(500,250,230,240);
 			try{
-			reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");}
+			reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");
+			out.write((Function.REACHROOM+"|"+myRoom+"|"+(myNum+1)+"|"+RefData.nameRoom[n-1]+"\n").getBytes());
+			}
 			catch(Exception ex){
 				
 			}
 
 			reachRoom.setVisible(true);
 		}
+		/*수정필요
 		mainScreen.showCount();
 		mainScreen.setImage();
-		mainScreen.jpGameBoard.repaint();
+		mainScreen.jpGameBoard.repaint();*/
+		}
 	}
 
 	@Override
@@ -653,9 +723,14 @@ KeyListener,Runnable,MouseListener{
 					new Thread(loading).start(); // 160204 정선추가
 					mainScreen.gameStart(); //game생성자 호출
 					mainScreen.game.setMyNum(pnum-1);
+					this.myNum=pnum-1;
 					mainScreen.game.setMyAva(ava);
 					mainScreen.game.setAnswerCard(ans);
 					mainScreen.game.setpCard(pCard);
+					
+					for(int i=1;i<=4;i++)
+						mainScreen.game.setPlayer(i, gwr.avaName[i-1].getText().trim());
+					
 					mainScreen.jpMyCard.setCardImg(mainScreen.game.pCard[pnum-1]);//0번플레이어로
 					mainScreen.showCount();
 					mainScreen.setImage();
@@ -668,7 +743,30 @@ KeyListener,Runnable,MouseListener{
 					gwr.btnReady.setEnabled(true);
 				}
 				break;
-
+				case Function.SELECTCARD:
+				{
+					String pnum=st.nextToken();
+					int avata= Integer.parseInt(st.nextToken());
+					int roomNo=Integer.parseInt(st.nextToken());
+					//데이터를 cs에 넘겨줘서 처리.. 누가 어디에서 추리중,.
+					repaint();
+					card.show(getContentPane(), "CS");
+					cs.setCardImg();
+				}
+				break;
+				
+				case Function.MOVE:
+				{
+					String pnum=st.nextToken();
+					int key= Integer.parseInt(st.nextToken());
+					mainScreen.game.gp.keyPressed(key);
+				}
+				break;
+				
+				case Function.ROOMCHAT:
+				{
+					 mainScreen.ta.append(st.nextToken()+"\n");
+				}
 				}
 			} catch (Exception e) {
 				// TODO: handle exception

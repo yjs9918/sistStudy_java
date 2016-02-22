@@ -22,7 +22,7 @@ public class GamePlayer {
 		inputY=0;
 	}
 	
-	public void keyPressed(KeyEvent e){
+	/*public void keyPressed(KeyEvent e){
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_UP:
 			inputY=-1;
@@ -34,6 +34,27 @@ public class GamePlayer {
 			inputX=-1;
 			break;
 		case KeyEvent.VK_RIGHT:
+			inputX=1;
+			break;
+		default: //다른 키 눌렀을 때
+			count++;
+		}
+		count--;
+		
+	}*/
+	
+	public void keyPressed(int  key){
+		switch(key){
+		case 0:	//KeyEvent.VK_UP
+			inputY=-1;
+			break;
+		case 1: //KeyEvent.VK_DOWN
+			inputY=1;
+			break;
+		case 2: //KeyEvent.VK_LEFT
+			inputX=-1;
+			break;
+		case 3: //KeyEvent.VK_RIGHT
 			inputX=1;
 			break;
 		default: //다른 키 눌렀을 때

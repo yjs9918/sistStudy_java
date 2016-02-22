@@ -16,7 +16,7 @@ public class Function {
 
     public static final int WAITROOMUPDATE=250;
     public static final int REFLUSH=260;
-    
+    public static final int ROOMCHAT=270;
 	//GameWaitingRoom
 	
 	public static final int CHOOSECHAR = 600;
@@ -26,8 +26,13 @@ public class Function {
 	public static final int GETREADY = 640;
 	public static final int ALLREADY = 650;
 	
-	public static final int STARTGAME = 700;
-	public static final int SETCARD = 710;
+	public static final int STARTGAME = 700;	
+	public static final int REACHROOM = 710;
+	public static final int GUESS = 720;
+	public static final int FINALGUESS = 730;
+	public static final int SELECTCARD = 740;
+	public static final int MOVE = 750;
+	
 
 	
 	

@@ -4,6 +4,7 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
+
 import com.sist.common.Function;
 
 
@@ -189,6 +190,23 @@ public class Server implements Runnable{
  					    }
  				   }
  				   break;
+					case Function.ROOMCHAT:
+ 				   {
+ 					    String rname=st.nextToken();
+ 					    String strMsg=st.nextToken();
+ 					    for(int i=0;i<roomVc.size();i++)
+ 					    {
+ 					    	Room room=roomVc.elementAt(i);
+ 					    	if(rname.equals(room.roomName))
+ 					    	{
+ 					    		 for(int j=0;j<room.userVc.size();j++)
+ 					    		 {
+ 					    			  ClientThread c=room.userVc.elementAt(j);
+ 					    			  c.messageTo(Function.ROOMCHAT+"|["+name+"]"+strMsg);
+ 					    		 }
+ 					    	}
+ 					    }
+ 				   }
  				   case Function.ROOMOUT:
  				   {
  					   
@@ -317,14 +335,73 @@ public class Server implements Runnable{
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);
 					    			 c.messageTo(Function.STARTGAME+"|"+c.pnum+"|"+c.avata+"|"+room.getAnsCard()+room.getPCard());//자신의 Player 넘버와 캐릭터
-					    			 //c.messageTo(Function.SETCARD+"|"+room.getAnsCard()+room.getPCard());
 					    			 
-					    			// c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님이 준비하였습니다");
+					    			 
+					    			c.messageTo(Function.ROOMCHAT+"|[알림] 게임이 시작되었습니다");
 					    			 
 					    		 }
 					    }
  				   }
  				  break;
+ 				   case Function.REACHROOM:
+ 				   {
+ 					  String rname=st.nextToken();
+ 					  String pnum =st.nextToken();
+ 					  String roomName=st.nextToken();
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			    			 
+					    			c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님("+pnum+"P)이 "+roomName+"에 도달하였습니다");
+					    			 
+					    		 }
+					    }
+ 				   }
+ 				   break;
+ 				  case Function.GUESS:
+				   {
+					  String rname=st.nextToken();					  
+					  int roomNum=Integer.parseInt(st.nextToken());
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.SELECTCARD+"|"+pnum+"|"+avata+"|"+roomNum);
+					    			
+					    			 
+					    		 }
+					    }
+				   }
+				   break;
+ 				 case Function.MOVE:
+				   {
+					  String rname=st.nextToken();					  
+					  int pnum=Integer.parseInt(st.nextToken());
+					  int key=Integer.parseInt(st.nextToken());
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.MOVE+"|"+pnum+"|"+key);
+					    			 
+					    			 
+					    		 }
+					    }
+				   }
+				   break;
  				    }
 
 				} catch (Exception ex) {
