@@ -36,7 +36,8 @@ public class Game{
 	}
 	*/
 	
-	public Game(GameArea gv, JFrame fr){
+/*원 생성자
+ 		public Game(GameArea gv, JFrame fr){
 		p=new PlayerDTO[4];
 		
 		this.gv=gv;
@@ -57,8 +58,31 @@ public class Game{
 		
 		setGamePlayer(crrPlayer,runDice());
 		
-	}
+	}*/
 
+	public Game(GameArea gv, JFrame fr){
+		p=new PlayerDTO[4];
+		
+		this.gv=gv;
+		frTurn=fr;
+		/*answerCard=selectAnswerCard();	//정답카드
+		distributeCard(answerCard, pCard); //플레이어카드
+	
+		
+		
+		//플레이어 초기화 수정필요=> 대기실에서 데이터 가져와야함.
+		p[0]= new PlayerDTO(0,pCard[0]);
+		p[1]= new PlayerDTO(1,pCard[1]);
+		p[2]= new PlayerDTO(2,pCard[2]);
+		p[3]= new PlayerDTO(3,pCard[3]);
+		
+		pMain=new PlayerDTO(p[0].getCharIndex(),pCard[0]);
+		
+		crrPlayer=0;
+		
+		setGamePlayer(crrPlayer,runDice());
+	*/		
+	}
 	
 	public int runDice() {
 		// TODO Auto-generated method stub

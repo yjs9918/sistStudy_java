@@ -633,6 +633,12 @@ KeyListener,Runnable,MouseListener{
 				case Function.STARTGAME:
 				{
 					
+					repaint();
+					card.show(getContentPane(), "LD"); // 160204 정선추가
+					new Thread(loading).start(); // 160204 정선추가
+					mainScreen.gameStart(); //game생성자 호출
+					
+					
 				}
 				break;
 				
