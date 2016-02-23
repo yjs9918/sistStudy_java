@@ -13,21 +13,22 @@ public class ShowTurn extends JFrame {
 	JLabel la1;
 	JLabel label ;
 	JLabel label2 ;
-	GameArea gs;
-	public ShowTurn(String id, int dice, GameArea gs){
-		this.gs=gs;
+
+	public JButton b1;
+	public ShowTurn(){
+		
 		setSize(300,300);
 		
-		label = new JLabel(id+"턴! ");
-		label2 = new JLabel("이동횟수: "+dice);
+		label = new JLabel("MY TURN ");
+		b1= new JButton("주사위 돌리기");
 		
 		setLayout(null);
 		
 		label.setBounds(150,50,80,20);
-		label2.setBounds(80,150,100,40);
+		b1.setBounds(80,150,120,40);
 		
 		add(label);
-		add(label2);	
+		add(b1);	
 	
 		
 	

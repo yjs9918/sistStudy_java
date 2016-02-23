@@ -33,7 +33,7 @@ public class GameMainScreen extends JPanel implements ActionListener{
 	JFrame jfTurn;
 	AudioClip clip;
 	
-	GameWaitingRoom gwr= new GameWaitingRoom();
+	//GameWaitingRoom gwr= new GameWaitingRoom();
 	
 
 	public GameMainScreen() {
@@ -124,7 +124,7 @@ public class GameMainScreen extends JPanel implements ActionListener{
 	
 	public void gameStart(){
 		game= new Game(jpGameBoard,jfTurn);
-		try {
+		/*try {
 			Thread.sleep(20);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -132,7 +132,7 @@ public class GameMainScreen extends JPanel implements ActionListener{
 		}
 		jpMyCard.setCardImg(game.pCard[0]);//0번플레이어로
 		showCount();
-		setImage();
+		setImage();*/
 		
 
 	}
@@ -143,16 +143,16 @@ public class GameMainScreen extends JPanel implements ActionListener{
 	}
 	
 	public void showCount(){
-		jlshowCnt.setText(String.valueOf(game.gp.getCount()));
+		jlshowCnt.setText(String.valueOf(game.getCount()));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==gwr.btnReady)
+		/*if(e.getSource()==gwr.btnReady)
 		{
 			clip.play();
-		}
+		}*/
 	}
 	
 

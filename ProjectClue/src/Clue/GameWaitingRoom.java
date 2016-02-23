@@ -207,23 +207,6 @@ public class GameWaitingRoom extends JPanel {
   		idtf[2].setBounds(235,347,225, 50);
   		idtf[3].setBounds(690,347,225, 50);
   		
-  		JLabel l1 = new JLabel("이름");
-  		l1.setBounds(235, 50, 50, 50);
-  		l1.setBackground(Color.white);
-  		
-  		
-  		
-  		JLabel l2 = new JLabel("이름");
-  		l2.setBounds(235, 50, 50, 50);
-  		add(l1);
-  		
-  		JLabel l3 = new JLabel("이름");
-  		l3.setBounds(235, 50, 50, 50);
-  		add(l1);
-  		
-  		JLabel l4 = new JLabel("이름");
-  		l4.setBounds(235, 50, 50, 50);
-  		add(l1);
   		
   		add(idtf[0]);
   		add(idtf[1]);

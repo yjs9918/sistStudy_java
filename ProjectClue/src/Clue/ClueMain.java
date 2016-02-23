@@ -13,7 +13,7 @@ import java.util.*;
 
 public class ClueMain extends JFrame implements ActionListener,
 KeyListener,Runnable,MouseListener{
-	JLabel l1;
+	
 	CardLayout card;
 	GameWaitingRoom gwr = new GameWaitingRoom();
 	Login login = new Login();
@@ -26,7 +26,7 @@ KeyListener,Runnable,MouseListener{
 	//private Dice dice;//160206 정선 추가
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
-
+	ShowTurn  jfTurn=new ShowTurn();
 	FinalCardSelect fcs=new FinalCardSelect(); //160216 정선 추가
 
 	 // 소켓 연결시도
@@ -36,9 +36,10 @@ KeyListener,Runnable,MouseListener{
 	BufferedReader in;	//서버에서 값을 읽는다
 	OutputStream out;	//서버로 요청값을 보낸다.
 	
+	int n=0;
 	 
     String myRoom,myId;
-
+   int myNum;
 
 	public ClueMain() {
 
@@ -58,9 +59,6 @@ KeyListener,Runnable,MouseListener{
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		JLabel l1 = new JLabel();
-		
 		
 		login.b1.addActionListener(this);
 
@@ -96,6 +94,8 @@ KeyListener,Runnable,MouseListener{
 		setFocusable(true);
 		reachRoom.b1.addActionListener(this);
 		reachRoom.b2.addActionListener(this);
+		mainScreen.ChatInput.addActionListener(this);
+		jfTurn.b1.addActionListener(this);
 		fcs.j[0].addActionListener(this);
 	}
 
@@ -130,15 +130,6 @@ KeyListener,Runnable,MouseListener{
 
 	}
 	
-	/*public void chAvata(int pNum,int i){
-		
-		gwr.aa[pNum].removeAll();
-		  gwr.aa[pNum].setLayout(new BorderLayout());
-		  gwr.aa[i].add(new JLabel(new ImageIcon("image/player/char"+i+".jpg")));
-		  gwr.aa[i].setBounds(5, 60, 171, 250);
-		  gwr.aa[i].validate();//panel재배치
-	}*/
-
 	@Override
 
 	public void actionPerformed(ActionEvent e) {
@@ -272,7 +263,7 @@ KeyListener,Runnable,MouseListener{
 			repaint();
 			card.show(getContentPane(), "LD");
 			new Thread(loading).start();
-			/*try
+			try
 			{
 				if(gwr.btnReady.getText().equals("START"))
 					out.write((Function.STARTGAME+"|"+myRoom+"\n").getBytes());
@@ -280,7 +271,7 @@ KeyListener,Runnable,MouseListener{
 				 out.write((Function.READY+"|"+myRoom+"\n").getBytes());
 			}catch(Exception ex){}
 
-			gwr.btnReady.setEnabled(false);*/
+			gwr.btnReady.setEnabled(false);
 			
 		} else if (e.getSource() == gwr.btnExit) {
 			try
@@ -352,11 +343,16 @@ KeyListener,Runnable,MouseListener{
 
 			// mainScreen.mc.show(getParent(), "GB");
 		} else if (e.getSource() == reachRoom.b1) {
-			repaint();
+			try
+			{
+				 out.write((Function.GUESS+"|"+myRoom+"|"+n+"\n").getBytes());
+			}catch(Exception ex){}
+			
+			/*repaint();
 			
 			card.show(getContentPane(), "CS");
 			cs.setCardImg();
-			reachRoom.setVisible(false);
+			reachRoom.setVisible(false);*/
 		}
 		else if(e.getSource()==reachRoom.b2)
 		{
@@ -384,7 +380,53 @@ KeyListener,Runnable,MouseListener{
 			mainScreen.showCount();
 			mainScreen.setImage();
 			mainScreen.jpGameBoard.repaint();
+		}else if(e.getSource()==mainScreen.ChatInput)
+		{
+			 String msg=mainScreen.ChatInput.getText().trim();
+			 if(msg.length()<1)
+				 return;
+			 //서버로 전송 
+			 /*
+			  *   사람 찾는다 ==> id (waitVc)
+			  *   방에 있는 사람 ==> roomName(userVc)
+			  */
+			 try
+			 {
+				 out.write((Function.ROOMCHAT+"|"+myRoom+"|"+msg+"\n").getBytes());
+				 // Server ==> in.readLine() (Thread==> run())
+				 /*
+				  *   1. 이벤트 발생 (Button,Mouse)   
+				  *      ==> 서버로 요청값 전송
+				  *      ******** 브라우저으로 클릭 , 주소 변경 
+				  *                 login.jsp?id=aaa&pwd=1234
+				  *   2. Server (통신을 담당하는 쓰레드에서 처리)
+				  *      class Client
+				  *      {
+				  *          public void run(){}
+				  *      }
+				  *      ==> 요청한 결과값을 클라이언트로 전송 
+				  *      ==> 웹서버 ==> 처리 결과를 클라이언트 브라우저로 전송
+				  *   3. run() : 서버에서 들어오는 응답을 받아서 
+				  *       윈도우에 출력 (브라우저 출력)
+				  *       
+				  *   Client ==> Server ==> Client
+				  *   오라클 
+				  *     요청 ==> 결과값 ==> 브라우저 전송(출력)
+				  *     SQL  
+				  *   웹서버
+				  *     요청 (브라우저) ==> 파일요청 ==> 
+				  *     파일 찾기 ==> 파일내용 브라우저 전송
+				  */
+			 }catch(Exception ex){}
+			 mainScreen.ChatInput.setText("");
+		}else if(e.getSource()==jfTurn.b1){
+			try
+			{
+				 out.write((Function.SETTURN+"|"+myRoom+"\n").getBytes());
+			}catch(Exception ex){}
 		}
+
+		jfTurn.setVisible(false);
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -395,8 +437,6 @@ KeyListener,Runnable,MouseListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-
-		mainScreen.game.gp.keyPressed(e);
 
 		if(myNum==Game.crrPlayer){//내가 현재 플레이어일때.
 		int key=-1;
@@ -681,6 +721,36 @@ KeyListener,Runnable,MouseListener{
 					break;
 				case Function.STARTGAME:
 				{
+					int[] ans= new int[3];
+					int[][] pCard= new int[4][5];
+					
+					int pnum=Integer.parseInt(st.nextToken());
+					int ava=Integer.parseInt(st.nextToken());
+					for(int i=0;i<ans.length;i++){
+						ans[i]=Integer.parseInt(st.nextToken());
+					}
+					for(int i=0;i<pCard.length;i++){
+						for(int j=0; j<pCard[i].length; j++){
+							pCard[i][j]=Integer.parseInt(st.nextToken());
+						}
+					}
+					
+					repaint();
+					card.show(getContentPane(), "LD"); // 160204 정선추가
+					new Thread(loading).start(); // 160204 정선추가
+					mainScreen.gameStart(); //game생성자 호출
+					mainScreen.game.setMyNum(pnum-1);
+					this.myNum=pnum-1;
+					mainScreen.game.setMyAva(ava);
+					mainScreen.game.setAnswerCard(ans);
+					mainScreen.game.setpCard(pCard);
+					
+					for(int i=1;i<=4;i++)
+						mainScreen.game.setPlayer(i, gwr.avaName[i-1].getText().trim());
+					
+					mainScreen.jpMyCard.setCardImg(mainScreen.game.pCard[pnum-1]);//0번플레이어로
+					mainScreen.showCount();
+					mainScreen.setImage();
 					
 				}
 				break;
@@ -697,9 +767,27 @@ KeyListener,Runnable,MouseListener{
 					int avata= Integer.parseInt(st.nextToken());
 					int roomNo=Integer.parseInt(st.nextToken());
 					//데이터를 cs에 넘겨줘서 처리.. 누가 어디에서 추리중,.
+					for(int i=0;i<9;i++){
+						cs.j[i].setEnabled(false);
+					}
 					repaint();
+					
+					cs.guess[0].removeAll();
+					cs.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+(roomNo-1)+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
+					cs.guess[0].validate();//panel재배치
+					
+					cs.pl.removeAll();
+					cs.pl.add(new JLabel(new ImageIcon(setImage("image/player/char"+ (avata) + ".jpg", cs.pl.getWidth(), cs.pl.getHeight()))));
+					cs.pl.validate();//panel재배치
+					
+					cs.nPl.setText(RefData.nameChar[avata]+" 추리중");
+					
 					card.show(getContentPane(), "CS");
+					
 					cs.setCardImg();
+					/*repaint();
+					card.show(getContentPane(), "CS");
+					cs.setCardImg();*/
 				}
 				break;
 				
@@ -850,6 +938,11 @@ KeyListener,Runnable,MouseListener{
 		gwr.aa[pNum].validate();//panel재배치
 	
 		  
+	}
+	public void showMyTurn(){
+		
+		jfTurn.setBounds(450,300,300,300);
+		jfTurn.setVisible(true);
 	}
 
 	private Image setImage(String filename, int width, int height) {
