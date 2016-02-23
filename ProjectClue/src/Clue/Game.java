@@ -23,18 +23,18 @@ public class Game{
 	private int inputX=0,inputY=0;
 	private int count=0;
 	
-/*	public Game(){
-		answerCard=selectAnswerCard();	//정답카드
-		distributeCard(answerCard, pCard); //플레이어카드
-		p=new PlayerDTO[4];
+	public Game(){
+		//answerCard=selectAnswerCard();	//정답카드
+		//distributeCard(answerCard, pCard); //플레이어카드
+		/*p=new PlayerDTO[4];
 		p[0]= new PlayerDTO("신민아",pCard[0]);
 		p[1]= new PlayerDTO("오달수",pCard[1]);
 		p[2]= new PlayerDTO("길태미",pCard[2]);
 		p[3]= new PlayerDTO("고현정",pCard[3]);
 		
-		crrPlayer=0;
+		crrPlayer=0;*/
 	}
-	*/
+	
 	
 	public Game(GameArea gv, JFrame fr){
 		p=new PlayerDTO[4];
@@ -68,14 +68,31 @@ public class Game{
 		
 	}
 	
-	public int runDice() {
+	   public int runDice() {
+		      // TODO Auto-generated method stub
+		      
+		      random= new Random(System.currentTimeMillis());
+		      
+		      dice1=random.nextInt(6)+1;
+		      dice2=random.nextInt(6)+1;
+
+		      try {
+		         Thread.sleep(100);
+		      } catch (InterruptedException e) {
+		         // TODO Auto-generated catch block
+		         e.printStackTrace();
+		      }
+		      
+		      return dice1+dice2;
+		   }
+	/*public int runDice() {
 		// TODO Auto-generated method stub
 		
 		random= new Random(System.currentTimeMillis());
 		
 		dice1=random.nextInt(6)+1;
 		dice2=random.nextInt(6)+1;
-		/*frTurn = new JFrame("주사위");
+		frTurn = new JFrame("주사위");
 		frTurn.setSize(300, 300);
 		Container contentPane = frTurn.getContentPane();
 		JLabel label = new JLabel(p[crrPlayer].getId()+"턴! ",JLabel.CENTER);
@@ -84,7 +101,7 @@ public class Game{
 		contentPane.add(label2, BorderLayout.SOUTH);		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frTurn.setBounds((screenSize.width - frTurn.getWidth())/2,(screenSize.height - frTurn.getHeight())/2,frTurn.getWidth(),frTurn.getHeight());
-		*/
+		
 		//frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
 		try {
 			Thread.sleep(100);
@@ -92,11 +109,11 @@ public class Game{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
-		frTurn.setVisible(true);*/
+		frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
+		frTurn.setVisible(true);
 		
 		return dice1+dice2;
-	}
+	}*/
 	
 	public int getMyNum() {
 		return myNum;

@@ -368,6 +368,63 @@ KeyListener,Runnable,MouseListener{
 			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room0.jpg",fcs.j[0].getWidth(),fcs.j[0].getHeight()))));
 			fcs.r.validate();
 		}
+		else if (e.getSource() == fcs.j[1]) {
+					
+			fcs.r.removeAll();
+			//j[0].setLayout(new BorderLayout());
+			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room1.jpg",fcs.j[1].getWidth(),fcs.j[1].getHeight()))));
+			fcs.r.validate();
+				}
+		else if (e.getSource() == fcs.j[2]) {
+			
+			fcs.r.removeAll();
+			//j[0].setLayout(new BorderLayout());
+			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room2.jpg",fcs.j[2].getWidth(),fcs.j[2].getHeight()))));
+			fcs.r.validate();
+		}
+		else if (e.getSource() == fcs.j[3]) {
+			
+			fcs.r.removeAll();
+			//j[0].setLayout(new BorderLayout());
+			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room3.jpg",fcs.j[3].getWidth(),fcs.j[3].getHeight()))));
+			fcs.r.validate();
+		}
+		else if (e.getSource() == fcs.j[4]) {
+			
+			fcs.r.removeAll();
+			//j[0].setLayout(new BorderLayout());
+			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room4.jpg",fcs.j[4].getWidth(),fcs.j[4].getHeight()))));
+			fcs.r.validate();
+		}
+		else if (e.getSource() == fcs.j[5]) {
+			
+			fcs.r.removeAll();
+			//j[0].setLayout(new BorderLayout());
+			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room5.jpg",fcs.j[5].getWidth(),fcs.j[5].getHeight()))));
+			fcs.r.validate();
+		}
+		else if (e.getSource() == fcs.j[6]) {
+			
+			fcs.r.removeAll();
+			//j[0].setLayout(new BorderLayout());
+			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room6.jpg",fcs.j[6].getWidth(),fcs.j[6].getHeight()))));
+			fcs.r.validate();
+		}
+		else if (e.getSource() == fcs.j[7]) {
+			
+			fcs.r.removeAll();
+			//j[0].setLayout(new BorderLayout());
+			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room7.jpg",fcs.j[7].getWidth(),fcs.j[7].getHeight()))));
+			fcs.r.validate();
+		}
+		else if (e.getSource() == fcs.j[0]) {
+			
+			fcs.r.removeAll();
+			//j[0].setLayout(new BorderLayout());
+			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room8.jpg",fcs.j[8].getWidth(),fcs.j[8].getHeight()))));
+			fcs.r.validate();
+		}
+		
 		else if(e.getSource()==fcs.st)
 		{
 
