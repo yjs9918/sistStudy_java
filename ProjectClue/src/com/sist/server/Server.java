@@ -396,7 +396,49 @@ public class Server implements Runnable{
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);
 					    			 c.messageTo(Function.MOVE+"|"+pnum+"|"+key);
+					    			 c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님("+pnum+"P)이 "+key+"누름");
 					    			 
+					    		 }
+					    }
+				   }
+				   break;
+ 				case Function.SETTURN:
+				   {
+					  String rname=st.nextToken();					  
+					 
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	room.runDice();
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.SETTURN+"|"+(pnum-1)+"|"+room.dice1+"|"+room.dice2);
+					    			 //currPlayer+dice1+dice2
+					    			 c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님("+pnum+"P)턴");
+					    			 
+					    		 }
+					    }
+				   }
+				   break;
+ 				case Function.FINISHTURN:
+				   {
+					  String rname=st.nextToken();					  
+					 
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	 	 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.ROOMCHAT+"|[알림] +"+pnum+"P턴이 종료되었습니다.");
+					    			 c.messageTo(Function.FINISHTURN+"|");
+					    			 if(c.pnum==(pnum%4)+1){
+					    				 c.messageTo(Function.MYTURN+"|"+c.pnum);
+					    			
+					    			 }
 					    			 
 					    		 }
 					    }

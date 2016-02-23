@@ -26,7 +26,7 @@ KeyListener,Runnable,MouseListener{
 	
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
-	
+	ShowTurn  jfTurn=new ShowTurn();
 	
 	
 	 // 소켓 연결시도
@@ -93,6 +93,8 @@ KeyListener,Runnable,MouseListener{
 		reachRoom.b1.addActionListener(this);
 		reachRoom.b2.addActionListener(this);
 		mainScreen.ChatInput.addActionListener(this);
+		jfTurn.b1.addActionListener(this);
+		
 	}
 
 	// 소켓
@@ -390,8 +392,14 @@ KeyListener,Runnable,MouseListener{
 				  */
 			 }catch(Exception ex){}
 			 mainScreen.ChatInput.setText("");
+		}else if(e.getSource()==jfTurn.b1){
+			try
+			{
+				 out.write((Function.SETTURN+"|"+myRoom+"\n").getBytes());
+			}catch(Exception ex){}
 		}
 
+		jfTurn.setVisible(false);
 	}
 
 	@Override
@@ -431,7 +439,9 @@ KeyListener,Runnable,MouseListener{
 				
 			}
 		
-		n=mainScreen.game.process();
+		/*
+		 * 수정필요
+		 n=mainScreen.game.process();
 		if(n!=0){
 			reachRoom.setBounds(500,250,230,240);
 			try{
@@ -444,7 +454,7 @@ KeyListener,Runnable,MouseListener{
 
 			reachRoom.setVisible(true);
 		}
-		/*수정필요
+		//수정필요
 		mainScreen.showCount();
 		mainScreen.setImage();
 		mainScreen.jpGameBoard.repaint();*/
@@ -759,7 +769,46 @@ KeyListener,Runnable,MouseListener{
 				{
 					String pnum=st.nextToken();
 					int key= Integer.parseInt(st.nextToken());
-					mainScreen.game.gp.keyPressed(key);
+					mainScreen.game.keyPressed(key);
+					mainScreen.game.move();
+					
+					if(myNum==Game.crrPlayer){
+						n=mainScreen.game.isReached();
+					
+					if(n!=0){
+						reachRoom.setBounds(500,250,230,240);
+						try{
+						reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");
+						out.write((Function.REACHROOM+"|"+myRoom+"|"+(myNum+1)+"|"+RefData.nameRoom[n-1]+"\n").getBytes());
+						}
+						catch(Exception ex){
+							
+						}
+						reachRoom.setVisible(true);
+						
+					}
+					else if(mainScreen.game.getCount()==0){
+						try{
+									out.write((Function.FINISHTURN+"|"+myRoom+"\n").getBytes());
+							}
+							catch(Exception ex){
+								
+							}
+						
+						
+						
+					}
+					}
+					mainScreen.showCount();
+					mainScreen.setImage();
+					mainScreen.jpGameBoard.repaint();
+					repaint();
+					
+					
+					
+					
+					repaint();
+					
 				}
 				break;
 				
@@ -767,7 +816,30 @@ KeyListener,Runnable,MouseListener{
 				{
 					 mainScreen.ta.append(st.nextToken()+"\n");
 				}
+				break;
+				case Function.SETTURN:
+				{
+					Game.crrPlayer=Integer.parseInt(st.nextToken());
+					Game.dice1=Integer.parseInt(st.nextToken());
+					Game.dice2=Integer.parseInt(st.nextToken());
+					mainScreen.game.setGamePlayer(Game.crrPlayer, (Game.dice1+Game.dice2));
+					//new GameThread().start();
 				}
+				break;
+				case Function.MYTURN:
+				{
+					showMyTurn();
+					
+				}
+				break;
+				case Function.FINISHTURN:
+				{
+					mainScreen.game.savePlayerStatus();
+					
+				}
+				break;
+				}
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -837,6 +909,12 @@ KeyListener,Runnable,MouseListener{
 	
 		  
 	}
+	
+	public void showMyTurn(){
+				
+		jfTurn.setBounds(450,300,300,300);
+		jfTurn.setVisible(true);
+	}
 
 	private Image setImage(String filename, int width, int height) {
 		// TODO Auto-generated method stub
@@ -845,5 +923,77 @@ KeyListener,Runnable,MouseListener{
 		return image;
 		//return null;
 	}
+	
+	class  GameThread extends Thread{
+		public void run(){
+			/*n=mainScreen.game.process();
+			if(n!=0){
+				reachRoom.setBounds(500,250,230,240);
+				try{
+				reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");
+				out.write((Function.REACHROOM+"|"+myRoom+"|"+(myNum+1)+"|"+RefData.nameRoom[n-1]+"\n").getBytes());
+				}
+				catch(Exception ex){
+					
+				}
 
+				reachRoom.setVisible(true);
+			}
+			//수정필요
+			mainScreen.showCount();
+			mainScreen.setImage();
+			mainScreen.jpGameBoard.repaint();*/
+			while(true){
+				mainScreen.game.move();
+				n=mainScreen.game.isReached();
+				if(n!=0){
+					reachRoom.setBounds(500,250,230,240);
+					try{
+					reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");
+					out.write((Function.REACHROOM+"|"+myRoom+"|"+(myNum+1)+"|"+RefData.nameRoom[n-1]+"\n").getBytes());
+					}
+					catch(Exception ex){
+						
+					}
+					reachRoom.setVisible(true);
+					break;
+				}
+				else if(mainScreen.game.getCount()==0){
+					try{
+								out.write((Function.FINISHTURN+"|"+myRoom+"\n").getBytes());
+						}
+						catch(Exception ex){
+							
+						}
+					
+					
+					break;
+				}
+				mainScreen.showCount();
+				mainScreen.setImage();
+				mainScreen.jpGameBoard.repaint();
+				repaint();
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
+		}
 }
+}
+
+	
+
+
+
+
+
+
+
+
+
+

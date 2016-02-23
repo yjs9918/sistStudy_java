@@ -1,6 +1,8 @@
 package com.sist.server;
 import java.util.*;
 
+import Clue.ShowTurn;
+
 public class Room {
      String roomName,roomState,roomPwd;
      int maxcount;
@@ -117,5 +119,15 @@ public class Room {
 					}
 				}
 		}
+	}
+	
+	public void runDice() {
+		// TODO Auto-generated method stub
+		
+		Random random= new Random(System.currentTimeMillis());
+		
+		dice1=random.nextInt(6)+1;
+		dice2=random.nextInt(6)+1;
+
 	}
 }

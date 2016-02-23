@@ -33,7 +33,7 @@ public class LoadingTest extends JPanel implements Runnable{
 		  {
 			  cm.card.show(cm.getContentPane(), "MS");
 			 if(cm.myNum==0)
-			  cm.mainScreen.game.setGamePlayer(0,cm.mainScreen.game.runDice());
+			  cm.showMyTurn();
 		  }
 		  try{Thread.sleep(55);}catch(Exception e){}  
 
