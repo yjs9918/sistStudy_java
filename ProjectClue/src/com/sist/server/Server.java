@@ -444,6 +444,24 @@ public class Server implements Runnable{
 					    }
 				   }
 				   break;
+ 				case Function.CHOOSECARD:
+				   {
+					  //String rname=st.nextToken();					  
+					 int cardnum = Integer.parseInt(st.nextToken());
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	 	 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);					    			 
+					    			 c.messageTo(Function.CHOOSECARD+"|"+cardnum);
+					    			 
+					    			 
+					    		 }
+					    }
+				   }
+				   break;
  				    }
 
 				} catch (Exception ex) {

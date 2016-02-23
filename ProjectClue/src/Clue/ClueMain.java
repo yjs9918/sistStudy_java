@@ -64,7 +64,6 @@ KeyListener,Runnable,MouseListener{
 		wait.b2.addActionListener(this);// 160211 정선추가
 		wait.b6.addActionListener(this);// 160217 찬재추가
 		wait.tf.addActionListener(this);// 160211 정선추가
-
 		mkr.b1.addActionListener(this);// 160211 정선추가
 
 
@@ -79,6 +78,15 @@ KeyListener,Runnable,MouseListener{
 			gwr.chr[i].addActionListener(this);
 		}
 		
+		for(int i=0; i<cs.p.length; i++){
+			cs.p[i].addActionListener(this);
+		}
+		for(int i=0; i<cs.q.length; i++){
+			cs.q[i].addActionListener(this);
+		}
+		for(int i=1; i<cs.j.length; i++){
+			cs.j[i].addActionListener(this);
+		}
 		
 		mainScreen.b.addActionListener(this);	//채팅입력
 		cs.st.addActionListener(this);	//추리-카드선택
@@ -392,9 +400,109 @@ KeyListener,Runnable,MouseListener{
 			{
 				 out.write((Function.SETTURN+"|"+myRoom+"\n").getBytes());
 			}catch(Exception ex){}
+			jfTurn.setVisible(false);
 		}
-
-		jfTurn.setVisible(false);
+		
+		
+		//########## 경은/ CS 버튼
+		
+		else if(e.getSource()==cs.p[0])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+0+"\n").getBytes());}catch(Exception ex){}
+		}else if(e.getSource()==cs.p[1])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+1+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.p[2])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+2+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.p[3])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+3+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.p[4])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+4+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.p[5])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+5+"\n").getBytes());}catch(Exception ex){}
+		}
+	
+		
+		//############## cs/ 무기
+		else if(e.getSource()==cs.q[0])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+6+"\n").getBytes());}catch(Exception ex){}
+			
+		}else if(e.getSource()==cs.q[1])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+7+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[2])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+8+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[3])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+9+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[4])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+10+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[5])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+11+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[6])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+12+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[7])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+13+"\n").getBytes());}catch(Exception ex){}
+		}
+		
+		//########### 방
+		else if(e.getSource()==cs.j[0])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+14+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[1])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+15+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[2])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+16+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[3])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+17+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[4])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+18+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[5])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+19+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[6])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+20+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[7])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+21+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[8])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+22+"\n").getBytes());}catch(Exception ex){}
+		}
+	
 	}
 
 	@Override
@@ -433,8 +541,6 @@ KeyListener,Runnable,MouseListener{
 			}catch(Exception ex){
 				
 			}
-		
-		
 		}
 	}
 
@@ -734,8 +840,23 @@ KeyListener,Runnable,MouseListener{
 					int avata= Integer.parseInt(st.nextToken());
 					int roomNo=Integer.parseInt(st.nextToken());
 					//데이터를 cs에 넘겨줘서 처리.. 누가 어디에서 추리중,.
+					for(int i=0;i<9;i++){
+						cs.j[i].setEnabled(false);
+					}
 					repaint();
+					
+					cs.guess[0].removeAll();
+					cs.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+(roomNo-1)+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
+					cs.guess[0].validate();//panel재배치
+					
+					cs.pl.removeAll();
+					cs.pl.add(new JLabel(new ImageIcon(setImage("image/player/char"+ (avata) + ".jpg", cs.pl.getWidth(), cs.pl.getHeight()))));
+					cs.pl.validate();//panel재배치
+					
+					cs.nPl.setText(RefData.nameChar[avata]+" 추리중");
+					
 					card.show(getContentPane(), "CS");
+					
 					cs.setCardImg();
 				}
 				break;
@@ -814,6 +935,37 @@ KeyListener,Runnable,MouseListener{
 				case Function.FINISHTURN:
 				{
 					mainScreen.game.savePlayerStatus();
+					
+				}
+				break;
+				
+				case Function.CHOOSECARD:
+				{
+					int cardnum=Integer.parseInt(st.nextToken());
+					
+					try{
+					if(cardnum<6){
+						cs.p[cardnum].removeAll();
+						cs.p[cardnum].add(new JLabel(new ImageIcon(setImage("image/player/char+"+cardnum+".jpg", cs.p[0].getWidth(), cs.p[0].getHeight()))));
+						cs.p[cardnum].validate();//panel재배치
+					}else if(cardnum>13){
+						cardnum=cardnum-13;
+						cs.j[cardnum].removeAll();
+						cs.j[cardnum].add(new JLabel(new ImageIcon(setImage("image/room/room+"+cardnum+".jpg", cs.p[0].getWidth(), cs.p[0].getHeight()))));
+						cs.j[cardnum].validate();//panel재배치
+						
+					}else{
+						cardnum=cardnum-6;
+						cs.q[cardnum].removeAll();
+						cs.q[cardnum].add(new JLabel(new ImageIcon(setImage("image/weapon/wp+"+cardnum+".jpg", cs.p[0].getWidth(), cs.p[0].getHeight()))));
+						cs.q[cardnum].validate();//panel재배치
+						
+					}
+					}catch(ArrayIndexOutOfBoundsException ex){
+						System.out.println("ChooseCard: "+ex.getMessage());
+					}
+					
+					
 					
 				}
 				break;
