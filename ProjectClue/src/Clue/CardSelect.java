@@ -5,9 +5,8 @@ import java.awt.event.*;
 
 public class CardSelect extends JPanel{
    Image back;
-   JTextField wp;//무기
-   JTextField sp;//용의자
-   JTextField r;//방
+   JLabel[] tfGuess;//무기
+
    JLabel k,nPl;//죽임
    JButton[] p= new JButton[6];
    JButton[] q=new JButton[8]; 
@@ -47,9 +46,9 @@ public CardSelect()
    p3.setOpaque(false);//배경 투명하게
   
    
-   r=new JTextField("어디에서");
-   sp=new JTextField("누가");
-   wp=new JTextField("무엇으로");
+   tfGuess[0]=new JLabel("어디에서",JLabel.CENTER);
+   tfGuess[1]=new JLabel("누가",JLabel.CENTER);
+   tfGuess[2]=new JLabel("무엇으로",JLabel.CENTER);
    k=new JLabel("죽였다!!",JLabel.RIGHT);
    st=new JButton("추리 제안");
    
@@ -58,7 +57,7 @@ public CardSelect()
 	   guess[i].setBounds(10+(i*210), 550, 200, 300);
 	   guess[i].setLayout(new BorderLayout());
 	   guess[i].add(new JLabel(new ImageIcon(setImage("image/back/cardback.jpg", guess[i].getWidth(), guess[i].getHeight()))));
-	   
+	   tfGuess[i].setBounds(10+(i*210), 850, 200, 20);
    }
    pl= new JPanel();
    pl.setBounds(920, 15, 250, 350);
@@ -71,9 +70,7 @@ public CardSelect()
    
    JPanel p4=new JPanel();
    p4.setLayout(new GridLayout(1,4,5,5));
-   p4.add(r);
-   p4.add(sp);
-   p4.add(wp);
+
    p4.add(k);
    p4.setOpaque(false);
    
@@ -92,11 +89,14 @@ public CardSelect()
    add(p1);
    add(p2);
    add(pl);
-   add(p3);
+ //  add(p3);
    //add(p4);
    add(guess[0]);
    add(guess[1]);
    add(guess[2]);
+   add(tfGuess[0]);
+   add(tfGuess[1]);
+   add(tfGuess[2]);
    add(p5);
    add(nPl);
    

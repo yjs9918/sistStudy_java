@@ -336,7 +336,7 @@ KeyListener,Runnable,MouseListener{
 				}catch(Exception ex){}
 
 		} else if (e.getSource() == cs.st) {
-			repaint();
+			/*repaint();
 			card.previous(getContentPane());
 			card.show(getContentPane(), "MS");
 
@@ -345,9 +345,12 @@ KeyListener,Runnable,MouseListener{
 
 			mainScreen.showCount();
 			mainScreen.setImage();
-			mainScreen.jpGameBoard.repaint();
-
-			// mainScreen.mc.show(getParent(), "GB");
+			mainScreen.jpGameBoard.repaint();*/
+			mainScreen.game.getHint(cs.tfGuess[0].getText(),cs.tfGuess[1].getText(),cs.tfGuess[2].getText());
+			
+			/*need to decide the action after guessing.
+			either show up one dialog or either give a msg on chatarea*/
+			
 		} else if (e.getSource() == reachRoom.b1) {
 			try
 			{
@@ -411,6 +414,7 @@ KeyListener,Runnable,MouseListener{
 			try{ out.write((Function.CHOOSECARD+"|"+0+"\n").getBytes());}catch(Exception ex){}
 		}else if(e.getSource()==cs.p[1])
 		{
+			
 			try{ out.write((Function.CHOOSECARD+"|"+1+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.p[2])
@@ -942,24 +946,25 @@ KeyListener,Runnable,MouseListener{
 				case Function.CHOOSECARD:
 				{
 					int cardnum=Integer.parseInt(st.nextToken());
-					
+					 System.out.println(cardnum);
 					try{
 					if(cardnum<6){
-						cs.p[cardnum].removeAll();
-						cs.p[cardnum].add(new JLabel(new ImageIcon(setImage("image/player/char+"+cardnum+".jpg", cs.p[0].getWidth(), cs.p[0].getHeight()))));
-						cs.p[cardnum].validate();//panel재배치
+						cs.guess[1].removeAll();
+						cs.guess[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+cardnum+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
+						cs.guess[1].validate();//panel재배치
+						cs.tfGuess[1].setText(RefData.nameChar[cardnum]);
 					}else if(cardnum>13){
 						cardnum=cardnum-13;
-						cs.j[cardnum].removeAll();
-						cs.j[cardnum].add(new JLabel(new ImageIcon(setImage("image/room/room+"+cardnum+".jpg", cs.p[0].getWidth(), cs.p[0].getHeight()))));
-						cs.j[cardnum].validate();//panel재배치
-						
+						cs.guess[0].removeAll();
+						cs.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room+"+cardnum+".jpg", cs.guess[2].getWidth(), cs.guess[2].getHeight()))));
+						cs.guess[0].validate();//panel재배치
+						cs.tfGuess[0].setText(RefData.nameRoom[cardnum]);
 					}else{
 						cardnum=cardnum-6;
-						cs.q[cardnum].removeAll();
-						cs.q[cardnum].add(new JLabel(new ImageIcon(setImage("image/weapon/wp+"+cardnum+".jpg", cs.p[0].getWidth(), cs.p[0].getHeight()))));
-						cs.q[cardnum].validate();//panel재배치
-						
+						cs.guess[2].removeAll();
+						cs.guess[2].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+cardnum+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
+						cs.guess[2].validate();//panel재배치
+						cs.tfGuess[2].setText(RefData.nameWp[cardnum]);
 					}
 					}catch(ArrayIndexOutOfBoundsException ex){
 						System.out.println("ChooseCard: "+ex.getMessage());
