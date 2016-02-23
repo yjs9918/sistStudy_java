@@ -103,7 +103,7 @@ public class FinalCardSelect extends JPanel implements ActionListener{
 	   p1.setBounds(10,15,900,120);//시작점 10(가로),15(세로) 
 	   p2.setBounds(10,150,900,120);//시작점 10(가로),250(세로) 
 	   p3.setBounds(10,285,900,120); 
-	   p4.setBounds(10,450,600,150); 
+	   p4.setBounds(10,450,400,120); 
 	   p5.setBounds(710,500,200,100); 
 	    
 	   add(p1); 

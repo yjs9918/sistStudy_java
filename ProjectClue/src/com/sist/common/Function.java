@@ -28,6 +28,11 @@ public class Function {
 	
 	
 	//게임관련
+	
+	//최종추리 관련
+	public static final int CHOOSEROOM = 800;
+	public static final int CHOOSESUS = 810;
+	public static final int CHOOSEWP = 820;
 
 	//나가기 관련
 	//기타(쪽지 보내기, 정보)

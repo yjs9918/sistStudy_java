@@ -202,7 +202,7 @@ public class GameWaitingRoom extends JPanel {
 	
 		
   		  
-  		idtf[0].setBounds(285,50,225, 100);
+  		idtf[0].setBounds(235,50,225, 50);
   		idtf[1].setBounds(690,45,225, 50);
   		idtf[2].setBounds(235,347,225, 50);
   		idtf[3].setBounds(690,347,225, 50);

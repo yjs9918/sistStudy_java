@@ -96,7 +96,7 @@ KeyListener,Runnable,MouseListener{
 		setFocusable(true);
 		reachRoom.b1.addActionListener(this);
 		reachRoom.b2.addActionListener(this);
-		//fcs.j[fcs.p.length].addActionListener(this);
+		fcs.j[0].addActionListener(this);
 	}
 
 	// ╪рдо
@@ -372,22 +372,13 @@ KeyListener,Runnable,MouseListener{
 			fcs.setCardImg();
 			reachRoom.setVisible(false);
 		}
-		else if(e.getSource()==fcs.j[0])
-		{	
-			for(int i=0;i<fcs.p.length;i++)
-			{
-				
-				
-				
-
-				/*fcs.r.removeAll();
-				fcs.j[i].setLayout(new BorderLayout());
-				fcs.r.add("Center",new JLabel(new ImageIcon(setImage(,fcs.j[0].getWidth(),fcs.j[i].getHeight()))));
-				fcs.r.validate();*/
-				//r=setIcon(new ImageIcon(setImage("image/room/room"+i+".jpg",j[0].getWidth(),j[i].getHeight())));
-			}
+		else if (e.getSource() == fcs.j[0]) {
+			
+			fcs.r.removeAll();
+			//j[0].setLayout(new BorderLayout());
+			fcs.r.add("Center",new JLabel(new ImageIcon(setImage("image/room/room0.jpg",fcs.j[0].getWidth(),fcs.j[0].getHeight()))));
+			fcs.r.validate();
 		}
-	
 		else if(e.getSource()==fcs.st)
 		{
 
