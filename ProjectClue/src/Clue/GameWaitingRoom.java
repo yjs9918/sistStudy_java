@@ -1,7 +1,15 @@
 package Clue;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.MalformedURLException;
+
 import javax.swing.*;
 import javax.swing.table.*;
+
 public class GameWaitingRoom extends JPanel {
 	
 	/*class userInfo{
@@ -15,19 +23,16 @@ public class GameWaitingRoom extends JPanel {
 	Image back3;
 	Image p1,p2,p3,p4,p5,p6,qc;
 	
+
 	JPanel title;
 	JPanel uPan1,uPan2,uPan3,uPan4,bb1,bb2,bb3,bb4;
-
 	JPanel CntDwn;
-
 	JPanel[] aa= new JPanel[4];
 	int pnum; //플레이어 넘버
-	
 	JTextArea chat;
 	JTextField chatInput;
 	
 	JButton btnReady,btnExit,insert;//160211 정선 수정 (JComboBox삭제->JButton insert추가/하위box관련항목 수정)
-
 	
     JTextField t1=new JTextField();
     JTextField t2=new JTextField();
@@ -35,16 +40,13 @@ public class GameWaitingRoom extends JPanel {
     JTextField t4=new JTextField();
     
     JTextField[] avaName= new JTextField[4];
-
     JTextField[] isReady= new JTextField[4];
-
 	
 	JTextField[] idtf={t1,t2,t3,t4};
 	boolean[] sw=new boolean[4];
 
 	//JButton chr, chr2, chr3, chr4, chr5, chr6, chrN;
 	JButton[] chr=new JButton[7];
-
 	
 	public GameWaitingRoom(){
 		back3=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -55,10 +57,9 @@ public class GameWaitingRoom extends JPanel {
 		p4 = Toolkit.getDefaultToolkit().getImage("image/player/char3.jpg");
 		p5 = Toolkit.getDefaultToolkit().getImage("image/player/char4.jpg");
 		p6 = Toolkit.getDefaultToolkit().getImage("image/player/char5.jpg");
-		
-		
 
 		//게임 유저
+
 		title=new JPanel();
 
 		//title.setBackground(Color.darkGray);
@@ -70,17 +71,14 @@ public class GameWaitingRoom extends JPanel {
 		setLayout(null);
 		uPan1.setBounds(5, 45, 450, 300);
 		uPan1.setLayout(new BorderLayout());
+		
 		uPan1.add("Center",new JLabel(new ImageIcon(setImage("image/back/cardback.jpg", uPan1.getWidth(), uPan1.getHeight()))));
-		
-		
-		
 
 		aa[0]=new JPanel();
 		aa[0].setOpaque(false);
 		aa[0].setBounds(5, 60, 220, 295);
 		aa[0].add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
 		add(aa[0]);
-
 		
 		bb1=new JPanel();
 		bb1.setOpaque(false);
@@ -195,7 +193,6 @@ public class GameWaitingRoom extends JPanel {
 		avaName[1]= new JTextField("?");
 		avaName[2]= new JTextField("?");
 		avaName[3]= new JTextField("?");
-
 		
 		isReady[0]= new JTextField("");
 		isReady[1]= new JTextField("");
@@ -205,11 +202,29 @@ public class GameWaitingRoom extends JPanel {
 	
 		
   		  
-  		idtf[0].setBounds(235,45,225, 50);
+  		idtf[0].setBounds(285,50,225, 100);
   		idtf[1].setBounds(690,45,225, 50);
   		idtf[2].setBounds(235,347,225, 50);
   		idtf[3].setBounds(690,347,225, 50);
-  		  
+  		
+  		JLabel l1 = new JLabel("이름");
+  		l1.setBounds(235, 50, 50, 50);
+  		l1.setBackground(Color.white);
+  		
+  		
+  		
+  		JLabel l2 = new JLabel("이름");
+  		l2.setBounds(235, 50, 50, 50);
+  		add(l1);
+  		
+  		JLabel l3 = new JLabel("이름");
+  		l3.setBounds(235, 50, 50, 50);
+  		add(l1);
+  		
+  		JLabel l4 = new JLabel("이름");
+  		l4.setBounds(235, 50, 50, 50);
+  		add(l1);
+  		
   		add(idtf[0]);
   		add(idtf[1]);
   		add(idtf[2]);
@@ -240,23 +255,25 @@ public class GameWaitingRoom extends JPanel {
   		CntDwn.setOpaque(false);
   		CntDwn.setBounds(510, 330, 171, 250);
   		CntDwn.add(new JLabel(new ImageIcon(setImage("image/dice/d3.png", 171, 250))));
-
 		
 
 		
 		js1.setBounds(5, 652, 902, 180);
 		chatInput.setBounds(5, 837, 795, 30);
 		insert.setBounds(805,837,102,30);
+
 		chr[1].setBounds(912, 75, 278, 95);
 		chr[2].setBounds(912, 170, 278, 95);
 		chr[3].setBounds(912, 265, 278, 95);
 		chr[4].setBounds(912, 360, 278, 95);
 		chr[5].setBounds(912, 455, 278, 95);
 		chr[6].setBounds(912, 550, 278, 95);
+
 		p.setBounds(912, 652, 278, 215);
 		
 		
 		add(title);
+
 		add(chr[0]);
 		add(chr[1]);
 		add(chr[2]);
@@ -264,6 +281,7 @@ public class GameWaitingRoom extends JPanel {
 		add(chr[4]);
 		add(chr[5]);
 		add(chr[6]);
+
 		add(uPan1);
 		add(uPan2);
 		add(uPan3);
@@ -273,9 +291,20 @@ public class GameWaitingRoom extends JPanel {
 		add(insert);
 		
 		add(p);
+
+/*<<<<<<< HEAD
+		try {
+            File file = new File("wav/GameWaitingRoom_bgm_low.wav");
+            clip = Applet.newAudioClip(file.toURL());
+            clip.stop();
+            
+           
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+
+	}*/
 		
-
-
 	/*	캐릭터 이미지 바꿀때
 	 * gwr.pan[i].removeAll();
 		  gwr.pan[i].setLayout(new BorderLayout());
@@ -295,7 +324,6 @@ public class GameWaitingRoom extends JPanel {
 		}
 	}
 	
-
 	private Image setImage(String filename, int width, int height) {
 		// TODO Auto-generated method stub
 		ImageIcon ii = new ImageIcon(filename);
@@ -303,9 +331,19 @@ public class GameWaitingRoom extends JPanel {
 		return image;
 		//return null;
 	}
+	
 	@Override
 	//paint, paintComponent => 자동호출
 	protected void paintComponent(Graphics g) {
 		g.drawImage(back3, 0, 0, getWidth(),getHeight(),this);
 }
+	/*@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==wait.b2)
+		{
+			clip.play();
+		}
+	}*/
+	
 }
