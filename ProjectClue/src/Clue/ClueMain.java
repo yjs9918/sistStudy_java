@@ -282,14 +282,7 @@ KeyListener,Runnable,MouseListener{
 
 			gwr.btnReady.setEnabled(false);*/
 			
-			/*repaint();
-			 * card.show(getContentPane(), "LD"); // 160204 정선추가
-			new Thread(loading).start(); // 160204 정선추가
-*/
 		} else if (e.getSource() == gwr.btnExit) {
-
-			/*repaint();
-			card.previous(getContentPane());*/
 			try
 			{
 				 out.write((Function.ROOMOUT+"|"+myRoom+"\n").getBytes());
@@ -405,21 +398,35 @@ KeyListener,Runnable,MouseListener{
 
 		mainScreen.game.gp.keyPressed(e);
 
+		if(myNum==Game.crrPlayer){//내가 현재 플레이어일때.
+		int key=-1;
 		
-		int n=mainScreen.game.process();
-		if(n!=0){
-			reachRoom.setBounds(500,250,230,240);
-			try{
-			reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");}
-			catch(Exception ex){
+		//mainScreen.game.gp.keyPressed(e);
+		
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_RIGHT:
+			key=3;
+			break;
+		case KeyEvent.VK_LEFT:
+			key=2;
+			break;
+		case KeyEvent.VK_UP:
+			key=0;
+			break;
+		case KeyEvent.VK_DOWN:
+			key=1;
+			break;
+		}
+		
+		try{
+			
+			out.write((Function.MOVE+"|"+myRoom+"|"+(myNum+1)+"|"+key+"\n").getBytes());
+			}catch(Exception ex){
 				
 			}
-
-			reachRoom.setVisible(true);
+		
+		
 		}
-		mainScreen.showCount();
-		mainScreen.setImage();
-		mainScreen.jpGameBoard.repaint();
 	}
 
 	@Override
@@ -498,8 +505,7 @@ KeyListener,Runnable,MouseListener{
 				{
 					 String id=st.nextToken();
 					 String sex=st.nextToken();
-					 //int pNum=Integer.parseInt(st.nextToken());
-					 //int avata=Integer.parseInt(st.nextToken());
+					 
 					 String s="";
 					 if(sex.equals("남자")) 
 						 s="m";
@@ -516,10 +522,7 @@ KeyListener,Runnable,MouseListener{
 							  break;
 						  }
 					 }
-					 //chAvata(pNum-1,avata);	//사진바꾸기
-					 //gwr.avaName[pNum-1].setText("캐릭터:"+RefData.nameChar[avata-1]);//캐릭터 바꾸기
 					 
-					//String[] temp={id,sex,avata};
 					
 				}
 				break;
@@ -554,10 +557,12 @@ KeyListener,Runnable,MouseListener{
 					 if(pnum==1){
 						 gwr.btnReady.setText("START");
 						 gwr.btnReady.setEnabled(false);
-						 gwr.isReady[pnum-1].setFont(new Font("맑은 고딕", Font.ITALIC, 20));
-						 gwr.isReady[pnum-1].setForeground(Color.PINK);
-						 gwr.isReady[pnum-1].setText("방장");
 					 }
+						 gwr.isReady[0].setFont(new Font("맑은 고딕", Font.ITALIC, 20));
+						 gwr.isReady[0].setForeground(Color.PINK);
+						 gwr.isReady[0].setText("방장");
+					 
+				
 					
 				}
 				break;
@@ -669,7 +674,7 @@ KeyListener,Runnable,MouseListener{
 					int prvChar=Integer.parseInt(st.nextToken()); //이전캐릭
 					
 					chAvata(pNum-1,charNum);	//사진바꾸기
-					gwr.avaName[pNum-1].setText("캐릭터:"+RefData.nameChar[charNum-1]);//캐릭터 바꾸기
+					gwr.avaName[pNum-1].setText(RefData.nameChar[charNum-1]);//캐릭터 바꾸기
 					gwr.chr[charNum].setEnabled(false);
 					gwr.chr[prvChar].setEnabled(true);
 					
@@ -683,6 +688,96 @@ KeyListener,Runnable,MouseListener{
 				case Function.ALLREADY:
 				{
 					gwr.btnReady.setEnabled(true);
+				}
+
+				break;
+				case Function.SELECTCARD:
+				{
+					String pnum=st.nextToken();
+					int avata= Integer.parseInt(st.nextToken());
+					int roomNo=Integer.parseInt(st.nextToken());
+					//데이터를 cs에 넘겨줘서 처리.. 누가 어디에서 추리중,.
+					repaint();
+					card.show(getContentPane(), "CS");
+					cs.setCardImg();
+				}
+				break;
+				
+				case Function.MOVE:
+				{
+					String pnum=st.nextToken();
+					int key= Integer.parseInt(st.nextToken());
+					mainScreen.game.keyPressed(key);
+					mainScreen.game.move();
+					
+					if(myNum==Game.crrPlayer){
+						n=mainScreen.game.isReached();
+					
+					if(n!=0){
+						reachRoom.setBounds(500,250,230,240);
+						try{
+						reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");
+						out.write((Function.REACHROOM+"|"+myRoom+"|"+(myNum+1)+"|"+RefData.nameRoom[n-1]+"\n").getBytes());
+						}
+						catch(Exception ex){
+							
+						}
+						reachRoom.setVisible(true);
+						
+					}
+					else if(mainScreen.game.getCount()==0){
+						try{
+									out.write((Function.FINISHTURN+"|"+myRoom+"\n").getBytes());
+							}
+							catch(Exception ex){
+								
+							}
+						
+						
+						
+					}
+					}
+					mainScreen.showCount();
+					mainScreen.setImage();
+					mainScreen.jpGameBoard.repaint();
+					repaint();
+					
+					
+					
+					
+					repaint();
+					
+				}
+				break;
+				
+				case Function.ROOMCHAT:
+				{
+					 mainScreen.ta.append(st.nextToken()+"\n");
+				}
+				break;
+				case Function.SETTURN:
+				{
+					Game.crrPlayer=Integer.parseInt(st.nextToken());
+					Game.dice1=Integer.parseInt(st.nextToken());
+					Game.dice2=Integer.parseInt(st.nextToken());
+					mainScreen.game.setGamePlayer(Game.crrPlayer, (Game.dice1+Game.dice2));
+					//new GameThread().start();
+					mainScreen.showCount();
+					mainScreen.setImage();
+					mainScreen.jpGameBoard.repaint();
+					repaint();
+				}
+				break;
+				case Function.MYTURN:
+				{
+					showMyTurn();
+					
+				}
+				break;
+				case Function.FINISHTURN:
+				{
+					mainScreen.game.savePlayerStatus();
+					
 				}
 				break;
 
