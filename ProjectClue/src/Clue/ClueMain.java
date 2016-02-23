@@ -96,7 +96,7 @@ KeyListener,Runnable,MouseListener{
 		setFocusable(true);
 		reachRoom.b1.addActionListener(this);
 		reachRoom.b2.addActionListener(this);
-		fcs.j[fcs.p.length].addActionListener(this);
+		//fcs.j[fcs.p.length].addActionListener(this);
 	}
 
 	// ╪рдо
@@ -372,8 +372,8 @@ KeyListener,Runnable,MouseListener{
 			fcs.setCardImg();
 			reachRoom.setVisible(false);
 		}
-		else if(e.getSource()==fcs.j)
-		{
+		else if(e.getSource()==fcs.j[0])
+		{	
 			for(int i=0;i<fcs.p.length;i++)
 			{
 				
