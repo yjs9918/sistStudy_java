@@ -6,9 +6,9 @@ import javax.swing.*;
 
 import javax.swing.table.*;
 
-import com.sist.note.GameNote_js;
-import com.sist.note.GameNote_js2;
-import com.sist.note.GameNote_js3;
+import com.clue.note.GameNote_js;
+import com.clue.note.GameNote_js2;
+import com.clue.note.GameNote_js3;
 
 import java.awt.event.*;
 import java.io.File;

@@ -1,15 +1,8 @@
 package Clue;
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.net.MalformedURLException;
-
 import javax.swing.*;
 import javax.swing.table.*;
-public class WaitRoom extends JPanel implements ActionListener{
+public class WaitRoom extends JPanel {
 	Image back;
 	JTable table1,table2;
 	DefaultTableModel model1,model2;
@@ -17,12 +10,11 @@ public class WaitRoom extends JPanel implements ActionListener{
 	JTextPane ta;
 	JTextField tf;
 	JComboBox box;
-
 	JPanel movie;
 	JButton b1,b2,b3,b4,b5,b6;
 	JScrollBar bar;
 	TableColumn column;
-
+	
 	
 	public WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -137,11 +129,6 @@ public class WaitRoom extends JPanel implements ActionListener{
 	protected void paintComponent(Graphics g) {
 		g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
 
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }
 
