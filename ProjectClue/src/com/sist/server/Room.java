@@ -1,17 +1,21 @@
 package com.sist.server;
 import java.util.*;
 
+import Clue.ShowTurn;
+
 public class Room {
      String roomName,roomState,roomPwd;
      int maxcount;
      int current;
      int noPlayer;
      Vector<Server.ClientThread> userVc=new Vector<Server.ClientThread>();
+
 	 int rdyCnt;
 	 
 	 	int[] answerCard =new int[3];
 		int[][] pCard= new int[4][5];
 		int dice1=1,dice2=1;
+		
 		
      public Room(String rn,String rs,String rp,int max)
      {
@@ -21,7 +25,9 @@ public class Room {
     	 maxcount=max;
     	 current=1;
     	 rdyCnt=0;
+
      }
+     
      public String getAnsCard(){
     	 String ans="";
     	 for(int i=0; i<answerCard.length; i++){
@@ -125,4 +131,3 @@ public class Room {
 
 	}
 }
-

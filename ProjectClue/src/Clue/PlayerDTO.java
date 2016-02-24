@@ -11,20 +11,20 @@ public class PlayerDTO {
 	
 
 	public PlayerDTO(String avaname, int[] cards){
-	      
-	      this.id = avaname;
-	      
-	      for(int i=0;i<6;i++){
-	         if(RefData.nameChar[i].equals(avaname)){
-	            charIndex=i;
-	            break;
-	         }
-	      }
-	      crrX = 6;
-	      crrY = 6;
-	      numCanGo=0;
-	      this.cards=cards.clone();//Ä«µåÀÎµ¦½º º¹Á¦.
-	   }
+		
+		this.id = avaname;
+		
+		for(int i=0;i<6;i++){
+			if(RefData.nameChar[i].equals(avaname)){
+				charIndex=i;
+				break;
+			}
+		}
+		crrX = 6;
+		crrY = 6;
+		numCanGo=0;
+		this.cards=cards.clone();//Ã„Â«ÂµÃ¥Ã€ÃŽÂµÂ¦Â½Âº ÂºÂ¹ÃÂ¦.
+	}
 	
 	
 	public int getCrrX() {

@@ -1,13 +1,14 @@
 package Clue;
 
+
 import java.util.Random;
+
 import javax.swing.*;
-import javax.swing.JFrame;
 
 
 public class Game{
 	
-	//GamePlayer gp=new GamePlayer(this);
+	
 	GameArea gv;
 	int[] answerCard =new int[3];
 	int[][] pCard= new int[4][5];
@@ -22,20 +23,7 @@ public class Game{
 	private int crrX=6,crrY=6;
 	private int inputX=0,inputY=0;
 	private int count=0;
-	
-	public Game(){
-		//answerCard=selectAnswerCard();	//Á¤´äÄ«µå
-		//distributeCard(answerCard, pCard); //ÇÃ·¹ÀÌ¾îÄ«µå
-		/*p=new PlayerDTO[4];
-		p[0]= new PlayerDTO("½Å¹Î¾Æ",pCard[0]);
-		p[1]= new PlayerDTO("¿À´Þ¼ö",pCard[1]);
-		p[2]= new PlayerDTO("±æÅÂ¹Ì",pCard[2]);
-		p[3]= new PlayerDTO("°íÇöÁ¤",pCard[3]);
-		
-		crrPlayer=0;*/
-	}
-	
-	
+
 	public Game(GameArea gv, JFrame fr){
 		p=new PlayerDTO[4];
 		
@@ -44,77 +32,35 @@ public class Game{
 		pMain=p[0];
 		crrPlayer=0;
 		
-		/*this.gv=gv;
-		frTurn=fr;
-		answerCard=selectAnswerCard();	//Á¤´äÄ«µå
-		distributeCard(answerCard, pCard); //ÇÃ·¹ÀÌ¾îÄ«µå
-*/		
-		
-		/*//ÇÃ·¹ÀÌ¾î ÃÊ±âÈ­ ¼öÁ¤ÇÊ¿ä=> ´ë±â½Ç¿¡¼­ µ¥ÀÌÅÍ °¡Á®¿Í¾ßÇÔ.
-		p[0]= new PlayerDTO(0,pCard[0]);
-		p[1]= new PlayerDTO(1,pCard[1]);
-		p[2]= new PlayerDTO(2,pCard[2]);
-		p[3]= new PlayerDTO(3,pCard[3]);
-		
-		pMain=new PlayerDTO(p[0].getCharIndex(),pCard[0]);
-		
-		crrPlayer=0;
-		
-		setGamePlayer(crrPlayer,runDice());
-		*/
 	}
+	
 	public void setPlayer(int pnum, String avata){
 		p[pnum-1]= new PlayerDTO(avata,pCard[pnum-1]);
 		
 	}
 	
-	   public int runDice() {
-		      // TODO Auto-generated method stub
-		      
-		      random= new Random(System.currentTimeMillis());
-		      
-		      dice1=random.nextInt(6)+1;
-		      dice2=random.nextInt(6)+1;
-
-		      try {
-		         Thread.sleep(100);
-		      } catch (InterruptedException e) {
-		         // TODO Auto-generated catch block
-		         e.printStackTrace();
-		      }
-		      
-		      return dice1+dice2;
-		   }
-	/*public int runDice() {
+	public int runDice() {
 		// TODO Auto-generated method stub
 		
 		random= new Random(System.currentTimeMillis());
 		
 		dice1=random.nextInt(6)+1;
 		dice2=random.nextInt(6)+1;
-		frTurn = new JFrame("ÁÖ»çÀ§");
-		frTurn.setSize(300, 300);
-		Container contentPane = frTurn.getContentPane();
-		JLabel label = new JLabel(p[crrPlayer].getId()+"ÅÏ! ",JLabel.CENTER);
-		JLabel label2 = new JLabel("ÀÌµ¿È½¼ö: "+(dice1+dice2),JLabel.CENTER);
-		contentPane.add(label, BorderLayout.CENTER);
-		contentPane.add(label2, BorderLayout.SOUTH);		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frTurn.setBounds((screenSize.width - frTurn.getWidth())/2,(screenSize.height - frTurn.getHeight())/2,frTurn.getWidth(),frTurn.getHeight());
-		
-		//frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
+
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
-		frTurn.setVisible(true);
 		
 		return dice1+dice2;
-	}*/
+	}
+
+
 	
+	
+
 	public int getMyNum() {
 		return myNum;
 	}
@@ -134,6 +80,8 @@ public class Game{
 	public PlayerDTO getpMain() {
 		return pMain;
 	}
+
+
 
 	public int getDice1() {
 		return dice1;
@@ -176,7 +124,7 @@ public class Game{
 	
 	public int isReached(){
 		int roomNo=0;
-		//¹æ1~3
+		//Â¹Ã¦1~3
 		if(crrY==0){
 			if(crrX==1){
 				roomNo=1;
@@ -204,25 +152,26 @@ public class Game{
 		return roomNo;
 	}
 
-	public int process()  {
-		move();
-		//isReached();
-		int roomNum=isReached();
-		if(roomNum!=0){
-			return roomNum;
-		}
-		if(count==0){
-			
-			
-			savePlayerStatus();
-			setGamePlayer(crrPlayer,runDice());
-			
-			
-		}
-		//isTurn();
-		return 0;
 	
-}
+	public int process()  {
+			move();
+			//isReached();
+			int roomNum=isReached();
+			if(roomNum!=0){
+				return roomNum;
+			}
+			if(count==0){
+				
+				
+				savePlayerStatus();
+				setGamePlayer(crrPlayer,runDice());
+				
+				
+			}
+			//isTurn();
+			return 0;
+		
+	}
 
 	public void isTurn() {
 		// TODO Auto-generated method stub
@@ -236,7 +185,8 @@ public class Game{
 		}
 	}
 	
-	//Ä«µå ºÀÀÎÇÏ±â
+	
+	
 	public void setAnswerCard(int[] answerCard) {
 		this.answerCard = answerCard;
 	}
@@ -280,7 +230,7 @@ public class Game{
 		case 3: //KeyEvent.VK_RIGHT
 			inputX=1;
 			break;
-		default: //´Ù¸¥ Å° ´­·¶À» ¶§
+		default: //Â´Ã™Â¸Â¥ Ã…Â° Â´Â­Â·Â¶Ã€Â» Â¶Â§
 			count++;
 		}
 		count--;
@@ -296,6 +246,58 @@ public class Game{
 	public void setCount(int count) {
 		// TODO Auto-generated method stub
 		this.count=count;
+	}
+	
+	public int getHint(String room, String suspect, String weapon){
+		int r=0, sus=0, wp=0;
+		boolean br=false,bs=false,bw=false;
+		for(int i=0; i<RefData.nameRoom.length;i++){
+			if(room.equals(RefData.nameRoom[i])){
+				r=i+14;
+				break;
+			}
+		}
+
+		for(int i=0; i<RefData.nameChar.length;i++){
+			if(suspect.equals(RefData.nameChar[i])){
+				sus=i;
+				break;
+			}
+		}
+		
+		for(int i=0; i<RefData.nameWp.length;i++){
+			if(weapon.equals(RefData.nameWp[i])){
+				wp=i+6;
+				break;
+			}
+		}
+		
+		for(int i=0; i<5;i++){
+			if(pCard[(crrPlayer+1)%4][i]==r){
+				br=true;
+				
+			}
+			if(pCard[(crrPlayer+1)%4][i]==sus){
+				bs=true;
+				
+			}
+			if(pCard[(crrPlayer+1)%4][i]==wp){
+				bw=true;
+				
+			}
+		}
+		
+		if(br==true)
+			return 0;
+		else if(bs==true)
+			return 1;
+		else if(bw==true)
+			return 2;
+		else 
+			return -1;
+		
+		
+		
 	}
 	
 }

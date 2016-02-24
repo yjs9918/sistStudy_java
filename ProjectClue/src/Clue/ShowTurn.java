@@ -35,8 +35,10 @@ public class ShowTurn extends JFrame {
 		
 		
 	}
-	
-	/*public void setLabel(String id, int dice){
+	/*	public static void main(String[] args){
+		new ShowTurn().setVisible(true);
+	}
+public void setLabel(String id, int dice){
 		label.setText(id+"턴! ");
 		label2.setText("이동횟수: "+dice);
 		
