@@ -127,7 +127,53 @@ public class GameArea extends JPanel{
 		jp.setVisible(true);
 	}
 	
+	public void setMsgText(String avata,int pp,int hin, String cardName) {
+		// TODO Auto-generated method stub
+		int ir=0,ip=0,iw=0;
+		if(hin==0){
+			for(int i=0; i<RefData.nameRoom.length; i++){
+				if(RefData.nameRoom[i].equals(cardName.trim())){
+					ir=i;
+					break;
+				}
+			}
+		}
+		else if(hin==1){
+			for(int i=0; i<RefData.nameChar.length; i++){
+				if(RefData.nameChar[i].equals(cardName.trim())){
+					ip=i;
+				}
+			}
+		}
+		else if(hin==2){
+			for(int i=0; i<RefData.nameWp.length; i++){
+				if(RefData.nameWp[i].equals(cardName.trim())){
+					iw=i;
+				}
+			}
+		}
+		
+		
+
+		hint[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+ip+".jpg", 140,190))));
+
+		
+
+		hint[1].validate();//panel재배치
+
+		
+		
+		GameMsg.setText(avata+"("+pp+"P)님이"+cardName+"카드를 보여줬습니다.");
+		jp.setVisible(true);
+		hint[0].setVisible(false);
+		hint[2].setVisible(false);
+		
+	}
+	
+	
 	public void deleteMsg(){
+		hint[0].setVisible(true);
+		hint[2].setVisible(true);
 		
 		hint[0].removeAll();
 		hint[1].removeAll();

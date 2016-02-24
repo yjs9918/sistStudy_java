@@ -337,36 +337,37 @@ KeyListener,Runnable,MouseListener{
 				}catch(Exception ex){}
 
 		} else if (e.getSource() == cs.st) {
-			/*repaint();
-			card.previous(getContentPane());
-			card.show(getContentPane(), "MS");
-
-			mainScreen.game.savePlayerStatus();
-			mainScreen.game.setGamePlayer(Game.crrPlayer, mainScreen.game.runDice());
-
-			mainScreen.showCount();
-			mainScreen.setImage();
-			mainScreen.jpGameBoard.repaint();*/
-			int hint=mainScreen.game.getHint(cs.tfGuess[0].getText(),cs.tfGuess[1].getText(),cs.tfGuess[2].getText());
+			String r=cs.tfGuess[0].getText();
+			String p=cs.tfGuess[1].getText();
+			String w=cs.tfGuess[2].getText();
+			
+			int nextP=Game.crrPlayer;
+			
+			
+			int hint=-1;
+			while(hint>=0){
+				hint=mainScreen.game.getHint(nextP,r,p,w);
+				nextP++;
+			}
+			nextP--;
+			String avata =mainScreen.game.p[nextP].id;
 			//0 -> 방. 1 -> 범인 2->무기 -1 ->없음
 			try
 			{
-				 out.write((Function.HINT+"|"+myRoom+"|"+(Game.crrPlayer%4)+1+"|"+cs.tfGuess[0].getText()+"|"+cs.tfGuess[1].getText()+"|"+cs.tfGuess[2].getText()+"\n").getBytes());
+				 out.write((Function.HINT+"|"+myRoom+"|"+avata+(nextP%4)+1+"|"+r+"|"+p+"|"+w+"\n").getBytes());
 			}catch(Exception ex){}
 			
-			if(hint==-1){
-				JOptionPane.showMessageDialog(getContentPane(), "가 카드를 가지고 있지 않습니다.");
-				
-			}
 			
 			for(int i=0; i<3;i++){
 				if(hint==i){
-					JOptionPane.showMessageDialog(getContentPane(), (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다.");
+					//JOptionPane.showMessageDialog(getContentPane(), (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다.");
+					
+					mainScreen.jpGameBoard.setMsgText(avata,nextP,i,cs.tfGuess[i].getText());
 					mainScreen.ta.append("[나에게만 알림]"+(Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n");
 					break;
 				}
 			}
-			
+			nextP=0;
 			//채팅창
 			
 			/*need to decide the action after guessing.
