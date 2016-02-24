@@ -5,7 +5,8 @@ import java.awt.event.*;
 
 public class CardSelect extends JPanel{
    Image back;
-   JLabel[] tfGuess;//무기
+   JLabel[] tfGuess=new JLabel[3];//무기
+   JLabel[] info=new JLabel[3];//무기
 
    JLabel k,nPl;//죽임
    JButton[] p= new JButton[6];
@@ -49,15 +50,25 @@ public CardSelect()
    tfGuess[0]=new JLabel("어디에서",JLabel.CENTER);
    tfGuess[1]=new JLabel("누가",JLabel.CENTER);
    tfGuess[2]=new JLabel("무엇으로",JLabel.CENTER);
+   
+   info[0]=new JLabel("",JLabel.CENTER);
+   info[1]=new JLabel("",JLabel.CENTER);
+   info[2]=new JLabel("",JLabel.CENTER);
+   
    k=new JLabel("죽였다!!",JLabel.RIGHT);
    st=new JButton("추리 제안");
    
    for(int i=0;i<3;i++){
 	   guess[i]=new JPanel();
-	   guess[i].setBounds(10+(i*210), 550, 200, 300);
+	   guess[i].setBounds(50+(i*210), 550, 180, 250);
 	   guess[i].setLayout(new BorderLayout());
 	   guess[i].add(new JLabel(new ImageIcon(setImage("image/back/cardback.jpg", guess[i].getWidth(), guess[i].getHeight()))));
-	   tfGuess[i].setBounds(10+(i*210), 850, 200, 20);
+	   info[i].setBounds(50+(i*210),520,180,30);
+	   info[i].setBackground(Color.BLACK);
+	   info[i].setForeground(Color.GREEN);
+	   tfGuess[i].setBounds(50+(i*210), 800, 180, 30);
+	   tfGuess[i].setBackground(Color.YELLOW);
+	   tfGuess[i].setForeground(Color.BLACK);
    }
    pl= new JPanel();
    pl.setBounds(920, 15, 250, 350);
