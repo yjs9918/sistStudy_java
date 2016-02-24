@@ -999,17 +999,26 @@ KeyListener,Runnable,MouseListener{
 				case Function.HINT:
 				{
 					card.show(getContentPane(), "MS");
+					int avata=Integer.parseInt(st.nextToken());
 					int who = Integer.parseInt(st.nextToken());
 					String r= st.nextToken();
 					String p = st.nextToken();
 					String w=  st.nextToken();
 					
-					mainScreen.jpGameBoard.setMsgText("디폴트",who,r,p,w);
-					Thread.sleep(3000);
-					mainScreen.jpGameBoard.deleteMsg();
-					if(myNum==(Game.crrPlayer%4)+1){
-						showMyTurn();
+					mainScreen.jpGameBoard.setMsgText("신민아",who,r,p,w);
+					
+					
+					if(myNum==Game.crrPlayer){
+						try{
+									out.write((Function.FINISHTURN+"|"+myRoom+"\n").getBytes());
+							}
+							catch(Exception ex){
+								
+							}
 					}
+					Thread.sleep(4000);
+					mainScreen.jpGameBoard.deleteMsg();
+					
 					
 					
 				}
@@ -1018,6 +1027,7 @@ KeyListener,Runnable,MouseListener{
 				
 			} catch (Exception e) {
 				// TODO: handle exception
+				System.out.println(e);
 			}
 		}
 	}

@@ -480,7 +480,7 @@ public class Server implements Runnable{
 					    			 ClientThread c=room.userVc.elementAt(j);					    			 
 					    			 
 					    			 
-					    			 c.messageTo(Function.HINT+"|"+who+"|"+r+"|"+p+"|"+w);
+					    			 c.messageTo(Function.HINT+"|"+avata+"|"+who+"|"+r+"|"+p+"|"+w);
 					    			 c.messageTo(Function.ROOMCHAT+"|[알림] +"+who+"님이" +r+","+p+","+w+"중 하나의 카드를 보여주었습니다.");
 					    			 
 					    			 
