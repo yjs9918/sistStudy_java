@@ -48,11 +48,11 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		card = new CardLayout();
 		setLayout(card);
 		
-		add("LOG",login);
+		/*add("LOG",login);
 		add("WR", wait);
 		add("GWR", gwr);
 		add("MS", mainScreen);
-		add("LD", loading); // 160204정선추가
+		add("LD", loading);*/ // 160204정선추가
 		add("CS", cs);
 
 		setSize(1200, 900);
@@ -121,7 +121,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	// 소켓
 	public void connection(String id, String name, String sex) {
 		try {
-			s = new Socket("211.238.142.87", 7777);
+			s = new Socket("localhost", 7777);
 			// s=server
 			in = new BufferedReader(new InputStreamReader(s.getInputStream()));// 바이트를
 																				// 캐릭터러
@@ -144,8 +144,9 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		try {
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		} catch (Exception ex) {
+			ClueMain mn = new ClueMain();
 		}
-		ClueMain mn = new ClueMain();
+		
 
 	}
 
