@@ -6,13 +6,15 @@ import javax.swing.text.*;
 
 import com.sist.common.Function;
 
+import sun.util.resources.cldr.bem.CurrencyNames_bem;
+
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
 public class ClueMain extends JFrame implements ActionListener,
-KeyListener,Runnable,MouseListener{
+KeyListener,Runnable,MouseListener,FocusListener{
 
 	CardLayout card;
 	GameWaitingRoom gwr = new GameWaitingRoom();
@@ -103,13 +105,23 @@ KeyListener,Runnable,MouseListener{
 		mainScreen.ChatInput.addActionListener(this);
 		jfTurn.b1.addActionListener(this);
 		mainScreen.jpGameBoard.addMouseListener(this);
-		
+		//addFocusListener(this);
+		addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowGainedFocus(WindowEvent e) {
+				// TODO Auto-generated method stub
+				//ClueMain.this.mainScreen.requestDefaultFocus();
+				ClueMain.this.setFocusable(true);
+			}
+			
+		});
 	}
 
 	// 소켓
 	public void connection(String id, String name, String sex) {
 		try {
-			s = new Socket("localhost", 3355);
+			s = new Socket("211.238.142.87", 7777);
 			// s=server
 			in = new BufferedReader(new InputStreamReader(s.getInputStream()));// 바이트를
 																				// 캐릭터러
@@ -337,6 +349,7 @@ KeyListener,Runnable,MouseListener{
 				}catch(Exception ex){}
 
 		} else if (e.getSource() == cs.st) {
+
 			/*repaint();
 			card.previous(getContentPane());
 			card.show(getContentPane(), "MS");
@@ -358,27 +371,33 @@ KeyListener,Runnable,MouseListener{
 					break;
 				else pGiveHint++;
 			}
+
 			//0 -> 방. 1 -> 범인 2->무기 -1 ->없음
 			try
 			{
+
 				 out.write((Function.HINT+"|"+myRoom+"|"+mainScreen.game.p[pGiveHint%4].id+"|"+(pGiveHint+1)%4+"|"+sr+"|"+sp+"|"+sw+"|"+hint+"\n").getBytes());
 			}catch(Exception ex){
 				System.out.println("guessing"+ex);
 			}
 			
+
 			
 			
 			for(int i=0; i<3;i++){
 				if(hint==i){
 					//JOptionPane.showMessageDialog(getContentPane(), (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다.");
+
 					mainScreen.ta.append("[나에게만 알림]"+(pGiveHint+1)+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n");
 					
+
 					break;
 				}
 			}
+
+
 			
-			
-			
+
 			//채팅창
 			
 			/*need to decide the action after guessing.
@@ -545,12 +564,40 @@ KeyListener,Runnable,MouseListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
+		/*if(myNum==Game.crrPlayer){//내가 현재 플레이어일때.
+			int key=-1;
+			
+			//mainScreen.game.gp.keyPressed(e);
+			
+			switch(e.getKeyCode()){
+			case KeyEvent.VK_RIGHT:
+				key=3;
+				break;
+			case KeyEvent.VK_LEFT:
+				key=2;
+				break;
+			case KeyEvent.VK_UP:
+				key=0;
+				break;
+			case KeyEvent.VK_DOWN:
+				key=1;
+				break;
+			}
+			
+			try{
+				
+				out.write((Function.MOVE+"|"+myRoom+"|"+(myNum+1)+"|"+key+"\n").getBytes());
+				}catch(Exception ex){
+					System.out.println(ex.getMessage());
+				}
+			}*/
 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
 		
 		if(myNum==Game.crrPlayer){//내가 현재 플레이어일때.
 		int key=-1;
@@ -559,15 +606,21 @@ KeyListener,Runnable,MouseListener{
 		
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_RIGHT:
+			
+			
 			key=3;
 			break;
 		case KeyEvent.VK_LEFT:
+			
+			
 			key=2;
 			break;
 		case KeyEvent.VK_UP:
+			
 			key=0;
 			break;
 		case KeyEvent.VK_DOWN:
+			
 			key=1;
 			break;
 		}
@@ -576,7 +629,7 @@ KeyListener,Runnable,MouseListener{
 			
 			out.write((Function.MOVE+"|"+myRoom+"|"+(myNum+1)+"|"+key+"\n").getBytes());
 			}catch(Exception ex){
-				
+				System.out.println(ex.getMessage());
 			}
 		}
 	}
@@ -892,6 +945,7 @@ KeyListener,Runnable,MouseListener{
 					
 					cs.nPl.setText(RefData.nameChar[avata-1]+" 추리중");
 					cs.tfGuess[0].setText(RefData.nameRoom[roomNo-1]);
+					
 					card.show(getContentPane(), "CS");
 					
 					cs.setCardImg();
@@ -1117,6 +1171,7 @@ KeyListener,Runnable,MouseListener{
 		
 		
 		}else if(e.getSource()==mainScreen.jpGameBoard){
+			this.requestFocus(true);
 			setFocusable(true);
 		}
 	}
@@ -1165,6 +1220,21 @@ KeyListener,Runnable,MouseListener{
 		Image image = ii.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		return image;
 		//return null;
+	}
+
+	@Override
+	public void focusGained(FocusEvent e) {
+		/*if(e.getSource()==mainScreen.jpGameBoard){
+			setFocusable(true);
+		}*/
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		// TODO Auto-generated method stub
+		/*if(e.getSource()==mainScreen.jpGameBoard){
+			setFocusable(false);
+		}*/
 	}
 	
 
