@@ -382,6 +382,25 @@ public class Server implements Runnable{
 					    }
 				   }
 				   break;
+ 				 case Function.FINALGUESS:
+				   {
+					  String rname=st.nextToken();					  
+					  int roomNum=Integer.parseInt(st.nextToken());
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.FINALSELECTCARD+"|"+pnum+"|"+avata+"|"+roomNum);
+					    			
+					    			 
+					    		 }
+					    }
+				   }
+				   break;
  				 case Function.MOVE:
 				   {
 					  String rname=st.nextToken();					  

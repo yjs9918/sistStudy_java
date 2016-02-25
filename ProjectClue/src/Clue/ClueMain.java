@@ -1229,19 +1229,19 @@ KeyListener,Runnable,MouseListener{
 					try{
 					if(cardnum<6){
 						fc.guess[1].removeAll();
-						fc.guess[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+cardnum+".jpg", fc.guess[0].getWidth(), cs.guess[0].getHeight()))));
+						fc.guess[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+cardnum+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
 						fc.guess[1].validate();//panel재배치
 						fc.tfGuess[1].setText(RefData.nameChar[cardnum]);
 					}else if(cardnum>13){
 						cardnum=cardnum-13;
 						fc.guess[0].removeAll();
-						fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room+"+cardnum+".jpg", fc.guess[2].getWidth(), cs.guess[2].getHeight()))));
+						fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room+"+cardnum+".jpg", fc.guess[2].getWidth(), fc.guess[2].getHeight()))));
 						fc.guess[0].validate();//panel재배치
 						fc.tfGuess[0].setText(RefData.nameRoom[cardnum]);
 					}else{
 						cardnum=cardnum-6;
 						fc.guess[2].removeAll();
-						fc.guess[2].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+cardnum+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
+						fc.guess[2].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+cardnum+".jpg", fc.guess[1].getWidth(), fc.guess[1].getHeight()))));
 						fc.guess[2].validate();//panel재배치
 						fc.tfGuess[2].setText(RefData.nameWp[cardnum]);
 					}
@@ -1257,20 +1257,20 @@ KeyListener,Runnable,MouseListener{
 					int roomNo=Integer.parseInt(st.nextToken());
 					//데이터를 fc에 넘겨줘서 처리. 누가 어디에서 추리중.
 					for(int i=0;i<9;i++){
-						cs.j[i].setEnabled(false);
+						fc.j[i].setEnabled(true);
 					}
 					repaint();
 					
-					fc.guess[0].removeAll();
-					fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+(roomNo-1)+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
+					//fc.guess[0].removeAll();
+					//fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+(roomNo-1)+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
 					fc.guess[0].validate();//panel재배치
-					
+		
 					fc.pl.removeAll();
 					fc.pl.add(new JLabel(new ImageIcon(setImage("image/player/char"+ (avata-1) + ".jpg", fc.pl.getWidth(), fc.pl.getHeight()))));
 					fc.pl.validate();//panel재배치
 					
 					fc.nPl.setText(RefData.nameChar[avata-1]+" 추리중");
-					fc.tfGuess[0].setText(RefData.nameRoom[roomNo-1]);
+					//fc.tfGuess[0].setText(RefData.nameRoom[roomNo-1]);
 					card.show(getContentPane(), "FC");
 					
 					fc.setCardImg();
