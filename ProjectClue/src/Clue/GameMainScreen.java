@@ -26,6 +26,7 @@ public class GameMainScreen extends JPanel{
 	//JTable table;
 	JTextArea ta;
 	JTextField ChatInput;
+	JScrollBar bar;
 	JButton b;
 	Game game;
 	JLabel jlshowCnt;
@@ -56,6 +57,7 @@ public class GameMainScreen extends JPanel{
 		jpMyCard=new ShowMyCard();//카드보여주기
 		ta=new JTextArea();
 		JScrollPane jsChatArea=new JScrollPane(ta);//채팅창
+		bar=jsChatArea.getVerticalScrollBar();
 		ChatInput=new JTextField();	//채팅입력창
 		b=new JButton("입력");	//채팅창
 		

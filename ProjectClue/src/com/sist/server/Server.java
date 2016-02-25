@@ -104,7 +104,7 @@ public class Server implements Runnable {
 						}
 					}
 						break;
-					
+
 					case Function.MAKEROOM: {
 						Room room = new Room(st.nextToken(), st.nextToken(), st.nextToken(),
 								Integer.parseInt(st.nextToken()));
@@ -123,13 +123,13 @@ public class Server implements Runnable {
 						pnum = room.current;
 					}
 						break;
-						
+
 					case Function.WAITCHAT: {
 						String data = st.nextToken();
 						messageAll(Function.WAITCHAT + "|[" + name + "]" + data);
 					}
-						break;	
-						
+						break;
+
 					case Function.ROOMIN: {
 						/*
 						 * 1) 방이름을 받는다 2) 방을 찾는다 3) ==> 현재인원증가 ==> 위치변경 4) 방에 있는
@@ -182,6 +182,7 @@ public class Server implements Runnable {
 					case Function.ROOMCHAT: {
 						String rname = st.nextToken();
 						String strMsg = st.nextToken();
+						
 						for (int i = 0; i < roomVc.size(); i++) {
 							Room room = roomVc.elementAt(i);
 							if (rname.equals(room.roomName)) {

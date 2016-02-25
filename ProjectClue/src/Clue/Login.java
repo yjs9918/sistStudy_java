@@ -26,9 +26,9 @@ public class Login extends JPanel{
 		la1=new JLabel("ID");
 		la1.setForeground(Color.WHITE);
 		la1.setFont(new Font("Arial", Font.BOLD, 14));
-		la2=new JLabel("PW");
+		la2=new JLabel("닉네임");
 		la2.setForeground(Color.WHITE);
-		la2.setFont(new Font("Arial", Font.BOLD, 14));
+		la2.setFont(new Font("맑은 고딕l", Font.BOLD, 14));
 		tf=new JTextField();
 		//pf=new JPasswordField();
 		tf2=new JTextField();
@@ -45,7 +45,7 @@ public class Login extends JPanel{
 		setLayout(null); //사용자 지정
 		la1.setBounds(490, 480, 30, 30);
 		tf.setBounds(520, 480, 150, 30);
-		la2.setBounds(490, 515, 30, 30);
+		la2.setBounds(464, 480, 100,100);
 		//pf.setBounds(520, 515, 150, 30);
 		tf2.setBounds(520, 515, 150, 30);
 		// 추가

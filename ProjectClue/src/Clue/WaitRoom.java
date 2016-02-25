@@ -42,7 +42,7 @@ public class WaitRoom extends JPanel {
 		JScrollPane js1=new JScrollPane(table1);
 		
 		
-		String[] col2={"ID","대화명","성별","위치"};
+		String[] col2={"ID","닉네임","성별","위치"};
 		String[][] row2=new String[0][4];
 		
 		model2=new DefaultTableModel(row2, col2);

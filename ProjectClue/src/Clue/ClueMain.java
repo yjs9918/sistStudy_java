@@ -68,8 +68,6 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		wait.tf.addActionListener(this);// 160211 정선추가
 		
 		mkr.b1.addActionListener(this);// 160211 정선추가
-
-
     	mkr.b2.addActionListener(this);
     	wait.table1.addMouseListener(this);
     	wait.table2.addMouseListener(this);
@@ -316,11 +314,6 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			}catch(Exception ex){}
 		}
 
-		else if (e.getSource() == gwr.chatInput) {
-			String data = gwr.chatInput.getText();
-			gwr.chat.append(data + "\n");
-			gwr.chatInput.setText("");
-		} 
 		else if (e.getSource() == gwr.chr[1]) {
 		
 			int avata=1;
@@ -1028,6 +1021,11 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				case Function.ROOMCHAT:
 				{
 					 mainScreen.ta.append(st.nextToken()+"\n");
+					 mainScreen.bar.setValue(mainScreen.bar.getMaximum());
+					 
+					 //bar.setValue(wr.bar.getMaximum());
+					 
+					 
 				}
 				break;
 				case Function.SETTURN:
