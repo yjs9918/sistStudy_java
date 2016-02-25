@@ -7,7 +7,7 @@ public class WaitRoom extends JPanel {
 	JTable table1,table2;
 	DefaultTableModel model1,model2;
 
-	JTextPane ta;
+	JTextArea ta;
 	JTextField tf;
 	JComboBox box;
 	JPanel movie;
@@ -52,7 +52,7 @@ public class WaitRoom extends JPanel {
 		table2.getTableHeader().setResizingAllowed(false);
 		
 		//채팅
-		ta=new JTextPane();
+		ta=new JTextArea();
 		ta.setEditable(false);
 		JScrollPane js3=new JScrollPane(ta);
 		bar=js3.getVerticalScrollBar();

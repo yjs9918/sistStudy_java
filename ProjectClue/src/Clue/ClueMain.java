@@ -21,7 +21,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	Login login = new Login();
 	GameMainScreen mainScreen = new GameMainScreen();
 	CardSelect cs = new CardSelect();
-
+	
 	LoadingTest loading= new LoadingTest(this); //160204 정선 추가
 	ReachRoom reachRoom =new ReachRoom();
 	WaitRoom wait=new WaitRoom(); //160211 정선추가
@@ -66,6 +66,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		wait.b2.addActionListener(this);// 160211 정선추가
 		wait.b6.addActionListener(this);// 160217 찬재추가
 		wait.tf.addActionListener(this);// 160211 정선추가
+		
 		mkr.b1.addActionListener(this);// 160211 정선추가
 
 
@@ -199,6 +200,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			repaint();
 			card.show(getContentPane(), "GWR");
 		} // 160211 정선 추가
+		
 		else if (e.getSource() == wait.tf) {
 			String msg = wait.tf.getText().trim();
 			if (msg.length() < 1)
@@ -206,6 +208,9 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			String color = wait.box.getSelectedItem().toString();
 			initStyle();
 			append(msg, color);
+			try{
+				out.write((Function.WAITCHAT+"|"+msg+"\n").getBytes());
+			}catch(Exception ex){}
 			wait.tf.setText("");
 
 		}//160211 정선추가
@@ -272,7 +277,17 @@ KeyListener,Runnable,MouseListener,FocusListener{
 
 		}
 
-		
+		else if(e.getSource()==wait.tf)
+		{
+			String data=wait.tf.getText();
+			if(data.length()<1)
+				return;
+			
+			try
+			{
+				out.write((Function.WAITCHAT+"|"+data+"\n").getBytes());
+			}catch(Exception ex){}
+			wait.tf.setText("");}
 
 		// ################## GameWaitngRoom   // gwr 160217 찬재추가
 
@@ -644,7 +659,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	public void initStyle() // 160211 정선추가
 	{
 		Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-		Style blue = wait.ta.addStyle("blue", def);
+		/*Style blue = wait.ta.addStyle("blue", def);
 		StyleConstants.setForeground(blue, Color.blue);
 
 		Style pink = wait.ta.addStyle("pink", def);
@@ -654,7 +669,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		StyleConstants.setForeground(green, Color.green);
 
 		Style cyan = wait.ta.addStyle("cyan", def);
-		StyleConstants.setForeground(cyan, Color.cyan);
+		StyleConstants.setForeground(cyan, Color.cyan);*/
 
 	}
 
@@ -662,7 +677,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	{
 		try {
 			Document doc = wait.ta.getDocument();
-			doc.insertString(doc.getLength(), msg + "\n", wait.ta.getStyle(color));
+			
+			//doc.insertString(doc.getLength(), msg + "\n", wait.ta.getStyle(color));
 		} catch (Exception e) {
 		}
 	}
@@ -693,7 +709,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					break;
 
 				case Function.WAITCHAT: {
-					// wait.ta.append(st.nextToken()+"\n");
+					wait.ta.append(st.nextToken()+"\n");
 					append(st.nextToken() + "\n", "Color.BLUE");
 					wait.bar.setValue(wait.bar.getMaximum());
 				}

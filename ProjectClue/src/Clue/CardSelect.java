@@ -140,7 +140,7 @@ public class CardSelect extends JPanel {
 		add(p1);
 		add(p2);
 		add(pl);
-		// add(p3);
+		//add(p3);
 		// add(p4);
 		add(guess[0]);
 		add(guess[1]);
