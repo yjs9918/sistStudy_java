@@ -48,11 +48,11 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		card = new CardLayout();
 		setLayout(card);
 		
-		/*add("LOG",login);
+		add("LOG",login);
 		add("WR", wait);
 		add("GWR", gwr);
 		add("MS", mainScreen);
-		add("LD", loading);*/ // 160204정선추가
+		add("LD", loading); // 160204정선추가
 		add("CS", cs);
 
 		setSize(1200, 900);

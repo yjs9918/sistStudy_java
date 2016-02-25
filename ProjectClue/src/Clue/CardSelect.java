@@ -58,29 +58,41 @@ public class CardSelect extends JPanel {
 
 		k = new JLabel("Á×¿´´Ù!!", JLabel.RIGHT);
 		st = new JButton("Ãß¸® Á¦¾È");
-		st.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		st.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
 
 		for (int i = 0; i < 3; i++) {
 			guess[i] = new JPanel();
-			guess[i].setBounds(50 + (i * 240), 500, 180, 250);
+			guess[i].setBounds(50 + (i * 250), 500, 180, 250);
 			guess[i].setLayout(new BorderLayout());
 			guess[i].add(new JLabel(
 					new ImageIcon(setImage("image/back/qcard.png", guess[i].getWidth(), guess[i].getHeight()))));
-			info[i].setBounds(50 + (i * 240), 600, 180, 30);
+			info[i].setBounds(50 + (i * 250), 600, 180, 30);
 			info[i].setBackground(Color.BLACK);
 			info[i].setForeground(Color.GREEN);
 
-			tfGuess[i].setBounds(50 + (i * 240), 600, 180, 30);
+			tfGuess[i].setBounds(50 + (i * 250), 600, 180, 30);
 			tfGuess[i].setBackground(Color.YELLOW);
 			tfGuess[i].setForeground(Color.BLACK);
 			tfGuess[i].setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
 		}
 
-		JLabel l3 = new JLabel("°¡", JLabel.CENTER);
+		JLabel l3 = new JLabel("¿¡¼­", JLabel.CENTER);
 		l3.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
 		l3.setForeground(Color.white);
-		l3.setBounds(30, 650, 20,20);
+		l3.setBounds(225, 700, 80,50);
 		add(l3);
+		
+		JLabel l4 = new JLabel("°¡", JLabel.CENTER);
+		l4.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		l4.setForeground(Color.white);
+		l4.setBounds(475, 700, 80,50);
+		add(l4);
+		
+		JLabel l5 = new JLabel("¸¦ ÀÌ¿ëÇØ¼­ ÇÇÇØÀÚ¸¦ Á×¿´´Ù.", JLabel.CENTER);
+		l5.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		l5.setForeground(Color.white);
+		l5.setBounds(740, 700, 440,50);
+		add(l5);
 		
 		// ÄÉ¸¯ÅÍ Ä«µå
 		pl = new JPanel();
@@ -123,7 +135,7 @@ public class CardSelect extends JPanel {
 		p3.setBounds(20, 335, 900, 120);
 		p4.setBounds(20, 600, 600, 150);
 
-		p5.setBounds(740, 650, 200, 100);
+		p5.setBounds(950, 550, 200, 100);
 
 		add(p1);
 		add(p2);
