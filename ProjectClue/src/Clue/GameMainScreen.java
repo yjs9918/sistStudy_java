@@ -24,13 +24,15 @@ public class GameMainScreen extends JPanel{
 	ShowMyCard jpMyCard;
 	GameArea jpGameBoard;
 	//JTable table;
-	JTextArea ta;
+	JTextPane ta;
 	JTextField ChatInput;
+	JScrollBar bar;
 	JButton b;
 	Game game;
 	JLabel jlshowCnt;
 	JFrame jfTurn;
-	
+	//JScrollPane jsChatArea;
+	JComboBox box;
 	
 
 	public GameMainScreen() {
@@ -54,9 +56,19 @@ public class GameMainScreen extends JPanel{
 		
 		
 		jpMyCard=new ShowMyCard();//카드보여주기
-		ta=new JTextArea();
-		JScrollPane jsChatArea=new JScrollPane(ta);//채팅창
-		ChatInput=new JTextField();	//채팅입력창
+		ta=new JTextPane();
+		ta.setEditable(false);
+		JScrollPane js3=new JScrollPane(ta);
+		bar=js3.getVerticalScrollBar();
+		ChatInput=new JTextField();
+		box=new JComboBox();
+		box.addItem("black");
+		box.addItem("blue");
+		box.addItem("green");
+		box.addItem("pink");
+		box.addItem("yellow");
+		box.addItem("magenta");
+		box.setFont(new Font("맑은 고딕",Font.BOLD,13));
 		b=new JButton("입력");	//채팅창
 		
 		jfTurn= new JFrame("주사위");
@@ -75,9 +87,10 @@ public class GameMainScreen extends JPanel{
 		jpCount.setBounds(995, 10, 140, 90);
 		jpGameBoard.setBounds(5, 105, 850, 570);//게임화면
 		
-		jsChatArea.setBounds(5, 680, 600, 160);
+		js3.setBounds(5, 680, 600, 160);
 		jpMyCard.setBounds(610, 680, 575, 185);
-		ChatInput.setBounds(5, 840, 540, 25);
+		ChatInput.setBounds(5, 840, 510, 25);
+		//box.setBounds(520,840,25,25);
 		b.setBounds(545, 840, 60, 25);
 		jpNote1.setBounds(865, 105, 320, 186);
 		jpNote2.setBounds(865, 295, 320, 186);
@@ -89,7 +102,7 @@ public class GameMainScreen extends JPanel{
 
 	
 		add(jpMyCard);
-		add(jsChatArea);
+		add(js3);
 		add(ChatInput);
 		add(b);
 		add(jpNote1);

@@ -399,8 +399,12 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			for(int i=0; i<3;i++){
 				if(hint==i){
 					//JOptionPane.showMessageDialog(getContentPane(), (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다.");
-
-					mainScreen.ta.append("[나에게만 알림]"+(pGiveHint+1)+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n");
+					Document doc=mainScreen.ta.getDocument();
+					//doc.insertString(offset, str, a);
+					//mainScreen.ta.("[나에게만 알림]"+(pGiveHint+1)+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n",Color.PINK);
+					
+					//Document doc = mainScreen.ta.getDocument();
+					//doc.insertString(doc.getLength(), "[나에게만 알림]"+(pGiveHint+1)+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n", mainScreen.ta.getStyle(color));
 					
 
 					break;
@@ -426,6 +430,14 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		}else if(e.getSource()==mainScreen.ChatInput)
 		{
 			 String msg=mainScreen.ChatInput.getText().trim();
+			 String color = mainScreen.box.getSelectedItem().toString();
+			 initStyle();
+			 append(msg, color);
+			 mainScreen.ChatInput.setText("");
+			 //String data= mainScreen.ChatInput.getText();
+			 //mainScreen.ta.append(msg+"\n"); //append:문자 붙여줌
+			 //mainScreen.ChatInput.setText("");
+			 //mainScreen.jsChatArea.getVerticalScrollBar().setValue(mainScreen.jsChatArea.getVerticalScrollBar().getMaximum());
 			 if(msg.length()<1)
 				 return;
 			 //서버로 전송 
@@ -460,8 +472,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				  *     요청 (브라우저) ==> 파일요청 ==> 
 				  *     파일 찾기 ==> 파일내용 브라우저 전송
 				  */
+				 
 			 }catch(Exception ex){}
-			 mainScreen.ChatInput.setText("");
 		}else if(e.getSource()==jfTurn.b1){
 			try
 			{
@@ -786,16 +798,16 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	public void initStyle() // 160211 정선추가
 	{
 		Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-		Style blue = wait.ta.addStyle("blue", def);
+		Style blue = mainScreen.ta.addStyle("blue", def);
 		StyleConstants.setForeground(blue, Color.blue);
 
-		Style pink = wait.ta.addStyle("pink", def);
+		Style pink = mainScreen.ta.addStyle("pink", def);
 		StyleConstants.setForeground(pink, Color.pink);
 
-		Style green = wait.ta.addStyle("green", def);
+		Style green = mainScreen.ta.addStyle("green", def);
 		StyleConstants.setForeground(green, Color.green);
 
-		Style cyan = wait.ta.addStyle("cyan", def);
+		Style cyan = mainScreen.ta.addStyle("cyan", def);
 		StyleConstants.setForeground(cyan, Color.cyan);
 
 	}
@@ -803,8 +815,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	public void append(String msg, String color) // 160211 정선추가
 	{
 		try {
-			Document doc = wait.ta.getDocument();
-			doc.insertString(doc.getLength(), msg + "\n", wait.ta.getStyle(color));
+			Document doc = mainScreen.ta.getDocument();
+			doc.insertString(doc.getLength(), msg + "\n", mainScreen.ta.getStyle(color));
 		} catch (Exception e) {
 		}
 	}
@@ -1144,9 +1156,12 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				
 				case Function.ROOMCHAT:
 				{
-					 mainScreen.ta.append(st.nextToken()+"\n");
+					 //mainScreen.ta.append(st.nextToken()+"\n");
+					 append(st.nextToken() + "\n", "Color.BLUE");
+					 
+					 mainScreen.bar.setValue(mainScreen.bar.getMaximum());
 				}
-				break;
+
 				case Function.SETTURN:
 				{
 					Game.crrPlayer=Integer.parseInt(st.nextToken());
@@ -1315,7 +1330,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					}
 					repaint();
 					
-					fc.guess[0].removeAll();
+					//fc.guess[0].removeAll();
 					//fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+(roomNo-1)+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
 					fc.guess[0].validate();//panel재배치
 		
