@@ -9,12 +9,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.sound.sampled.*;
 import java.io.File;
 import java.net.MalformedURLException;
 
+/*import javax.sound.sampled.*;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.Clip;*/
 
 public class Login extends JPanel implements ActionListener{
 	Image back;
@@ -74,7 +74,7 @@ public class Login extends JPanel implements ActionListener{
 		
 		
 		 try {
-	            File file = new File("wav/login_bgm_low.wav");
+	            File file = new File("wav/login_bgm.wav");
 	            clip = Applet.newAudioClip(file.toURL());
 	            clip.play();
 	            
@@ -98,10 +98,7 @@ public class Login extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==b1)
-		{
-			clip.stop();
-		}
+		
 	}
 
 	

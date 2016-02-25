@@ -1,5 +1,10 @@
 package Clue;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
+import java.io.File;
+import java.net.MalformedURLException;
+
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -38,6 +43,8 @@ public class GameWaitingRoom extends JPanel {
 
 	// JButton chr, chr2, chr3, chr4, chr5, chr6, chrN;
 	JButton[] chr = new JButton[7];
+	
+	AudioClip clip;
 
 	public GameWaitingRoom() {
 		back3 = Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -336,6 +343,16 @@ public class GameWaitingRoom extends JPanel {
 		 * gwr.pan[i].validate();//panelÀç¹èÄ¡
 		 */
 		// setCntDwn();
+		
+		try {
+            File file = new File("wav/GameWaitingRoom_bgm.wav");
+            clip = Applet.newAudioClip(file.toURL());
+            clip.stop();
+            
+           
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
 	}
 
 	public void setCntDwn() {

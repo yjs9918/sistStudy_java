@@ -1,7 +1,15 @@
 package Clue;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
+import java.io.File;
+import java.net.MalformedURLException;
+
 import javax.swing.*;
 import javax.swing.table.*;
+import javax.sound.sampled.*;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 public class WaitRoom extends JPanel {
 	Image back,movie1;
 	JTable table1,table2;
@@ -14,7 +22,7 @@ public class WaitRoom extends JPanel {
 	JButton b1,b2,b3,b4,b5,b6;
 	JScrollBar bar;
 	TableColumn column;
-	
+	AudioClip clip;
 	
 	public WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/cardback.jpg");
@@ -129,9 +137,20 @@ public class WaitRoom extends JPanel {
 			 }
 			 column.setCellRenderer(rend);
 		}
+		
+		try {
+            File file = new File("wav/WatingRoom_bgm.wav");
+            clip = Applet.newAudioClip(file.toURL());
+            clip.stop();
+            
+           
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+}
 
 
-	}
+	
 	private String setImage(String string, int i, int j) {
 		// TODO Auto-generated method stub
 		return null;

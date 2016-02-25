@@ -153,8 +153,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		try {
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		} catch (Exception ex) {
-			ClueMain mn = new ClueMain();
 		}
+		ClueMain mn = new ClueMain();
 		
 
 	}
@@ -170,6 +170,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				JOptionPane.showMessageDialog(this, "ID를 입력하세요");
 				login.tf.requestFocus();
 				return;
+				
 			}
 
 			String name = login.tf2.getText().trim();
@@ -832,10 +833,14 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				case Function.LOGIN: {
 					String[] data = { st.nextToken(), st.nextToken(), st.nextToken(), st.nextToken() };
 					wait.model2.addRow(data);
+					login.clip.stop();
+					wait.clip.play();
 				}
 					break;
 
 				case Function.MYLOG: {
+					login.clip.stop();
+					wait.clip.play();
 					String id = st.nextToken();
 					setTitle(id);
 					repaint();
@@ -885,6 +890,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				break;
 				case Function.ROOMIN:
 				{
+					wait.clip.stop();
+					gwr.clip.play();
 					 String id=st.nextToken();
 					 String sex=st.nextToken();					 
 					 myRoom=st.nextToken();
@@ -921,7 +928,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 						 gwr.isReady[pnum-1].setBackground(Color.black);
 						 gwr.isReady[pnum-1].setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
 				
-					
+						
 				}
 				break;
 				case Function.REFLUSH:
@@ -942,6 +949,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				break;
 				case Function.ROOMOUT:
 				{
+					gwr.clip.stop();
+					wait.clip.play();
 					String id=st.nextToken();
 					for(int i=0;i<4;i++)
 					 {
@@ -961,7 +970,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					break;
 				case Function.MYROOMOUT:
 				{
-					
+					gwr.clip.stop();
+					wait.clip.play();
 					for(int i=0;i<4;i++)
 						{
 					 gwr.sw[i]=false;
@@ -1046,7 +1056,10 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					
 					break;
 				case Function.STARTGAME:
-				{	int[] ans= new int[3];
+				{	
+					gwr.clip.stop();
+					mainScreen.clip.play();
+					int[] ans= new int[3];
 					int[][] pCard= new int[4][5];
 					
 					int pnum=Integer.parseInt(st.nextToken());
