@@ -133,7 +133,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	// 소켓
 	public void connection(String id, String name, String sex) {
 		try {
-			s = new Socket("211.238.142.87", 7777);
+			s = new Socket("211.238.142.76", 7777);
 			// s=server
 			in = new BufferedReader(new InputStreamReader(s.getInputStream()));// 바이트를
 																				// 캐릭터러
@@ -1315,7 +1315,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					}
 					repaint();
 					
-					//fc.guess[0].removeAll();
+					fc.guess[0].removeAll();
 					//fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+(roomNo-1)+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
 					fc.guess[0].validate();//panel재배치
 		
