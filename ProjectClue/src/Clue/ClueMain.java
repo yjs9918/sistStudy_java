@@ -763,10 +763,11 @@ KeyListener,Runnable,MouseListener,FocusListener{
 						 gwr.btnReady.setText("START");
 						 gwr.btnReady.setEnabled(false);
 					 }
-						 gwr.isReady[0].setFont(new Font("¸¼Àº °íµñ", Font.ITALIC, 20));
-						 gwr.isReady[0].setForeground(Color.PINK);
+						 gwr.isReady[0].setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+						 gwr.isReady[0].setForeground(Color.white);
 						 gwr.isReady[0].setText("¹æÀå");
-					 
+						 gwr.isReady[pnum-1].setBackground(Color.black);
+						 gwr.isReady[pnum-1].setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
 				
 					
 				}
@@ -870,6 +871,10 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					boolean ready=Boolean.parseBoolean(st.nextToken());
 					if(ready)
 					gwr.isReady[pNum-1].setText("ÁØºñ¿Ï·á");//Ä³¸¯ÅÍ ¹Ù²Ù±â
+					gwr.isReady[pNum-1].setFont(new Font("¸¼Àº °íµñ",Font.BOLD,20));
+					gwr.isReady[pNum-1].setForeground(Color.white);
+					gwr.isReady[pNum-1].setBackground(Color.black);
+					gwr.isReady[pNum-1].setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
 				}
 					break;
 				
@@ -882,6 +887,10 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					gwr.avaName[pNum-1].setText(RefData.nameChar[charNum-1]);//Ä³¸¯ÅÍ ¹Ù²Ù±â
 					gwr.chr[charNum].setEnabled(false);
 					gwr.chr[prvChar].setEnabled(true);
+					gwr.avaName[pNum-1].setText(RefData.nameChar[charNum-1]);//Ä³¸¯ÅÍ ¹Ù²Ù±â
+					gwr.avaName[pNum-1].setFont(new Font("¸¼Àº °íµñ",Font.BOLD,20));
+					gwr.avaName[pNum-1].setBackground(Color.black);
+					gwr.avaName[pNum-1].setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
 					
 					break;
 				case Function.STARTGAME:
