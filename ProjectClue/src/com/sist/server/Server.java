@@ -16,7 +16,7 @@ public class Server implements Runnable{
 	ServerSocket ss = null;	//서버에서 접속시 처리(교환소켓)-> 접속만 받는다
 	public Server(){
 		try{
-			ss= new ServerSocket(3355);
+			ss= new ServerSocket(7777);
 			System.out.println("Server Start...");
 		}catch(Exception ec){
 			System.out.println(ec.getMessage());
