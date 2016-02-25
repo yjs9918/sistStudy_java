@@ -40,8 +40,8 @@ public class Login extends JPanel implements ActionListener{
 		
 		la1=new JLabel("ID");
 		la1.setForeground(Color.WHITE);
-		la1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 14));
-		la2=new JLabel("´ëÈ­¸í");
+		la1.setFont(new Font("Arial", Font.BOLD, 14));
+		la2=new JLabel("´Ð³×ÀÓ");
 		la2.setForeground(Color.WHITE);
 		la2.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 14));
 		tf=new JTextField();
@@ -61,7 +61,7 @@ public class Login extends JPanel implements ActionListener{
 
 		la1.setBounds(460, 480, 60, 30);
 		tf.setBounds(520, 480, 150, 30);
-		la2.setBounds(460, 515, 60, 30);
+		la2.setBounds(464, 480, 100,100);
 		//pf.setBounds(520, 515, 150, 30);
 		tf2.setBounds(520, 515, 150, 30);
 

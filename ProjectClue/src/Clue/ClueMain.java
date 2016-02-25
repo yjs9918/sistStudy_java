@@ -21,7 +21,6 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	Login login = new Login();
 	GameMainScreen mainScreen = new GameMainScreen();
 	CardSelect cs = new CardSelect();
-
 	LoadingTest loading= new LoadingTest(this); //160204 정선 추가
 	ReachRoom reachRoom =new ReachRoom();
 	WaitRoom wait=new WaitRoom(); //160211 정선추가
@@ -68,8 +67,6 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		wait.b6.addActionListener(this);// 160217 찬재추가
 		wait.tf.addActionListener(this);// 160211 정선추가
 		mkr.b1.addActionListener(this);// 160211 정선추가
-
-
     	mkr.b2.addActionListener(this);
     	wait.table1.addMouseListener(this);
     	wait.table2.addMouseListener(this);
@@ -133,7 +130,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	// 소켓
 	public void connection(String id, String name, String sex) {
 		try {
-			s = new Socket("211.238.142.76", 7777);
+			s = new Socket("localhost", 7777);
 			// s=server
 			in = new BufferedReader(new InputStreamReader(s.getInputStream()));// 바이트를
 																				// 캐릭터러
@@ -156,8 +153,9 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		try {
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		} catch (Exception ex) {
+			ClueMain mn = new ClueMain();
 		}
-		ClueMain mn = new ClueMain();
+		
 
 	}
 
@@ -210,6 +208,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			repaint();
 			card.show(getContentPane(), "GWR");
 		} // 160211 정선 추가
+		
 		else if (e.getSource() == wait.tf) {
 			String msg = wait.tf.getText().trim();
 			if (msg.length() < 1)
@@ -217,6 +216,9 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			String color = wait.box.getSelectedItem().toString();
 			initStyle();
 			append(msg, color);
+			try{
+				out.write((Function.WAITCHAT+"|"+msg+"\n").getBytes());
+			}catch(Exception ex){}
 			wait.tf.setText("");
 
 		}//160211 정선추가
@@ -283,7 +285,17 @@ KeyListener,Runnable,MouseListener,FocusListener{
 
 		}
 
-		
+		else if(e.getSource()==wait.tf)
+		{
+			String data=wait.tf.getText();
+			if(data.length()<1)
+				return;
+			
+			try
+			{
+				out.write((Function.WAITCHAT+"|"+data+"\n").getBytes());
+			}catch(Exception ex){}
+			wait.tf.setText("");}
 
 		// ################## GameWaitngRoom   // gwr 160217 찬재추가
 
@@ -312,11 +324,6 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			}catch(Exception ex){}
 		}
 
-		else if (e.getSource() == gwr.chatInput) {
-			String data = gwr.chatInput.getText();
-			gwr.chat.append(data + "\n");
-			gwr.chatInput.setText("");
-		} 
 		else if (e.getSource() == gwr.chr[1]) {
 		
 			int avata=1;
@@ -798,25 +805,15 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	public void initStyle() // 160211 정선추가
 	{
 		Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-		Style blue = mainScreen.ta.addStyle("blue", def);
-		StyleConstants.setForeground(blue, Color.blue);
-
-		Style pink = mainScreen.ta.addStyle("pink", def);
-		StyleConstants.setForeground(pink, Color.pink);
-
-		Style green = mainScreen.ta.addStyle("green", def);
-		StyleConstants.setForeground(green, Color.green);
-
-		Style cyan = mainScreen.ta.addStyle("cyan", def);
-		StyleConstants.setForeground(cyan, Color.cyan);
 
 	}
 
 	public void append(String msg, String color) // 160211 정선추가
 	{
 		try {
-			Document doc = mainScreen.ta.getDocument();
-			doc.insertString(doc.getLength(), msg + "\n", mainScreen.ta.getStyle(color));
+			Document doc = wait.ta.getDocument();
+			
+			//doc.insertString(doc.getLength(), msg + "\n", wait.ta.getStyle(color));
 		} catch (Exception e) {
 		}
 	}
@@ -847,7 +844,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					break;
 
 				case Function.WAITCHAT: {
-					// wait.ta.append(st.nextToken()+"\n");
+					wait.ta.append(st.nextToken()+"\n");
 					append(st.nextToken() + "\n", "Color.BLUE");
 					wait.bar.setValue(wait.bar.getMaximum());
 				}
@@ -918,10 +915,11 @@ KeyListener,Runnable,MouseListener,FocusListener{
 						 gwr.btnReady.setText("START");
 						 gwr.btnReady.setEnabled(false);
 					 }
-						 gwr.isReady[0].setFont(new Font("맑은 고딕", Font.ITALIC, 20));
-						 gwr.isReady[0].setForeground(Color.PINK);
+						 gwr.isReady[0].setFont(new Font("맑은 고딕", Font.BOLD, 20));
+						 gwr.isReady[0].setForeground(Color.white);
 						 gwr.isReady[0].setText("방장");
-					 
+						 gwr.isReady[pnum-1].setBackground(Color.black);
+						 gwr.isReady[pnum-1].setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
 				
 					
 				}
@@ -1025,6 +1023,10 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					boolean ready=Boolean.parseBoolean(st.nextToken());
 					if(ready)
 					gwr.isReady[pNum-1].setText("준비완료");//캐릭터 바꾸기
+					gwr.isReady[pNum-1].setFont(new Font("맑은 고딕",Font.BOLD,20));
+					gwr.isReady[pNum-1].setForeground(Color.white);
+					gwr.isReady[pNum-1].setBackground(Color.black);
+					gwr.isReady[pNum-1].setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
 				}
 					break;
 				
@@ -1037,6 +1039,10 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					gwr.avaName[pNum-1].setText(RefData.nameChar[charNum-1]);//캐릭터 바꾸기
 					gwr.chr[charNum].setEnabled(false);
 					gwr.chr[prvChar].setEnabled(true);
+					gwr.avaName[pNum-1].setText(RefData.nameChar[charNum-1]);//캐릭터 바꾸기
+					gwr.avaName[pNum-1].setFont(new Font("맑은 고딕",Font.BOLD,20));
+					gwr.avaName[pNum-1].setBackground(Color.black);
+					gwr.avaName[pNum-1].setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
 					
 					break;
 				case Function.STARTGAME:
@@ -1156,10 +1162,10 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				
 				case Function.ROOMCHAT:
 				{
-					 //mainScreen.ta.append(st.nextToken()+"\n");
-					 append(st.nextToken() + "\n", "Color.BLUE");
-					 
+					 mainScreen.ta.append(st.nextToken()+"\n");
 					 mainScreen.bar.setValue(mainScreen.bar.getMaximum());
+					 
+					 //bar.setValue(wr.bar.getMaximum());
 				}
 
 				case Function.SETTURN:
