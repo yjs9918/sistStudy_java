@@ -150,24 +150,20 @@ public class CardSelect extends JPanel {
 		add(tfGuess[2]);
 		add(p5);
 		add(nPl);
-
-	}
-
-	public void setCardImg() {
-
 		for (int i = 0; i < p.length; i++) {
-			p[i].setIcon(new ImageIcon(setImage("image/player/char" + i + ".jpg", p[0].getWidth(), p[0].getHeight())));
+			p[i].setIcon(new ImageIcon(setImage("image/player/char" + i + ".jpg", 105, 150)));
 		}
 		for (int i = 0; i < q.length; i++) {
-			q[i].setIcon(new ImageIcon(setImage("image/weapon/wp" + i + ".jpg", q[0].getWidth(), q[0].getHeight())));
+			q[i].setIcon(new ImageIcon(setImage("image/weapon/wp" + i + ".jpg",  105, 150)));
 
 		}
 		for (int i = 0; i < j.length; i++) {
-			j[i].setIcon(new ImageIcon(setImage("image/room/room" + i + ".jpg", j[0].getWidth(), j[0].getHeight())));
+			j[i].setIcon(new ImageIcon(setImage("image/room/room" + i + ".jpg", 105, 150)));
 
 		}
-
 	}
+
+	
 
 	public Image setImage(String filename, int width, int height) {
 		ImageIcon ii = new ImageIcon(filename);

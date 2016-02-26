@@ -15,6 +15,7 @@ public class Room {
 	 	int[] answerCard =new int[3];
 		int[][] pCard= new int[4][5];
 		int dice1=1,dice2=1;
+		int[] removedP={-1,-1};
 		
 		
      public Room(String rn,String rs,String rp,int max)
@@ -61,9 +62,10 @@ public class Room {
  	public int[] selectAnswerCard(){
  		//정답카드고르기
  		int[] answer = new int[3];
- 		answer[0]=(int)(Math.random()*6);//플레이어
- 		answer[1]=(int)(Math.random()*8)+6;//무기
- 		answer[2]=(int)(Math.random()*9)+14;//장소
+ 		answer[0]=(int)(Math.random()*9)+14;//장소
+ 		answer[1]=(int)(Math.random()*6);//플레이어
+ 		answer[2]=(int)(Math.random()*8)+6;//무기
+ 		
  		//System.out.println(answer[0]+" "+answer[1]+" "+answer[2]+"\n");
  		return answer;
  	}

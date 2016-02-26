@@ -1,7 +1,11 @@
 eclipse.preferences.version=1
 <<<<<<< HEAD
+<<<<<<< HEAD
 encoding//src/Clue/Game.java=UTF-8
 encoding//src/Clue/PlayerDTO.java=UTF-8
 =======
 encoding//src/Clue/WaitRoom.java=UTF-8
 >>>>>>> refs/heads/master
+=======
+encoding//src/Clue/WaitRoom.java=UTF-8
+>>>>>>> refs/remotes/origin/master

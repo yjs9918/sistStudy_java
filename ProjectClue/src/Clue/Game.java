@@ -34,7 +34,7 @@ public class Game{
 		
 	}
 	
-	public void setPlayer(int pnum, String avata){
+	public void setPlayer(int pnum, int avata){
 		p[pnum-1]= new PlayerDTO(avata,pCard[pnum-1]);
 		
 	}
@@ -124,7 +124,7 @@ public class Game{
 	
 	public int isReached(){
 		int roomNo=0;
-		//방1~3
+		//��1~3
 		if(crrY==0){
 			if(crrX==1){
 				roomNo=1;
@@ -230,11 +230,11 @@ public class Game{
 		case 3: //KeyEvent.VK_RIGHT
 			inputX=1;
 			break;
-		default: //다른 키 눌렀을 때
+		default: //�ٸ� Ű ������ ��
 			count++;
 		}
 		count--;
-		System.out.println("keyPresser->count"+count);
+		
 		
 	}
 
@@ -248,11 +248,41 @@ public class Game{
 		this.count=count;
 	}
 	
+	public boolean finalGusee(String r, String p, String w){
+		//answer[0]=>room [1]=> player ,[2]=> weapon
+		int ir=0,ip=0,iw=0;
+		for(int i=0; i<RefData.nameRoom.length;i++){
+			if(r.equals(RefData.nameRoom[i])){
+				ir=i+14;
+				break;
+			}
+		}
+
+		for(int i=0; i<RefData.nameChar.length;i++){
+			if(p.equals(RefData.nameChar[i])){
+				ip=i;
+				break;
+			}
+		}
+		
+		for(int i=0; i<RefData.nameWp.length;i++){
+			if(w.equals(RefData.nameWp[i])){
+				iw=i+6;
+				break;
+			}
+		}
+		
+		if(ir==answerCard[0]&& ip==answerCard[1] && iw==answerCard[2])
+			return true;
+		else 
+			return false;
+	}
 
 	public int getHint(int whoGiveHint, String room, String suspect, String weapon){
 
 		int r=0, sus=0, wp=0;
 		boolean br=false,bs=false,bw=false;
+		
 		for(int i=0; i<RefData.nameRoom.length;i++){
 			if(room.equals(RefData.nameRoom[i])){
 				r=i+14;

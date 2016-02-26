@@ -32,16 +32,18 @@ public class Function {
 	public static final int FINALGUESS = 730;
 	public static final int SELECTCARD = 740;
 	public static final int MOVE = 750;
-	public static final int  SETTURN = 760;
+	public static final int SETTURN = 760;
 	public static final int FINISHTURN = 770;
 	public static final int MYTURN = 780;
-	
+	public static final int FINALSELECTCARD = 790;
 	
 	public static final int CHOOSECARD = 800;
 	public static final int HINT = 810;
-	public static final int FINALCHOOSECARD = 830;
-	public static final int FINALSELECTCARD = 840;
 	public static final int MYHINT =820;
+	public static final int FINALRESULT = 830;
+	public static final int CORRECTANSWER = 840;
+	public static final int WRONGANSWER = 850;
+	
 
 	
 	

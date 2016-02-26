@@ -1,21 +1,19 @@
 package Clue;
-import java.applet.Applet;
-import java.applet.AudioClip;
+
 import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 
 import javax.swing.*;
 import javax.swing.table.*;
-import javax.sound.sampled.*;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import java.applet.Applet;
+import java.applet.AudioClip;
 public class WaitRoom extends JPanel {
 	Image back,movie1;
 	JTable table1,table2;
 	DefaultTableModel model1,model2;
 
-	JTextArea ta;
+	JTextPane ta;
 	JTextField tf;
 	JComboBox box;
 	JPanel movie;
@@ -23,6 +21,7 @@ public class WaitRoom extends JPanel {
 	JScrollBar bar;
 	TableColumn column;
 	AudioClip clip;
+	
 	
 	public WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/cardback.jpg");
@@ -50,7 +49,7 @@ public class WaitRoom extends JPanel {
 		JScrollPane js1=new JScrollPane(table1);
 		
 		
-		String[] col2={"ID","닉네임","성별","위치"};
+		String[] col2={"ID","대화명","성별","위치"};
 		String[][] row2=new String[0][4];
 		
 		model2=new DefaultTableModel(row2, col2);
@@ -60,7 +59,7 @@ public class WaitRoom extends JPanel {
 		table2.getTableHeader().setResizingAllowed(false);
 		
 		//채팅
-		ta=new JTextArea();
+		ta=new JTextPane();
 		ta.setEditable(false);
 		JScrollPane js3=new JScrollPane(ta);
 		bar=js3.getVerticalScrollBar();
@@ -103,7 +102,12 @@ public class WaitRoom extends JPanel {
 		box.setBounds(1055, 335, 105, 40);
 		
 		p.setBounds(740, 645, 420, 195);
-
+		
+		
+		
+		
+		
+		
 		add(js1);
 		add(js2);
 		add(js3);
@@ -112,6 +116,7 @@ public class WaitRoom extends JPanel {
 		
 		add(p);
 		
+
 
 		for(int i=0;i<col1.length;i++)
 		{
@@ -147,10 +152,9 @@ public class WaitRoom extends JPanel {
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
-}
 
 
-	
+	}
 	private String setImage(String string, int i, int j) {
 		// TODO Auto-generated method stub
 		return null;

@@ -26,6 +26,16 @@ public class PlayerDTO {
 		this.cards=cards.clone();//카드인덱스 복제.
 	}
 	
+public PlayerDTO(int avaname, int[] cards){
+		
+		this.id = RefData.nameChar[avaname-1];
+		charIndex=avaname;
+		
+		crrX = 6;
+		crrY = 6;
+		numCanGo=0;
+		this.cards=cards.clone();//ī���ε��� ����.
+	}
 	
 	public int getCrrX() {
 		return crrX;

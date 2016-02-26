@@ -6,7 +6,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import javax.swing.table.*;
+
 
 import com.clue.note.GameNote_js;
 import com.clue.note.GameNote_js2;
@@ -14,39 +14,36 @@ import com.clue.note.GameNote_js3;
 
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
+
 
 
 public class GameMainScreen extends JPanel{
 	
 	Image back;
 	Image dice1,dice2,jpTurn; //정선
-	Image jpLogo; //정선
+	LogoSet jpLogo; //정선
 	JPanel jpCount,jpNote1,jpNote2,jpNote3;
 	ShowMyCard jpMyCard;
 	GameArea jpGameBoard;
 	//JTable table;
 	JTextArea ta;
 	JTextField ChatInput;
-	JScrollBar bar;
 	JButton b;
 	Game game;
 	JLabel jlshowCnt;
 	JFrame jfTurn;
-	//JScrollPane jsChatArea;
-	JComboBox box;
 	AudioClip clip;
+	
 	
 
 	public GameMainScreen() {
 
 		dice1=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
 		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
+		jpLogo=new LogoSet();
 		
-		
-		jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
+		//jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 
 		jpTurn=Toolkit.getDefaultToolkit().getImage("image/player/schar.jpg");//턴이미지화면
@@ -63,7 +60,6 @@ public class GameMainScreen extends JPanel{
 		jpMyCard=new ShowMyCard();//카드보여주기
 		ta=new JTextArea();
 		JScrollPane jsChatArea=new JScrollPane(ta);//채팅창
-		bar=jsChatArea.getVerticalScrollBar();
 		ChatInput=new JTextField();	//채팅입력창
 		b=new JButton("입력");	//채팅창
 		
@@ -82,11 +78,10 @@ public class GameMainScreen extends JPanel{
 		//jpTurn.setBounds(865, 10, 90, 90);
 		jpCount.setBounds(995, 10, 140, 90);
 		jpGameBoard.setBounds(5, 105, 850, 570);//게임화면
-		
+		jpLogo.setBounds(5, 10, 850, 90);
 		jsChatArea.setBounds(5, 680, 600, 160);
 		jpMyCard.setBounds(610, 680, 575, 185);
-		ChatInput.setBounds(5, 840, 510, 25);
-		//box.setBounds(520,840,25,25);
+		ChatInput.setBounds(5, 840, 540, 25);
 		b.setBounds(545, 840, 60, 25);
 		jpNote1.setBounds(865, 105, 320, 186);
 		jpNote2.setBounds(865, 295, 320, 186);
@@ -96,7 +91,7 @@ public class GameMainScreen extends JPanel{
 		add(jpCount);
 		add(jpGameBoard);
 
-	
+		add(jpLogo);
 		add(jpMyCard);
 		add(jsChatArea);
 		add(ChatInput);
@@ -114,7 +109,6 @@ public class GameMainScreen extends JPanel{
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
-		
 	}
 	
 	@Override
@@ -123,7 +117,7 @@ public class GameMainScreen extends JPanel{
 		g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
 		g.drawImage(dice1, 1140, 10, this);//정선추가 160207
 		g.drawImage(dice2, 1140, 55, this);//정선추가 160207
-		g.drawImage(jpLogo, 5, 10, this);//정선추가 160211
+		//
 		g.drawImage(jpTurn,865, 10,this);
 	}
 	//서버에서 받아와야 하는 것->플레이어 번호, 캐릭터카드 인덱스 ,id
@@ -143,7 +137,7 @@ public class GameMainScreen extends JPanel{
 
 	}
 	public void setImage(){
-		jpTurn=Toolkit.getDefaultToolkit().getImage("image/player/schar"+game.getpMain().getCharIndex()+".jpg");
+		jpTurn=Toolkit.getDefaultToolkit().getImage("image/player/schar"+(game.getpMain().getCharIndex()-1)+".jpg");
 		dice1=Toolkit.getDefaultToolkit().getImage("image/dice/d" + Game.dice1+ ".png");
 		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d" + Game.dice2+ ".png");
 	}

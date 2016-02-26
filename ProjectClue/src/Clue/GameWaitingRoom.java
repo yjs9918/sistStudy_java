@@ -1,12 +1,13 @@
 package Clue;
-import java.applet.Applet;
-import java.applet.AudioClip;
+
 import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 
 import javax.swing.*;
 import javax.swing.table.*;
+import java.applet.Applet;
+import java.applet.AudioClip;
 
 public class GameWaitingRoom extends JPanel {
 
@@ -27,6 +28,7 @@ public class GameWaitingRoom extends JPanel {
 
 	JTextArea chat;
 	JTextField chatInput;
+	AudioClip clip;
 
 	JButton btnReady, btnExit, insert;// 160211 정선 수정 (JComboBox삭제->JButton
 										// insert추가/하위box관련항목 수정)
@@ -43,8 +45,6 @@ public class GameWaitingRoom extends JPanel {
 
 	// JButton chr, chr2, chr3, chr4, chr5, chr6, chrN;
 	JButton[] chr = new JButton[7];
-	
-	AudioClip clip;
 
 	public GameWaitingRoom() {
 		back3 = Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -307,6 +307,32 @@ public class GameWaitingRoom extends JPanel {
 			isReady[i].setBounds(235, 230, 180, 40);
 		}*/
 		
+		isReady[0].setBounds(235, 230, 180, 40);
+		isReady[0].setOpaque(false);
+		isReady[0].setFont(new Font("맑은 고딕", Font.BOLD, 20));
+
+		isReady[1].setBounds(690, 230, 180, 40);
+		isReady[1].setOpaque(false);
+		isReady[1].setFont(new Font("맑은 고딕", Font.BOLD, 20));
+
+		isReady[2].setBounds(235, 535, 180, 40);
+		isReady[2].setOpaque(false);
+		isReady[2].setFont(new Font("맑은 고딕", Font.BOLD, 20));
+
+		isReady[3].setBounds(690, 535, 180, 40);
+		isReady[3].setOpaque(false);
+		isReady[3].setFont(new Font("맑은 고딕", Font.BOLD, 20));
+
+		add(isReady[0]);
+		add(isReady[1]);
+		add(isReady[2]);
+		add(isReady[3]);
+
+		CntDwn = new JPanel();
+		CntDwn.setOpaque(false);
+		CntDwn.setBounds(510, 330, 171, 250);
+		CntDwn.add(new JLabel(new ImageIcon(setImage("image/dice/d3.png", 171, 250))));
+
 		js1.setBounds(5, 652, 902, 180);
 		chatInput.setBounds(5, 837, 795, 30);
 		insert.setBounds(805, 837, 102, 30);
@@ -335,14 +361,6 @@ public class GameWaitingRoom extends JPanel {
 		add(insert);
 
 		add(p);
-
-		/*
-		 * 캐릭터 이미지 바꿀때 gwr.pan[i].removeAll(); gwr.pan[i].setLayout(new
-		 * BorderLayout()); gwr.pan[i].add("Center", new JLabel(new
-		 * ImageIcon("c:\\image\\"+s+avata+".gif")));
-		 * gwr.pan[i].validate();//panel재배치
-		 */
-		// setCntDwn();
 		
 		try {
             File file = new File("wav/GameWaitingRoom_bgm.wav");
@@ -353,6 +371,14 @@ public class GameWaitingRoom extends JPanel {
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
+
+		/*
+		 * 캐릭터 이미지 바꿀때 gwr.pan[i].removeAll(); gwr.pan[i].setLayout(new
+		 * BorderLayout()); gwr.pan[i].add("Center", new JLabel(new
+		 * ImageIcon("c:\\image\\"+s+avata+".gif")));
+		 * gwr.pan[i].validate();//panel재배치
+		 */
+		// setCntDwn();
 	}
 
 	public void setCntDwn() {
